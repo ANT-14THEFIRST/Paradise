@@ -1,5 +1,5 @@
 using Content.Server.Atmos.Components;
-using Content.Shared.AltMech;
+using Content.Shared._Paradise.AltMech;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Equipment.Components;

@@ -18,26 +18,26 @@
         visible: false
       - map: [ "enum.MechPartVisualLayers.ChassisColored" ]
         visible: false
-      - sprite: SS220/Objects/Mechs/coresfinal.rsi
+      - sprite: Objects/Mechs/coresfinal.rsi
         state: basicloader
         map: [ "enum.MechPartVisualLayers.Core" ]
         visible: true
-      - sprite: SS220/Objects/Mechs/coresfinal.rsi
+      - sprite: Objects/Mechs/coresfinal.rsi
         state: basicloadercolor
         map: [ "enum.MechPartVisualLayers.CoreColored" ]
         color: "#ff6e52"
         visible: true
       - map: [ "enum.MechPartVisualLayers.Head" ]
         visible: false
-        sprite: SS220/Objects/Mechs/heads.rsi
+        sprite: Objects/Mechs/heads.rsi
         state: basicloader
       - map: [ "enum.MechPartVisualLayers.HeadColored" ]
         visible: false
-        sprite: SS220/Objects/Mechs/heads.rsi
+        sprite: Objects/Mechs/heads.rsi
         state: basicloadercolor
       - map: [ "enum.MechCameraVisualLayer.Camera" ]
         visible: false
-        sprite: SS220/Objects/Mechs/heads.rsi
+        sprite: Objects/Mechs/heads.rsi
         state: basicloadercamera
       - map: [ "enum.MechPartVisualLayers.Power" ]
         visible: false
@@ -227,7 +227,7 @@
   description: Versatile, light and still pretty cheap mech frame, LEF-021 is one of the most widely used mech frames in the TSF space
   components:
   - type: Sprite
-    sprite: SS220/Objects/Mechs/cores.rsi
+    sprite: Objects/Mechs/cores.rsi
     state: basiclight
     noRot: true
   - type: AltArmor # Ah yes,my beloved СБЭУ
@@ -280,7 +280,7 @@
   description: The peak of modern mech design partially based on reverse-enginiered [DELETED]. Materials, drives, electronics - everything was picked without a glance on the price
   components:
   - type: Sprite
-    sprite: SS220/Objects/Mechs/cores.rsi
+    sprite: Objects/Mechs/cores.rsi
     state: armoredsynth
     noRot: true
   - type: AltArmor

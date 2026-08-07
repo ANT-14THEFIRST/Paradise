@@ -7,6 +7,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Mech.Systems;
 using Robust.Shared.Containers;
 
 namespace Content.Shared.Clothing;
@@ -27,6 +28,7 @@ public sealed partial class SharedMagbootsSystem : EntitySystem
         SubscribeLocalEvent<MagbootsComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<MagbootsComponent, IsWeightlessEvent>(OnIsWeightless);
         SubscribeLocalEvent<MagbootsComponent, InventoryRelayedEvent<IsWeightlessEvent>>(OnIsWeightless);
+        SubscribeLocalEvent<MagbootsComponent, MechEquipmentRelayedEvent<IsWeightlessEvent>>(OnIsWeightless);
     }
 
     private void OnToggled(Entity<MagbootsComponent> ent, ref ItemToggledEvent args)
@@ -73,6 +75,11 @@ public sealed partial class SharedMagbootsSystem : EntitySystem
     }
 
     private void OnIsWeightless(Entity<MagbootsComponent> ent, ref InventoryRelayedEvent<IsWeightlessEvent> args)
+    {
+        OnIsWeightless(ent, ref args.Args);
+    }
+
+    private void OnIsWeightless(Entity<MagbootsComponent> ent, ref MechEquipmentRelayedEvent<IsWeightlessEvent> args)
     {
         OnIsWeightless(ent, ref args.Args);
     }

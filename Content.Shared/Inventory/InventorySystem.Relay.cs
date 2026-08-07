@@ -23,6 +23,7 @@ using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.NightVision;
 using Content.Shared.Nutrition;
 using Content.Shared.Overlays;
+using Content.Shared.PhysicalParameters;
 using Content.Shared.Projectiles;
 using Content.Shared.Radio;
 using Content.Shared.Screech;
@@ -90,6 +91,8 @@ public partial class InventorySystem
         SubscribeLocalEvent<InventoryComponent, RefreshNightVisionEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, GluedEffectAttemptEvent>(RefRelayInventoryEvent);
         SubscribeLocalEvent<InventoryComponent, LubedEffectAttemptEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, ParametersUpdateEvent>(RefRelayInventoryEvent);
+        SubscribeLocalEvent<InventoryComponent, UserParametersChangedEvent>(RefRelayInventoryEvent);
 
         // Eye/vision events
         SubscribeLocalEvent<InventoryComponent, CanSeeAttemptEvent>(RelayInventoryEvent);

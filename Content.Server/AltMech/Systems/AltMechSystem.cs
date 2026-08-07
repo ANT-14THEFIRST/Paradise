@@ -27,7 +27,6 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
-using Content.Shared.AltMech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Parts.Components;
 using Content.Shared.Mech.Systems;
@@ -44,6 +43,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Temperature;
+using Content.Shared._Paradise.AltMech;
 
 namespace Content.Server.Mech.Systems;
 

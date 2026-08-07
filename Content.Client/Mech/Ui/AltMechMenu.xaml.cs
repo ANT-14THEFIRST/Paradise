@@ -1,6 +1,6 @@
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Fragments;
-using Content.Shared.AltMech;
+using Content.Shared._Paradise.AltMech;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Parts.Components;

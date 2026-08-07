@@ -1,4 +1,3 @@
-using Content.Shared.AltBlocking;
 using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
@@ -192,12 +191,8 @@ namespace Content.Shared.ActionBlocker
         {
             // If target is in a container can we attack
             if (target != null && _container.IsEntityInContainer(target.Value))
-            {
-                if (TryComp<AltBlockingComponent>(target, out var comp) && comp.User != null)
-                    return true;
-
                 return false;
-            }
+
 
             _container.TryGetOuterContainer(uid, Transform(uid), out var outerContainer);
 

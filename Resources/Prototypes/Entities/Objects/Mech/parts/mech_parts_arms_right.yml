@@ -7,10 +7,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        sprite: Objects/Mechs/righthandicons.rsi
         state: basichydraulic
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        sprite: Objects/Mechs/righthandicons.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
   - type: ArmorBlock
@@ -77,10 +77,10 @@
     maxIntegrity: 150
     ownMass: 120
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      sprite: Objects/Mechs/righthandfinal.rsi
       state: basichydraulic
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      sprite: Objects/Mechs/righthandfinal.rsi
       state: basichydrauliccolor
 
 - type: entity
@@ -121,7 +121,7 @@
     maxIntegrity: 100
     ownMass: 80
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthand.rsi
+      sprite: Objects/Mechs/righthand.rsi
       state: servo
   - type: Destructible
     thresholds:
@@ -192,7 +192,7 @@
     maxIntegrity: 65
     ownMass: 40
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthand.rsi
+      sprite: Objects/Mechs/righthand.rsi
       state: medicalmultitool
   - type: Destructible
     thresholds:
@@ -217,10 +217,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        sprite: Objects/Mechs/righthandicons.rsi
         state: hydraulicdrill
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/righthandicons.rsi
+        sprite: Objects/Mechs/righthandicons.rsi
         state: hydraulicdrillcolor
   - type: MechArm
     hands:
@@ -265,10 +265,10 @@
     maxIntegrity: 150
     ownMass: 175
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      sprite: Objects/Mechs/righthandfinal.rsi
       state: hydraulicdrill
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/righthandfinal.rsi
+      sprite: Objects/Mechs/righthandfinal.rsi
       state: hydraulicdrillcolor
   - type: Construction
     graph: MechRightArm
@@ -320,7 +320,7 @@
     maxIntegrity: 150
     ownMass: 125
     attachedSprite:
-      sprite: SS220/Objects/Mechs/righthand.rsi
+      sprite: Objects/Mechs/righthand.rsi
       state: hydraulicdrill
   - type: Destructible
     thresholds:

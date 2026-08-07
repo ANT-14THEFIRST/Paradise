@@ -1,5 +1,5 @@
 using Content.Client.UserInterface.Fragments;
-using Content.Shared.AltMech;
+using Content.Shared._Paradise.AltMech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.Systems;
 using JetBrains.Annotations;

@@ -1,8 +1,11 @@
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.ItemExtension;
 using Content.Shared.Movement.Systems;
+using Content.Shared.PhysicalParameters;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -18,6 +21,7 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private PhysicalParametersSystem _parameters = default!;
 
     public override void Initialize()
     {
@@ -61,6 +65,21 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
 
         if (component.Standing != null && !_standing.IsMatchingState(args.Owner, component.Standing.Value))
             return;
+
+        if (component.AffectedByParameters &&
+            TryComp<ItemExtensionComponent>(uid, out var itemExtensionComp) &&
+            TryComp<PhysicalParametersComponent>(args.Owner, out var parametersComp))
+        {
+            var ownerParameter = _parameters.GetParameterValue((args.Owner, parametersComp), Parameter.Strength, armStrengthCounted: false);
+
+            float parameterMultiplier = 0f;
+
+            if (itemExtensionComp.StrengthRequirementToBeUsed != itemExtensionComp.MinimalStrengthToPickUp)
+                parameterMultiplier = FixedPoint2.Clamp(1 - (ownerParameter - itemExtensionComp.MinimalStrengthToPickUp) / (itemExtensionComp.StrengthRequirementToBeUsed - itemExtensionComp.MinimalStrengthToPickUp), FixedPoint2.Zero, 1).Float();
+
+            args.Args.ModifySpeed(1 - (1 - component.WalkModifier) * parameterMultiplier, 1 - (1 - component.SprintModifier) * parameterMultiplier);
+            return;
+        }
 
         args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
     }

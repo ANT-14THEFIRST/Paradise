@@ -1,7 +1,9 @@
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mech.Components;
 using Robust.Client.Player;
+using Robust.Shared.Containers;
 using Robust.Shared.Player;
 
 namespace Content.Client.Overlays;
@@ -27,6 +29,11 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
 
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
+
+        // PARADISE EDIT START - <mech overhaul>
+        SubscribeLocalEvent<T, EntGotInsertedIntoContainerMessage>(OnCompEquip);
+        SubscribeLocalEvent<T, EntGotRemovedFromContainerMessage>(OnCompUnequip);
+        // PARADISE EDIT END
 
         SubscribeLocalEvent<T, GotEquippedEvent>(OnCompEquip);
         SubscribeLocalEvent<T, GotUnequippedEvent>(OnCompUnequip);
@@ -55,6 +62,20 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
     protected virtual void UpdateInternal(RefreshEquipmentHudEvent<T> args) { }
 
     protected virtual void DeactivateInternal() { }
+
+    // PARADISE EDIT START - <mech overhaul>
+    private void OnCompEquip(Entity<T> ent, ref EntGotInsertedIntoContainerMessage args)
+    {
+        if (TryComp<AltMechComponent>(args.Container.Owner, out var _))
+            RefreshOverlay();
+    }
+
+    private void OnCompUnequip(Entity<T> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (TryComp<AltMechComponent>(args.Container.Owner, out var _))
+            RefreshOverlay();
+    }
+    // PARADISE EDIT END
 
     private void OnStartup(Entity<T> ent, ref ComponentStartup args)
     {

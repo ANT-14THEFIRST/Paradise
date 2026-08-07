@@ -11,7 +11,7 @@ namespace Content.Shared.Actions.Components;
 /// <summary>
 /// Component all actions are required to have.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(SharedAltMechSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
 [AutoGenerateComponentState(true, true)]
 [EntityCategory("Actions")]
 public sealed partial class ActionComponent : Component

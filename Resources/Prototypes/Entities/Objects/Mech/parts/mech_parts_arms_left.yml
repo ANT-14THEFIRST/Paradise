@@ -7,10 +7,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        sprite: Objects/Mechs/lefthandicons.rsi
         state: hydraulicdrill
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        sprite: Objects/Mechs/lefthandicons.rsi
         state: hydraulicdrillcolor
   - type: ArmorBlock
   - type: AltArmor # Ah yes,my beloved СБЭУ
@@ -61,10 +61,10 @@
     maxIntegrity: 150
     ownMass: 175
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+      sprite: Objects/Mechs/lefthandfinal.rsi
       state: hydraulicdrill
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+      sprite: Objects/Mechs/lefthandfinal.rsi
       state: hydraulicdrillcolor
   - type: Destructible
     thresholds:
@@ -110,7 +110,7 @@
     maxIntegrity: 150
     ownMass: 125
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthand.rsi
+      sprite: Objects/Mechs/lefthand.rsi
       state: hydraulicdrill
   - type: Destructible
     thresholds:
@@ -135,10 +135,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        sprite: Objects/Mechs/lefthandicons.rsi
         state: basichydraulic
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: SS220/Objects/Mechs/lefthandicons.rsi
+        sprite: Objects/Mechs/lefthandicons.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
   - type: Construction
@@ -192,10 +192,10 @@
     maxIntegrity: 150
     ownMass: 120
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+      sprite: Objects/Mechs/lefthandfinal.rsi
       state: basichydraulic
     attachedColoredSprite:
-      sprite: SS220/Objects/Mechs/lefthandfinal.rsi
+      sprite: Objects/Mechs/lefthandfinal.rsi
       state: basichydrauliccolor
   - type: Destructible
     thresholds:
@@ -249,7 +249,7 @@
     maxIntegrity: 100
     ownMass: 80
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthand.rsi
+      sprite: Objects/Mechs/lefthand.rsi
       state: servo
   - type: Destructible
     thresholds:
@@ -319,7 +319,7 @@
     maxIntegrity: 65
     ownMass: 40
     attachedSprite:
-      sprite: SS220/Objects/Mechs/lefthand.rsi
+      sprite: Objects/Mechs/lefthand.rsi
       state: medicalmultitool
   - type: Destructible
     thresholds:

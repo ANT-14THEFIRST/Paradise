@@ -250,6 +250,16 @@ public abstract partial class SharedActionsSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(ActionComponent.Enabled));
     }
 
+    public void SetStyle(Entity<ActionComponent?>? action, ItemActionIconStyle style)
+    {
+        if (GetAction(action) is not { } ent)
+            return;
+
+        ent.Comp.ItemIconStyle = style;
+        UpdateAction(ent);
+        DirtyField(ent, ent.Comp, nameof(ActionComponent.ItemIconStyle));
+    }
+
     #endregion
 
     #region Execution

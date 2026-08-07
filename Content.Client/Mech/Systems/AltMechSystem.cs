@@ -1,6 +1,6 @@
 using Content.Client.Mech.Ui;
 using Content.Client.UserInterface.Systems.DamageOverlays.Overlays;
-using Content.Shared.AltMech;
+using Content.Shared._Paradise.AltMech;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Mech.Components;
