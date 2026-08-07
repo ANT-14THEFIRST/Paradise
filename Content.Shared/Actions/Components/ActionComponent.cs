@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared.Mech.Systems;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,7 +11,7 @@ namespace Content.Shared.Actions.Components;
 /// <summary>
 /// Component all actions are required to have.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(SharedAltMechSystem))]
 [AutoGenerateComponentState(true, true)]
 [EntityCategory("Actions")]
 public sealed partial class ActionComponent : Component

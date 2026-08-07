@@ -84,7 +84,7 @@ namespace Content.Server.Ghost
             SubscribeLocalEvent<GhostComponent, ComponentShutdown>(OnGhostShutdown);
 
             SubscribeLocalEvent<GhostComponent, MindRemovedMessage>(OnMindRemovedMessage);
-            SubscribeLocalEvent<GhostComponent, MindUnvisitedMessage>(OnMindUnvisitedMessage);
+            SubscribeLocalEvent<GhostComponent, EntityGotUnvisitedEvent>(OnMindUnvisitedMessage);
             SubscribeLocalEvent<GhostComponent, PlayerDetachedEvent>(OnPlayerDetached);
 
             SubscribeLocalEvent<GhostOnMoveComponent, MoveInputEvent>(OnRelayMoveInput);
@@ -241,7 +241,7 @@ namespace Content.Server.Ghost
             DeleteEntity(uid);
         }
 
-        private void OnMindUnvisitedMessage(EntityUid uid, GhostComponent component, MindUnvisitedMessage args)
+        private void OnMindUnvisitedMessage(EntityUid uid, GhostComponent component, EntityGotUnvisitedEvent args)
         {
             DeleteEntity(uid);
         }

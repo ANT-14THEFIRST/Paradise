@@ -223,6 +223,17 @@ public sealed partial class SsdIconPrototype : StatusIconPrototype, IInheritingP
     public bool Abstract { get; private set; }
 }
 
+[Prototype]
+public sealed partial class BlockingIconPrototype : StatusIconPrototype, IInheritingPrototype
+{
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<BlockingIconPrototype>))]
+    public string[]? Parents { get; private set; }
+
+    [NeverPushInheritance]
+    [AbstractDataField]
+    public bool Abstract { get; private set; }
+}
+
 [Serializable, NetSerializable]
 public enum StatusIconLocationPreference : byte
 {

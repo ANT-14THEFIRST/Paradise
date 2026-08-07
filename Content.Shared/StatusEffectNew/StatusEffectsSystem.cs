@@ -124,6 +124,9 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         var ev = new StatusEffectRemovedEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
 
+        var targetEv = new StatusEffectRemovedFromEvent(args.Entity);
+        RaiseLocalEvent(ent, ref targetEv);
+
         // Clear AppliedTo after events are handled so event handlers can use it.
         if (statusComp.AppliedTo == null)
             return;
@@ -155,6 +158,9 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
         var ev = new StatusEffectAppliedEvent(statusEffectEnt.Comp.AppliedTo.Value);
         RaiseLocalEvent(statusEffectEnt, ref ev);
+
+        var targetEv = new StatusEffectAppliedToEvent(statusEffectEnt);
+        RaiseLocalEvent(statusEffectEnt.Comp.AppliedTo.Value, ref targetEv);
 
         statusEffectEnt.Comp.Applied = true;
 
@@ -359,3 +365,9 @@ public record struct StatusEffectEndTimeUpdatedEvent(EntityUid Target, TimeSpan?
 /// <param name="StartTime">The new start time of the status effect, included for convenience.</param>
 [ByRefEvent]
 public record struct StatusEffectStartTimeUpdatedEvent(EntityUid Target, TimeSpan? StartTime);
+
+[ByRefEvent]
+public readonly record struct StatusEffectAppliedToEvent(EntityUid Effect);
+
+[ByRefEvent]
+public readonly record struct StatusEffectRemovedFromEvent(EntityUid Effect);

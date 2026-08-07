@@ -7,7 +7,27 @@ namespace Content.Shared.Mind.Components
         public EntityUid? MindId;
     }
 
-    public sealed class MindUnvisitedMessage : EntityEventArgs
+    [ByRefEvent]
+    public readonly record struct EntityVisitedEvent(EntityUid MindEntity, MindComponent MindComp)
     {
+        public readonly EntityUid MindEntity = MindEntity;
+
+        public readonly MindComponent MindComp = MindComp;
+    }
+
+    [ByRefEvent]
+    public readonly record struct EntityUnvisitedEvent(EntityUid MindEntity, MindComponent MindComp)
+    {
+        public readonly EntityUid MindEntity = MindEntity;
+
+        public readonly MindComponent MindComp = MindComp;
+    }
+
+    [ByRefEvent]
+    public readonly record struct EntityGotUnvisitedEvent(EntityUid MindEntity, MindComponent MindComp)
+    {
+        public readonly EntityUid MindEntity = MindEntity;
+
+        public readonly MindComponent MindComp = MindComp;
     }
 }

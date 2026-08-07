@@ -9,6 +9,8 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
+using Content.Shared.Projectiles.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 
@@ -43,6 +45,26 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         if (attemptEv.Cancelled)
         {
             SetShooter(uid, component, target);
+            return;
+        }
+
+        var blockattemptEv = new ProjectileBlockAttemptEvent(uid, component.Damage);
+        RaiseLocalEvent(target, ref blockattemptEv);
+        if (blockattemptEv.Cancelled)
+        {
+            if (TryGetNetEntity(target, out var netTarget))
+            {
+                var blockedComp = EnsureComp<BlockedProjectileComponent>(uid);
+                blockedComp.BlockerEntity = netTarget;
+                Dirty(uid, blockedComp);
+            }
+
+            SetShooter(uid, component, target);
+            QueueDel(uid);
+
+            if (blockattemptEv.hitMarkColor != null)
+                _color.RaiseEffect((Color)blockattemptEv.hitMarkColor, new List<EntityUid>() { target }, Filter.Pvs(target, entityManager: EntityManager));
+
             return;
         }
 

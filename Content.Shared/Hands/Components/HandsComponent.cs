@@ -1,6 +1,9 @@
+using Content.Shared.Damage;
 using Content.Shared.DisplacementMap;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -101,6 +104,9 @@ public sealed partial class HandsComponent : Component
     /// </summary>
     [DataField]
     public bool CanBeStripped = true;
+
+    [DataField]
+    public bool HandsOverrideDamage = false;
 }
 
 [DataDefinition]
@@ -134,6 +140,9 @@ public partial record struct Hand
     /// </summary>
     [DataField]
     public EntityWhitelist? Blacklist;
+
+    [DataField]
+    public HandOverrideData? HandOverride;
 
     public Hand()
     {
@@ -174,4 +183,30 @@ public enum HandLocation : byte
     Right,
     Middle,
     Left
+}
+
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct HandOverrideData
+{
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier DamageOverride = new DamageSpecifier();
+
+    [DataField, AutoNetworkedField]
+    public float AttackRate = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool AltDisarm = true;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoAttack = false;
+
+    [DataField, AutoNetworkedField]
+    public float Range = 1.5f;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 StrengthModifier = 1f;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? HitSound = null;
 }

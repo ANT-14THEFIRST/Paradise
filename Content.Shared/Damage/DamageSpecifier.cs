@@ -26,6 +26,9 @@ namespace Content.Shared.Damage
         [DataField("types")]
         public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageDict { get; set; } = new();
 
+        [DataField]
+        public FixedPoint2 ArmourPiercing = 0;
+
         /// <summary>
         ///     Returns a sum of the damage values.
         /// </summary>
@@ -148,7 +151,12 @@ namespace Content.Shared.Damage
                     newValue = Math.Max(0f, newValue - reduction); // flat reductions can't heal you
 
                 if (modifierSet.Coefficients.TryGetValue(key, out var coefficient))
-                    newValue *= coefficient; // coefficients can heal you, e.g. cauterizing bleeding
+                {
+                    var lowerCap = Math.Min(0f, coefficient);
+                    var upperCap = Math.Max(1f, coefficient);
+
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+                }
 
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
@@ -346,6 +354,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;
             return newDamage;
         }
 
@@ -356,6 +365,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor;
             return newDamage;
         }
 
@@ -366,6 +376,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;
             return newDamage;
         }
 
@@ -377,6 +388,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
+            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor;
             return newDamage;
         }
 
@@ -394,6 +406,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] += entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing + damageSpecB.ArmourPiercing;
             return newDamage;
         }
 
@@ -410,6 +423,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] -= entry.Value;
                 }
             }
+            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing - damageSpecB.ArmourPiercing;
             return newDamage;
         }
 
@@ -431,6 +445,9 @@ namespace Content.Shared.Damage
                 if (!other.DamageDict.TryGetValue(key, out var otherValue) || value != otherValue)
                     return false;
             }
+
+            if (ArmourPiercing != other.ArmourPiercing)
+                return false;
 
             return true;
         }

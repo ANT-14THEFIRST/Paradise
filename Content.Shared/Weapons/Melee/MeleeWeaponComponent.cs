@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -132,6 +133,20 @@ public sealed partial class MeleeWeaponComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float AnimationOffset = 1f;
+
+    [DataField, AutoNetworkedField]
+    public bool StrengthAffectsDamage = true;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 StrengthDamageMultiplier = 0.35f;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<ProtoId<DamageTypePrototype>> AffectedDamageTypes = new HashSet<ProtoId<DamageTypePrototype>>
+    {
+        "Piercing",
+        "Slash",
+        "Blunt"
+    };
 
     // Sounds
 

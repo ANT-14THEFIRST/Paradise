@@ -6,6 +6,7 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Players;
+using NetCord;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Network;
@@ -136,6 +137,9 @@ public sealed partial class MindSystem : SharedMindSystem
         if (_players.TryGetSessionById(mind.UserId, out var session))
             _players.SetAttachedEntity(session, entity);
 
+        var ev = new EntityVisitedEvent(mindId, mind);
+        RaiseLocalEvent(entity, ref ev);
+
         Log.Info($"Session {session?.Name} visiting entity {entity}.");
     }
 
@@ -149,6 +153,8 @@ public sealed partial class MindSystem : SharedMindSystem
         if (mind.VisitingEntity == null)
             return;
 
+        var oldVisitingEnt = mind.VisitingEntity.Value;
+
         RemoveVisitingEntity(mindId, mind);
 
         if (mind.UserId == null || !_players.TryGetSessionById(mind.UserId.Value, out var session))
@@ -159,6 +165,15 @@ public sealed partial class MindSystem : SharedMindSystem
 
         var owned = mind.OwnedEntity;
         _players.SetAttachedEntity(session, owned);
+
+        var oldEntEv = new EntityGotUnvisitedEvent(mindId, mind);
+        RaiseLocalEvent(oldVisitingEnt, ref oldEntEv);
+
+        if (mind.OwnedEntity is { Valid: true } ownedEntValid)
+        {
+            var ev = new EntityUnvisitedEvent(mindId, mind);
+            RaiseLocalEvent(ownedEntValid, ref ev);
+        }
 
         if (owned.HasValue)
         {

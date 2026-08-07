@@ -300,7 +300,6 @@ public abstract partial class SharedMindSystem : EntitySystem
         }
 
         Dirty(mindId, mind);
-        RaiseLocalEvent(oldVisitingEnt, new MindUnvisitedMessage(), true);
     }
 
     public void WipeMind(ICommonSession player)
