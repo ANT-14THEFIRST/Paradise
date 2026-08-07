@@ -1,14 +1,14 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Clothing;
-using Content.Shared.Item.ItemToggle;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.Systems;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.SS220.PoweredClothing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
-namespace Content.Shared.PhysicalParameters;
+namespace Content.Shared.PoweredClothing;
 
 public abstract partial class SharedPoweredClothingSystem : EntitySystem
 {

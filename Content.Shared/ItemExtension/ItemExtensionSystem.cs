@@ -39,9 +39,6 @@ public sealed partial class ItemExtensionSystem : EntitySystem
 
     public void OnPickupAttempt(Entity<ItemExtensionComponent> ent, ref GettingPickedUpAttemptEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         FixedPoint2 userStrength = 1;
 
         if (TryComp<PhysicalParametersComponent>(args.User, out var parametersComp))

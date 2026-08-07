@@ -36,9 +36,9 @@
   description: A specialised powered exoskeleton made to increase muscle strength.
   components:
   - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    sprite: Clothing/OuterClothing/Misc/industrial_exosuit.rsi
   - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
+    sprite: Clothing/OuterClothing/Misc/industrial_exosuit.rsi
     quickEquip: false
     equipDelay: 4
     unequipDelay: 4
@@ -62,38 +62,3 @@
         Cold: 0.85
   - type: StaminaResistance
     damageCoefficient: 0.9
-
-- type: entity
-  parent: ClothingOuterExosuit
-  id: ClothingOuterExosuitArmor
-  name: exoskeletal armor
-  description: A specialised powered exoskeleton made to increase muscle strength.
-  components:
-  - type: Sprite
-    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
-  - type: Clothing
-    sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
-    quickEquip: false
-    equipDelay: 4
-    unequipDelay: 4
-  - type: PhysicalParametersModifyingClothing
-    parameterDict:
-      Strength: 1.1
-  - type: IntegratedClothing
-    clothingPrototypes:
-      back: ClothingBackpackExo
-      gloves: ClothingHandsGlovesCombat
-      shoes: ClothingShoesBootsMagExo
-    slots: [ back, gloves, shoes ]
-  - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 0.5
-        Slash: 0.5
-        Piercing: 0.5
-        Heat: 0.55
-        Caustic: 0.3
-        Radiation: 0.4
-        Cold: 0.3
-  - type: StaminaResistance
-    damageCoefficient: 0.2

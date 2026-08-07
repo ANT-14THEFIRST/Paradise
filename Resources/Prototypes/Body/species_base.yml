@@ -153,6 +153,11 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
+  - type: PhysicalParameters
+  - type: Item
+    size: Ginormous
+  - type: ItemExtension
+    minimalStrengthToPickUp: 3.5
 
 - type: entity
   abstract: true
