@@ -16,8 +16,6 @@ public sealed partial class AltMechSystem
 
     private readonly string _chassisSlot = "chassis";
 
-    //private readonly string _powerSlot = "power";
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
