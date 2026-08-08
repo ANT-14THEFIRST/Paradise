@@ -2,6 +2,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mech.Components;
+using Content.Shared.Paradise.Mech.Components;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;

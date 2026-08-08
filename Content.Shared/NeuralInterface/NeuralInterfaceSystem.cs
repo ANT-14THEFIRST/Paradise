@@ -4,7 +4,7 @@ using Content.Shared.MindShield;
 
 namespace Content.Shared.SS220.PhysicalParameters;
 
-public sealed class NeuralInterfaceSystem : EntitySystem
+public sealed partial class NeuralInterfaceSystem : EntitySystem
 {
     [Dependency] private AlertsSystem _alerts = default!;
 

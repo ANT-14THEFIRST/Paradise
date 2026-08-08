@@ -7,7 +7,7 @@ using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
-public sealed class ItemExtensionRangedWeaponSystem : EntitySystem
+public sealed partial class ItemExtensionRangedWeaponSystem : EntitySystem
 {
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
