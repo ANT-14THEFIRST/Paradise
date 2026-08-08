@@ -1,6 +1,5 @@
 using Content.Server.Hands.Systems;
 using Content.Server.Popups;
-using Content.Shared.CustomColorableLayer;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -13,6 +12,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
+using Content.Shared.Paradise.CustomColorableLayer;
 using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Paradise.Mech.Parts.Components;
 using Content.Shared.Paradise.Mech.Systems;

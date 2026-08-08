@@ -1,7 +1,7 @@
-using Content.Shared.CustomColorableLayer;
+using Content.Shared.Paradise.CustomColorableLayer;
 using Robust.Client.GameObjects;
 
-namespace Content.Client.CustomColorableLayer;
+namespace Content.Client.Paradise.CustomColorableLayer;
 
 public sealed partial class CustomColorableLayerSystem : SharedCustomColorableLayerSystem
 {

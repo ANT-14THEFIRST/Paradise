@@ -2,7 +2,7 @@ using Content.Shared.Alert;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.MindShield;
 
-namespace Content.Shared.SS220.PhysicalParameters;
+namespace Content.Shared.Paradise.NeuralInterface;
 
 public sealed partial class NeuralInterfaceSystem : EntitySystem
 {

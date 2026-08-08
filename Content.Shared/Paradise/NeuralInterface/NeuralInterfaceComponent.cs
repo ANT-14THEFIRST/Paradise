@@ -1,10 +1,8 @@
-// © SS220, MIT full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/MIT_LICENSE.TXT
-
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.PhysicalParameters;
+namespace Content.Shared.Paradise.NeuralInterface;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
