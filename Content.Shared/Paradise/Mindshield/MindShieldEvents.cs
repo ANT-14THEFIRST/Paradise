@@ -1,4 +1,4 @@
-namespace Content.Shared.MindShield;
+namespace Content.Shared.Paradise.MindShield;
 
 [ByRefEvent]
 public readonly record struct MindshieldProtectionGrantedEvent

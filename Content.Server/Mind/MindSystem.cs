@@ -107,7 +107,7 @@ public sealed partial class MindSystem : SharedMindSystem
         }
     }
 
-    public override void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
+    public override void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null, bool redirectChat = false) // PARADISE EDIT - Visiting mind overhaul
     {
         base.Visit(mindId, entity, mind);
 
@@ -131,6 +131,7 @@ public sealed partial class MindSystem : SharedMindSystem
         // EnsureComp instead of AddComp to deal with deferred deletions.
         var comp = EnsureComp<VisitingMindComponent>(entity);
         comp.MindId = mindId;
+        comp.RedirectChatMessages = redirectChat;// PARADISE EDIT - Visiting mind overhaul
 
         // Do this AFTER the entity changes above as this will fire off a player-detached event
         // which will run ghosting twice.

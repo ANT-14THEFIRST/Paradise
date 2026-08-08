@@ -1,6 +1,6 @@
 using Content.Shared.Alert;
 using Content.Shared.Mindshield.Components;
-using Content.Shared.MindShield;
+using Content.Shared.Paradise.MindShield;
 
 namespace Content.Shared.Paradise.NeuralInterface;
 

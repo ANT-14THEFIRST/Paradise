@@ -258,7 +258,7 @@ public abstract partial class SharedMindSystem : EntitySystem
         return false;
     }
 
-    public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null)
+    public virtual void Visit(EntityUid mindId, EntityUid entity, MindComponent? mind = null, bool redirectChat = false) // PARADISE EDIT - Visiting mind overhaul
     {
     }
 

@@ -1,4 +1,3 @@
-using System.Globalization;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -10,7 +9,10 @@ using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
+using Content.Shared.Mind;
+using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Speech.EntitySystems;
 using Robust.Server.Player;
@@ -20,6 +22,7 @@ using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
+using System.Globalization;
 
 namespace Content.Server.Chat.Systems;
 
@@ -156,11 +159,41 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
         }
 
+        // PARADISE EDIT START - Visiting mind overhaul
+        if (TryComp<VisitingMindComponent>(source, out var visitingComp) &&
+            visitingComp.RedirectChatMessages &&
+            visitingComp.MindId is { Valid: true } mindIdValid &&
+            TryComp<MindComponent>(mindIdValid, out var mindComp) &&
+            mindComp.OwnedEntity is { Valid: true } ownedEntValid)
+        {
+            TrySendInGameICMessage(
+                ownedEntValid,
+                message,
+                desiredType,
+                range,
+                hideLog,
+                shell,
+                player,
+                nameOverride,
+                checkRadioPrefix,
+                ignoreActionBlocker);
+
+            return;
+        }
+        // PARADISE EDIT END
+
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
         // Sus
-        if (player?.AttachedEntity is { Valid: true } entity && source != entity)
+        // PARADISE EDIT START - Visiting mind overhaul
+        if (player?.AttachedEntity is { Valid: true } entity &&
+            source != entity &&
+            !(TryComp<MindContainerComponent>(source, out var mindContainerComp) &&
+            mindContainerComp.Mind is { Valid: true } mindEnt &&
+            TryComp<MindComponent>(mindEnt, out var sourceMindComp) &&
+            sourceMindComp.VisitingEntity == entity))
+        // PARADISE EDIT END
         {
             return;
         }

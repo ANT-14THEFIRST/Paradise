@@ -5,6 +5,11 @@ namespace Content.Shared.Mind.Components
     {
         [ViewVariables]
         public EntityUid? MindId;
+
+        // PARADISE EDIT START - Visiting mind overhaul
+        [ViewVariables]
+        public bool RedirectChatMessages = true;
+        // PARADISE EDIT END
     }
 
     [ByRefEvent]

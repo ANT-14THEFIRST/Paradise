@@ -285,7 +285,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!HasComp<MindContainerComponent>(pilotValidated) || !_mind.TryGetMind(pilotValidated, out var mindId, out var mind))
             return;
 
-        _mind.Visit(mindId, ent.Owner);
+        _mind.Visit(mindId, ent.Owner, redirectChat: true);
 
         _actionBlocker.UpdateCanMove(ent.Owner);
 
@@ -461,7 +461,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!HasComp<MindContainerComponent>(ent.Owner) || !_mind.TryGetMind(ent.Owner, out var mindIdpilot, out var pilotmind))
             return;
 
-        _mind.Visit(mindIdpilot, ent.Comp.Mech, mind: pilotmind);
+        _mind.Visit(mindIdpilot, ent.Comp.Mech, mind: pilotmind, true);
     }
 
     private void OnMindAdded(Entity<AltMechPilotComponent> ent, ref MindAddedMessage args)
