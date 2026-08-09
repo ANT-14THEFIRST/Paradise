@@ -1,0 +1,16 @@
+- type: entity
+  parent: IDCardStandard
+  id: RoboticistIDCard
+  name: Roboticist ID card
+  components:
+    - type: Sprite
+      layers:
+        - state: silver
+        - state: idroboticist
+    - type: PresetIdCard
+      job: Roboticist
+    - type: Tag
+      tags:
+      - DoorBumpOpener
+      - WhitelistChameleon
+      - WhitelistChameleonIdCard

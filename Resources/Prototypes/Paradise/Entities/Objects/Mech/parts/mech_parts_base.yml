@@ -69,7 +69,7 @@
   abstract: true
   components:
   - type: MechPart
-    slot: right-arm
+    slot: RightArm
     ownMass: 60
     integrity: 150
     maxIntegrity: 150
@@ -125,7 +125,7 @@
   abstract: true
   components:
   - type: MechPart
-    slot: left-arm
+    slot: LeftArm
     ownMass: 60
     integrity: 150
     maxIntegrity: 150

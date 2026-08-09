@@ -134,6 +134,8 @@ public sealed partial class MeleeWeaponComponent : Component
     [DataField, AutoNetworkedField]
     public float AnimationOffset = 1f;
 
+    // PARADISE EDIT START - physical parameter dependent melee weapons
+
     [DataField, AutoNetworkedField]
     public bool StrengthAffectsDamage = true;
 
@@ -147,6 +149,8 @@ public sealed partial class MeleeWeaponComponent : Component
         "Slash",
         "Blunt"
     };
+
+    // PARADISE EDIT END
 
     // Sounds
 

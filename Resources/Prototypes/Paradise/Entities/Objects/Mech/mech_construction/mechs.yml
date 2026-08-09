@@ -24,7 +24,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Items
-    sprite: SS220/Objects/Mechs/coresfinal.rsi
+    sprite: Paradise/Objects/Mechs/coresfinal.rsi
     state: basicloader
   - type: Appearance
   - type: ContainerContainer
@@ -73,7 +73,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Items
-    sprite: SS220/Objects/Mechs/chassisfinal.rsi
+    sprite: Paradise/Objects/Mechs/chassisfinal.rsi
     state: basichydraulic
   - type: Appearance
   - type: ContainerContainer
@@ -120,7 +120,7 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+        sprite: Paradise/Objects/Mechs/mech_components_machines.rsi
         state: mech_arm_port
   - type: Appearance
   - type: ContainerContainer
@@ -174,7 +174,7 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_right.rsi
+        sprite: Paradise/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_right.rsi
         state: hydraulic
   - type: Appearance
   - type: ContainerContainer
@@ -214,7 +214,7 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/mech_components_machines.rsi
+        sprite: Paradise/Objects/Mechs/mech_components_machines.rsi
         state: mech_arm_port
   - type: Item
     size: Large
@@ -275,7 +275,7 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: SS220/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_left.rsi
+        sprite: Paradise/Objects/Mechs/mech_crafts_intermediate/intermediare_arms_left.rsi
         state: hydraulic
   - type: Appearance
   - type: ContainerContainer

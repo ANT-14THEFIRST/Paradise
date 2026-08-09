@@ -1,0 +1,17 @@
+  # Робототехник
+- type: roleLoadout
+  id: JobRoboticist
+  groups:
+  - ScientistHead
+  - ScientistNeck
+  - ScientistJumpsuit
+  - SeniorSciensistOuterClothing
+  - ScientistGloves
+  - ScientistBackpack
+  - ScientistShoes
+  - RoboticistPDA
+  - Survival
+  - SurvivalVox
+  - GroupSpeciesBreathTool
+  - Trinkets
+  - WorkerCash
