@@ -19,7 +19,6 @@ using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client.Paradise.Mech;
 
-/// <inheritdoc/>
 public sealed partial class AltMechSystem : SharedAltMechSystem
 {
     [Dependency] private SpriteSystem _sprite = default!;
@@ -28,17 +27,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private DamageOverlay _damageOverlay = default!;
 
-    private static readonly string HeadSlotId = "head";
-
-    /// <inheritdoc/>
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<AltMechComponent, AppearanceChangeEvent>(OnAppearanceChanged);
-
-        //SubscribeLocalEvent<AltMechComponent, ComponentStartup>(OnComponentStartup);
-        //SubscribeNetworkEvent<MechPartStatusChanged>(OnPartMoved);
 
         SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<AltMechComponent, EntRemovedFromContainerMessage>(OnRemoved);
@@ -83,7 +76,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         {
             if (partContainer.Value.ContainedEntity is not { Valid: true } partEntityValid || !TryComp<MechPartComponent>(partEntityValid, out var partComp))
             {
-                if (partContainer.Key != null && _sprite.LayerMapTryGet((ent.Owner, spriteComp), PartsVisuals[partContainer.Key], out var layerOfMissingPart, true))
+                if (_sprite.LayerMapTryGet((ent.Owner, spriteComp), PartsVisuals[partContainer.Key], out var layerOfMissingPart, true))
                     _sprite.LayerSetVisible((ent.Owner, spriteComp), layerOfMissingPart, false);
 
                 continue;
@@ -95,6 +88,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void OnInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        string containerID = args.Container.ID;
+
+        if (!containerID.StartsWith(PartContainerPrefix))
+            return;
+
         if (TryComp<MechPartComponent>(args.Entity, out var partComp))
             ProcessPartVisuals(ent, (args.Entity, partComp), true, partComp.Slot);
 
@@ -114,6 +112,11 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void OnRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        string containerID = args.Container.ID;
+
+        if (!containerID.StartsWith(PartContainerPrefix))
+            return;
+
         if (TryComp<MechPartComponent>(args.Entity, out var partComp))
             ProcessPartVisuals(ent, (args.Entity, partComp), false, partComp.Slot);
 
@@ -174,7 +177,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     }
 
-    private void ProcessPartVisuals(Entity<AltMechComponent> mech, Entity<MechPartComponent> part, bool attached, string? slot)
+    private void ProcessPartVisuals(Entity<AltMechComponent> mech, Entity<MechPartComponent> part, bool attached, PartSlot slot)
     {
         if (!TryComp<SpriteComponent>(mech, out var spriteComp) || spriteComp == null)
             return;
@@ -183,7 +186,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SpriteSpecifier? coloredSpriteToAdd = part.Comp.AttachedColoredSprite;
 
-        if (part.Comp.Slot == HeadSlotId)
+        if (slot == PartSlot.Head)
         {
             _sprite.LayerSetVisible((mech, spriteComp), mech.Comp.AttachedHeadSpriteLayer, attached);
             _sprite.LayerSetVisible((mech, spriteComp), mech.Comp.AttachedHeadColoredSpriteLayer, attached);

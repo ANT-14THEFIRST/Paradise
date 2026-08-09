@@ -1,6 +1,7 @@
 using Content.Shared.Movement.Components;
 using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Paradise.Mech.Parts.Components;
+using Content.Shared.Paradise.Mech;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Robust.Shared.Timing;
@@ -13,8 +14,6 @@ namespace Content.Server.Paradise.Mech.Systems;
 public sealed partial class AltMechSystem
 {
     [Dependency] private IGameTiming _timing = default!;
-
-    private readonly string _chassisSlot = "chassis";
 
     public override void Update(float frameTime)
     {
@@ -34,7 +33,7 @@ public sealed partial class AltMechSystem
             if (curTime < comp.NextPowerDrain)
                 continue;
 
-            if (comp.ContainerDict[_chassisSlot].ContainedEntity is not { Valid: true } chassisValid)
+            if (comp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true } chassisValid)
                 continue;
 
             if (!TryComp<MechChassisComponent>(chassisValid, out var chassisComp))
@@ -53,10 +52,10 @@ public sealed partial class AltMechSystem
 
     public bool TryChangeMechCharge(Entity<AltMechComponent> ent, float amount)
     {
-        if (ent.Comp.ContainerDict[_chassisSlot].ContainedEntity is not { Valid: true } batteryValid)
+        if (ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true } batteryValid)
             return false;
 
-        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict[_chassisSlot].ContainedEntity, out var batteryComp))
+        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity, out var batteryComp))
             return false;
 
         var actualChange = _battery.ChangeCharge(batteryValid, amount);
@@ -92,7 +91,7 @@ public sealed partial class AltMechSystem
 
             TransferMindIntoPilot((mech, mechComp));
 
-            if (mechComp.ContainerDict[_chassisSlot].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
         if (mechComp.Energy > 0 && !mechComp.Online)
@@ -102,7 +101,7 @@ public sealed partial class AltMechSystem
             if (mechComp.PilotSlot.ContainedEntity is not { Valid: true })
                 TransferMindIntoMech((mech, mechComp));
 
-            if (mechComp.ContainerDict[_chassisSlot].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
     }

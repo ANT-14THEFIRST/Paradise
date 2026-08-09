@@ -33,7 +33,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Linq;
 
@@ -60,15 +59,17 @@ public abstract partial class SharedAltMechSystem : EntitySystem
     public EntProtoId CombatModeToggleAction = "ActionCombatModeToggle";
     public EntProtoId MechRelayAction = "ActionMechRelay";
 
-    private static readonly LocId MechArmTooHeavy = "mech-arm-too-heavy";
+    public static readonly LocId MechArmTooHeavy = "mech-arm-too-heavy";
 
-    public readonly Dictionary<string, MechPartVisualLayers> PartsVisuals = new Dictionary<string, MechPartVisualLayers>()
+    public static readonly string PartContainerPrefix = "mech_part";
+
+    public readonly Dictionary<PartSlot, MechPartVisualLayers> PartsVisuals = new Dictionary<PartSlot, MechPartVisualLayers>()
     {
-        ["head"] = MechPartVisualLayers.Head,
-        ["right-arm"] = MechPartVisualLayers.RightArm,
-        ["left-arm"] = MechPartVisualLayers.LeftArm,
-        ["chassis"] = MechPartVisualLayers.Chassis,
-        ["power"] = MechPartVisualLayers.Power
+        [PartSlot.Head] = MechPartVisualLayers.Head,
+        [PartSlot.RightArm] = MechPartVisualLayers.RightArm,
+        [PartSlot.LeftArm] = MechPartVisualLayers.LeftArm,
+        [PartSlot.Chassis] = MechPartVisualLayers.Chassis,
+        [PartSlot.Power] = MechPartVisualLayers.Power
     };
 
     /// <inheritdoc/>
@@ -157,17 +158,22 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
     private void OnMechGetEyeProtection(Entity<AltMechComponent> ent, ref GetEyeProtectionEvent args)
     {
-        if (ent.Comp.ContainerDict["head"].ContainedEntity == null)
+        if (ent.Comp.ContainerDict[PartSlot.Head].ContainedEntity == null)
             return;
 
-        if (TryComp<EyeProtectionComponent>(ent.Comp.ContainerDict["head"].ContainedEntity, out var immunityComp))
+        if (TryComp<EyeProtectionComponent>(ent.Comp.ContainerDict[PartSlot.Head].ContainedEntity, out var immunityComp))
             args.Protection += immunityComp.ProtectionTime;
     }
 
     protected virtual void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
     {
-        foreach (var part in ent.Comp.ContainersToCreate)
-            ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, part);
+        foreach (PartSlot part in Enum.GetValues(typeof(PartSlot)))
+        {
+            if (part == PartSlot.Core)
+                continue;
+
+            ent.Comp.ContainerDict[part] = _container.EnsureContainer<ContainerSlot>(ent.Owner, PartContainerPrefix + "_" + part);
+        }
 
         ent.Comp.PilotSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, ent.Comp.PilotSlotId);
 
@@ -182,7 +188,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
             _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
 
-        if (ent.Comp.ContainerDict["head"].ContainedEntity == null && !ent.Comp.Transparent)
+        if (ent.Comp.ContainerDict[PartSlot.Head].ContainedEntity == null && !ent.Comp.Transparent)
         {
             TryComp<BlindableComponent>(ent.Owner, out var blindableComp);
             _blindable.AdjustEyeDamage((ent.Owner, blindableComp), 9); //Mech cannot see anything if it has no eyes
@@ -261,7 +267,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         foreach (var part in ent.Comp.ContainerDict)
         {
-            if (part.Key == "power" || part.Value == null || part.Value.ContainedEntity is not { Valid: true } partValid)
+            if (part.Key == PartSlot.Power || part.Value == null || part.Value.ContainedEntity is not { Valid: true } partValid)
                 continue;
 
             if (!TryGetNetEntity(partValid, out var netItem))
@@ -289,7 +295,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         foreach (var part in ent.Comp.ContainerDict)
         {
-            if (part.Key == "power" || part.Value == null || part.Value.ContainedEntity != null)
+            if (part.Key == PartSlot.Power || part.Value == null || part.Value.ContainedEntity != null)
                 continue;
 
             if (!TryGetNetEntity(part.Value.ContainedEntity, out var netItem))
@@ -426,11 +432,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         }
     }
 
-    /// <summary>
-    /// Destroys the mech, removing the user and ejecting anything contained.
-    /// </summary>
-    /// <param name="uid"></param>
-    /// <param name="component"></param>
     public virtual void BreakMech(Entity<AltMechComponent> ent)
     {
         TryEject(ent);
@@ -439,13 +440,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         ent.Comp.Broken = true;
     }
 
-    /// <summary>
-    /// Inserts an equipment item into the mech.
-    /// </summary>
-    /// <param name="uid"></param>
-    /// <param name="toInsert"></param>
-    /// <param name="component"></param>
-    /// <param name="equipmentComponent"></param>
     public void InsertEquipment(EntityUid uid, EntityUid toInsert, AltMechComponent? component = null,
         AltMechEquipmentComponent? equipmentComponent = null)
     {
@@ -489,7 +483,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!component.ContainerDict.ContainsKey(partComponent.Slot) || component.ContainerDict[partComponent.Slot].ContainedEntity != null)
             return;
 
-        if ((partComponent.Slot == "left-arm" || partComponent.Slot == "right-arm") && partComponent.OwnMass > component.MaximalArmMass)
+        if (TryComp<MechArmComponent>(toInsert, out var armComp) &&
+            partComponent.OwnMass > component.MaximalArmMass)
         {
             _popup.PopupEntity(Loc.GetString(MechArmTooHeavy), uid);
             return;
@@ -522,23 +517,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         mechComp.OverallMass -= value;
     }
 
-    /// <summary>
-    /// Removes an equipment item from a mech.
-    /// </summary>
-    /// <param name="uid"></param>
-    /// <param name="toRemove"></param>
-    /// <param name="component"></param>
-    /// <param name="equipmentComponent"></param>
-    /// <param name="forced">
-    ///     Whether or not the removal can be cancelled, and if non-mech equipment should be ejected.
-    /// </param>
     public void RemoveEquipment(EntityUid uid, EntityUid toRemove)
     {
         if (!TryComp<AltMechComponent>(uid, out var mechComp))
             return;
-        // When forced, we also want to handle the possibility that the "equipment" isn't actually equipment.
-        // This /shouldn't/ be possible thanks to OnEntityStorageDump, but there's been quite a few regressions
-        // with entities being hardlock stuck inside mechs.
+
         if (!TryComp<AltMechEquipmentComponent>(toRemove, out var equipmentComponent))
             return;
 
@@ -564,9 +547,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!TryComp<AltMechComponent>(uid, out var component))
             return;
 
-        // When forced, we also want to handle the possibility that the "equipment" isn't actually equipment.
-        // This /shouldn't/ be possible thanks to OnEntityStorageDump, but there's been quite a few regressions
-        // with entities being hardlock stuck inside mechs.
         if (!TryComp<MechPartComponent>(toRemove, out var partComponent))
             return;
 
@@ -576,24 +556,24 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (!component.ContainerDict.ContainsKey(partComponent.Slot) || component.ContainerDict[partComponent.Slot].ContainedEntity == null)
             return;
 
-        string? slot = null;
+        PartSlot slot;
 
-        if (partComponent != null)
-        {
-            slot = partComponent.Slot;
-            partComponent.PartOwner = null;
-            RemoveMass(component, partComponent.OwnMass);
+        if (partComponent == null)
+            return;
 
-            _container.Remove(toRemove, component.ContainerDict[partComponent.Slot]);
+        slot = partComponent.Slot;
+        partComponent.PartOwner = null;
+        RemoveMass(component, partComponent.OwnMass);
 
-            var ev = new MechPartRemovedEvent(uid);
-            RaiseLocalEvent(toRemove, ref ev);
+        _container.Remove(toRemove, component.ContainerDict[partComponent.Slot]);
 
-            var massEv = new MassChangedEvent();
-            RaiseLocalEvent(uid, ref massEv);
+        var ev = new MechPartRemovedEvent(uid);
+        RaiseLocalEvent(toRemove, ref ev);
 
-            Dirty(toRemove, partComponent);
-        }
+        var massEv = new MassChangedEvent();
+        RaiseLocalEvent(uid, ref massEv);
+
+        Dirty(toRemove, partComponent);
 
         Dirty(uid, component);
 
@@ -789,131 +769,4 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         args.CanDrop = CanInsert(ent, args.Dragged);
     }
 
-}
-
-[ByRefEvent]
-public readonly record struct MechPartInsertedEvent(EntityUid Mech)
-{
-    public readonly EntityUid Mech = Mech;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MechPartInsertedDoAfterEvent : SimpleDoAfterEvent
-{
-
-}
-
-[ByRefEvent]
-public readonly record struct MechPartRemovedEvent(EntityUid Mech)
-{
-    public readonly EntityUid Mech = Mech;
-}
-
-[ByRefEvent]
-public readonly record struct MechSpeedModifiedEvent(EntityUid Mech)
-{
-    public readonly EntityUid Mech = Mech;
-}
-
-[ByRefEvent]
-public readonly record struct OnMechExitEvent();
-
-[ByRefEvent]
-public readonly record struct OnMechEntryEvent();
-
-[ByRefEvent]
-public readonly record struct MassChangedEvent();
-
-public enum PartSlot : byte
-{
-    Core = 0,
-    Head = 1,
-    RightArm = 2,
-    LeftArm = 3,
-    Chassis = 4,
-    Power = 5
-}
-
-[Serializable, NetSerializable]
-public sealed partial class InsertPartEvent : SimpleDoAfterEvent
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MechBoltsSawedEvent : SimpleDoAfterEvent
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class InsertEquipmentEvent : SimpleDoAfterEvent
-{
-}
-
-[ByRefEvent]
-public readonly record struct MechEquipmentInsertedEvent(EntityUid Mech)
-{
-    public readonly EntityUid Mech = Mech;
-}
-
-[ByRefEvent]
-public readonly record struct MechEquipmentRemovedEvent(EntityUid Mech)
-{
-    public readonly EntityUid Mech = Mech;
-}
-
-[ByRefEvent]
-public record struct RefreshOpticHudEvent<T>() where T : IComponent
-{
-    public bool Active = false;
-    public List<T> Components = new();
-}
-
-public sealed partial class MechRelayActionEvent : InstantActionEvent
-{
-    public EntityUid ActionToPerform;
-    public EntityUid ActionUser;
-}
-
-[Serializable, NetSerializable]
-public sealed partial class RemoveBatteryEvent : SimpleDoAfterEvent
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MechExitEvent : SimpleDoAfterEvent
-{
-}
-
-[Serializable, NetSerializable]
-public sealed partial class MechEntryEvent : SimpleDoAfterEvent
-{
-}
-
-public sealed partial class MechOpenUiEvent : InstantActionEvent
-{
-}
-
-public sealed partial class MechEjectPilotEvent : InstantActionEvent
-{
-}
-
-public enum MechPartVisualLayers : byte
-{
-    Core = 0,
-    CoreColored = 1,
-    Head = 2,
-    HeadColored = 3,
-    Chassis = 4,
-    ChassisColored = 5,
-    RightArm = 6,
-    RightArmColored = 7,
-    LeftArm = 8,
-    LeftArmColored = 9,
-    Power = 10,
-    PowerColored = 11
-}
-
-public enum MechCameraVisualLayer : byte
-{
-    Camera = 0
 }

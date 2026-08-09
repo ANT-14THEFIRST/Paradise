@@ -16,6 +16,7 @@ using Content.Shared.Paradise.CustomColorableLayer;
 using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Paradise.Mech.Parts.Components;
 using Content.Shared.Paradise.Mech.Systems;
+using Content.Shared.Paradise.Mech;
 using Content.Shared.Power.Components;
 using Content.Shared.SprayPainter.Components;
 using Robust.Shared.Containers;

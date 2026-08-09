@@ -8,7 +8,7 @@
   - type: EyeProtection
   - type: CustomColorableLayer
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 70
@@ -36,7 +36,7 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: CustomColorableLayer
   - type: MechPart
@@ -68,7 +68,7 @@
   - type: EyeProtection
   - type: CustomColorableLayer
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 90
@@ -98,7 +98,7 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 90
@@ -127,7 +127,7 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 120
@@ -155,7 +155,7 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 75
@@ -186,7 +186,7 @@
   - type: FlashImmunity
   - type: EyeProtection
   - type: Sprite
-    sprite: Objects/Mechs/items/mecha_parts.rsi
+    sprite: Paradise/Objects/Mechs/items/mecha_parts.rsi
     state: visor_basic
   - type: MechPart
     integrity: 110

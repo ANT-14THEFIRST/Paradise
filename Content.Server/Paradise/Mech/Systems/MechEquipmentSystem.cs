@@ -9,6 +9,7 @@ using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Paradise.Mech.Equipment.Components;
 using Content.Shared.Paradise.Mech.Parts.Components;
 using Content.Shared.Paradise.Mech.Systems;
+using Content.Shared.Paradise.Mech;
 using Content.Shared.Toggleable;
 
 namespace Content.Server.Paradise.Mech.Systems;
@@ -133,13 +134,13 @@ public sealed partial class MechEquipmentSystem : EntitySystem
 
         if (ent.Comp.MaximalArmMassDelta != 0)
         {
-            var rightArm = mechComp.ContainerDict["right-arm"].ContainedEntity;
+            var rightArm = mechComp.ContainerDict[PartSlot.RightArm].ContainedEntity;
 
             if (rightArm is { Valid: true } rightArmValid && TryComp<MechPartComponent>(rightArmValid, out var partCompRight))
                 if (partCompRight.OwnMass > mechComp.MaximalArmMass - ent.Comp.MaximalArmMassDelta)
                     _mech.RemovePart(args.Mech, rightArmValid);
 
-            var leftArm = mechComp.ContainerDict["left-arm"].ContainedEntity;
+            var leftArm = mechComp.ContainerDict[PartSlot.LeftArm].ContainedEntity;
 
             if (leftArm is { Valid: true } leftArmValid && TryComp<MechPartComponent>(leftArmValid, out var partCompLeft))
                 if (partCompLeft.OwnMass > mechComp.MaximalArmMass - ent.Comp.MaximalArmMassDelta)

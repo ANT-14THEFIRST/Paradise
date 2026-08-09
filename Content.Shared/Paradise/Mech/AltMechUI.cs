@@ -1,4 +1,3 @@
-using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 
@@ -14,9 +13,9 @@ public enum MechUiKey : byte
 [Serializable, NetSerializable]
 public sealed class MechPartRemoveMessage : BoundUserInterfaceMessage
 {
-    public string Part;
+    public PartSlot Part;
 
-    public MechPartRemoveMessage(string part)
+    public MechPartRemoveMessage(PartSlot part)
     {
         Part = part;
     }

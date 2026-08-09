@@ -29,10 +29,10 @@
   - type: Sprite
     layers:
       - map: [ "enum.ColorableVisualLayer.CustomBase" ]
-        sprite: Objects/Mechs/chassisfinal.rsi
+        sprite: Paradise/Objects/Mechs/chassisfinal.rsi
         state: basichydraulic
       - map: [ "enum.ColorableVisualLayer.CustomColor" ]
-        sprite: Objects/Mechs/chassisfinal.rsi
+        sprite: Paradise/Objects/Mechs/chassisfinal.rsi
         state: basichydrauliccolor
   - type: CustomColorableLayer
   - type: MechChassis
@@ -45,10 +45,10 @@
     maxIntegrity: 250
     ownMass: 300
     attachedSprite:
-      sprite: Objects/Mechs/chassisfinal.rsi
+      sprite: Paradise/Objects/Mechs/chassisfinal.rsi
       state: basichydraulic
     attachedColoredSprite:
-      sprite: Objects/Mechs/chassisfinal.rsi
+      sprite: Paradise/Objects/Mechs/chassisfinal.rsi
       state: basichydrauliccolor
   - type: Destructible
     thresholds:
@@ -83,7 +83,7 @@
   description: Mech chassis made based on electro servos. It is lightweight, has low reaction time but won't be able to carry much weight
   components:
   - type: Sprite
-    sprite: Objects/Mechs/chassis.rsi
+    sprite: Paradise/Objects/Mechs/chassis.rsi
     state: servo
   - type: MechChassis
     maximalMass: 500
@@ -95,7 +95,7 @@
     maxIntegrity: 175
     ownMass: 100
     attachedSprite:
-      sprite: Objects/Mechs/chassis.rsi
+      sprite: Paradise/Objects/Mechs/chassis.rsi
       state: servo
   - type: Destructible
     thresholds:

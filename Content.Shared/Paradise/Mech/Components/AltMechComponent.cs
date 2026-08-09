@@ -150,10 +150,10 @@ public sealed partial class AltMechComponent : Component
     public bool BoltsSawed = false; //if the mech's bolts are sawed off bolts don't work
 
     [ViewVariables(VVAccess.ReadWrite)]
-    public Dictionary<string, ContainerSlot> ContainerDict = new Dictionary<string, ContainerSlot>();
+    public Dictionary<PartSlot, ContainerSlot> ContainerDict = new Dictionary<PartSlot, ContainerSlot>();
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public List<string> ContainersToCreate = new List<string> { "head", "right-arm", "left-arm", "chassis", "power" };
+    //[ViewVariables(VVAccess.ReadWrite)]
+    //public List<string> ContainersToCreate = new List<string> { "head", "right-arm", "left-arm", "chassis", "power" };
 
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]

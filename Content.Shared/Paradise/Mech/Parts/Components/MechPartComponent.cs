@@ -1,5 +1,6 @@
 using Content.Shared.FixedPoint;
 using Content.Shared.Mech.Components;
+using Content.Shared.Paradise.Mech.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
@@ -26,7 +27,7 @@ public sealed partial class MechPartComponent : Component
     /// The slot this part can be attached to
     /// </summary>
     [DataField("slot")]
-    public string Slot = "core";
+    public PartSlot Slot;
 
     /// <summary>
     /// How much "health" the mech has left.

@@ -7,7 +7,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 150
   - type: Sprite
-    sprite: Objects/Mechs/batteryicons.rsi
+    sprite: Paradise/Objects/Mechs/batteryicons.rsi
     state: nuclearicon
     noRot: True
   - type: MechPart
@@ -16,7 +16,7 @@
     integrity: 75
     maxIntegrity: 75
     attachedSprite:
-      sprite: Objects/Mechs/batteries.rsi
+      sprite: Paradise/Objects/Mechs/batteries.rsi
       state: nuclear
 
 - type: entity
@@ -25,7 +25,7 @@
   name: small-capacity mech battery
   components:
   - type: Sprite
-    sprite: Objects/Mechs/batteryicons.rsi
+    sprite: Paradise/Objects/Mechs/batteryicons.rsi
     state: smallicon
   - type: MechPart
     slot: power
@@ -33,7 +33,7 @@
     integrity: 75
     maxIntegrity: 75
     attachedSprite:
-      sprite: Objects/Mechs/batteries.rsi
+      sprite: Paradise/Objects/Mechs/batteries.rsi
       state: small
   - type: Battery
     maxCharge: 10000
@@ -70,7 +70,7 @@
   name: midline mech battery
   components:
   - type: Sprite
-    sprite: Objects/Mechs/batteryicons.rsi
+    sprite: Paradise/Objects/Mechs/batteryicons.rsi
     state: largeicon
     noRot: True
   - type: MechPart
@@ -79,7 +79,7 @@
     integrity: 100
     maxIntegrity: 100
     attachedSprite:
-      sprite: Objects/Mechs/batteries.rsi
+      sprite: Paradise/Objects/Mechs/batteries.rsi
       state: large
   - type: Battery
     maxCharge: 15000

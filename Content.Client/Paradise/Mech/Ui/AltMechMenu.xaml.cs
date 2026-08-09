@@ -14,7 +14,7 @@ namespace Content.Client.Paradise.Mech.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class AltMechMenu : FancyWindow
 {
-    public event Action<string>? OnRemovePartButtonPressed;
+    public event Action<PartSlot>? OnRemovePartButtonPressed;
 
     public event Action<EntityUid>? OnRemoveEquipmentButtonPressed;
 
@@ -42,29 +42,29 @@ public sealed partial class AltMechMenu : FancyWindow
         SpriteViewDict[MechPartVisualLayers.Chassis] = MechViewChassis;
         SpriteViewDict[MechPartVisualLayers.Power] = MechViewPower;
 
-        IntegrityBarDict[IntegrityDisplayBarCore] = "core";
-        IntegrityBarDict[IntegrityDisplayBarHead] = "head";
-        IntegrityBarDict[IntegrityDisplayBarRightArm] = "right-arm";
-        IntegrityBarDict[IntegrityDisplayBarLeftArm] = "left-arm";
-        IntegrityBarDict[IntegrityDisplayBarChassis] = "chassis";
-        IntegrityBarDict[IntegrityDisplayBarPower] = "power";
+        IntegrityBarDict[IntegrityDisplayBarCore] = PartSlot.Core;
+        IntegrityBarDict[IntegrityDisplayBarHead] = PartSlot.Head;
+        IntegrityBarDict[IntegrityDisplayBarRightArm] = PartSlot.RightArm;
+        IntegrityBarDict[IntegrityDisplayBarLeftArm] = PartSlot.LeftArm;
+        IntegrityBarDict[IntegrityDisplayBarChassis] = PartSlot.Chassis;
+        IntegrityBarDict[IntegrityDisplayBarPower] = PartSlot.Power;
 
-        SpriteTextDict[IntegrityDisplayCore] = "core";
-        SpriteTextDict[IntegrityDisplayHead] = "head";
-        SpriteTextDict[IntegrityDisplayRightArm] = "right-arm";
-        SpriteTextDict[IntegrityDisplayLeftArm] = "left-arm";
-        SpriteTextDict[IntegrityDisplayChassis] = "chassis";
-        SpriteTextDict[IntegrityDisplayPower] = "power";
+        SpriteTextDict[IntegrityDisplayCore] = PartSlot.Core;
+        SpriteTextDict[IntegrityDisplayHead] = PartSlot.Head;
+        SpriteTextDict[IntegrityDisplayRightArm] = PartSlot.RightArm;
+        SpriteTextDict[IntegrityDisplayLeftArm] = PartSlot.LeftArm;
+        SpriteTextDict[IntegrityDisplayChassis] = PartSlot.Chassis;
+        SpriteTextDict[IntegrityDisplayPower] = PartSlot.Power;
 
-        ButtonDict[RemoveButtonHead] = "head";
-        ButtonDict[RemoveButtonRightArm] = "right-arm";
-        ButtonDict[RemoveButtonLeftArm] = "left-arm";
-        ButtonDict[RemoveButtonChassis] = "chassis";
-        ButtonDict[RemoveButtonPower] = "power";
+        ButtonDict[RemoveButtonHead] = PartSlot.Head;
+        ButtonDict[RemoveButtonRightArm] = PartSlot.RightArm;
+        ButtonDict[RemoveButtonLeftArm] = PartSlot.LeftArm;
+        ButtonDict[RemoveButtonChassis] = PartSlot.Chassis;
+        ButtonDict[RemoveButtonPower] = PartSlot.Power;
 
         foreach (var key in ButtonDict.Keys)
         {
-            key.TexturePath = "/Textures/SS220/Interface/Mech/detach_button_old.png";
+            key.TexturePath = "/Textures/Paradise/Interface/Mech/detach_button.png";
             key.OnPressed += _ => OnRemovePartButtonPressed?.Invoke(ButtonDict[key]);
         }
 
@@ -89,21 +89,11 @@ public sealed partial class AltMechMenu : FancyWindow
         [MechPartVisualLayers.Power] = null
     };
 
-    public readonly Dictionary<ProgressBar, string> IntegrityBarDict = new Dictionary<ProgressBar, string>();
+    public readonly Dictionary<ProgressBar, PartSlot> IntegrityBarDict = new Dictionary<ProgressBar, PartSlot>();
 
-    public readonly Dictionary<Label, string> SpriteTextDict = new Dictionary<Label, string>();
+    public readonly Dictionary<Label, PartSlot> SpriteTextDict = new Dictionary<Label, PartSlot>();
 
-    public Dictionary<TextureButton, string> ButtonDict = new Dictionary<TextureButton, string>();
-
-    public readonly Dictionary<string, MechPartVisualLayers> PartsVisuals = new Dictionary<string, MechPartVisualLayers>()
-    {
-        ["core"] = MechPartVisualLayers.Core,
-        ["head"] = MechPartVisualLayers.Head,
-        ["right-arm"] = MechPartVisualLayers.RightArm,
-        ["left-arm"] = MechPartVisualLayers.LeftArm,
-        ["chassis"] = MechPartVisualLayers.Chassis,
-        ["power"] = MechPartVisualLayers.Power
-    };
+    public Dictionary<TextureButton, PartSlot> ButtonDict = new Dictionary<TextureButton, PartSlot>();
 
     public void OnMaintenanceButtonPressed(BaseButton.ButtonEventArgs args)
     {
@@ -195,7 +185,7 @@ public sealed partial class AltMechMenu : FancyWindow
 
         foreach (var bar in IntegrityBarDict.Keys)
         {
-            if (IntegrityBarDict[bar] == "core")
+            if (IntegrityBarDict[bar] == PartSlot.Core)
                 continue;
 
             FixedPoint2 partintegrityPercent;
@@ -213,7 +203,7 @@ public sealed partial class AltMechMenu : FancyWindow
 
         foreach (var text in SpriteTextDict.Keys)
         {
-            if (SpriteTextDict[text] == "core")
+            if (SpriteTextDict[text] == PartSlot.Core)
                 continue;
 
             if (mechComp.ContainerDict[SpriteTextDict[text]].ContainedEntity == null || !_ent.TryGetComponent<MechPartComponent>(mechComp.ContainerDict[SpriteTextDict[text]].ContainedEntity, out var partComp))
@@ -238,9 +228,12 @@ public sealed partial class AltMechMenu : FancyWindow
             EnergyDisplay.Text = Loc.GetString("mech-energy-missing");
         }
 
+        var entMan = IoCManager.Resolve<IEntityManager>();
+        var mechSys = entMan.System<SharedAltMechSystem>();
+
         foreach (var part in mechComp.ContainerDict)
         {
-            SetEntity(part.Value.ContainedEntity, PartsVisuals[part.Key]);
+            SetEntity(part.Value.ContainedEntity, mechSys.PartsVisuals[part.Key]);
         }
 
         SlotDisplay.Text = Loc.GetString("mech-equipment-slot-display", ("amount", mechComp.MaxEquipmentAmount - mechComp.CurrentEquipmentAmount));

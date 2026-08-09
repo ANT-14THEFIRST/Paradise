@@ -1,5 +1,4 @@
 using Content.Server.Atmos.Components;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Systems;
 using Content.Server.Hands.Systems;
 using Content.Server.Mind;
@@ -308,7 +307,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
                 _alerts.ShowAlert(ent.Owner, alert.Value);
         }
 
-        if (ent.Comp.ContainerDict["head"].ContainedEntity != null || ent.Comp.Transparent)
+        if (ent.Comp.ContainerDict[PartSlot.Head].ContainedEntity != null || ent.Comp.Transparent)
         {
             if (!TryComp<BlindableComponent>(ent.Owner, out var blindableCompMech))
                 return;
@@ -388,12 +387,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<AltMechComponent>(mech, out var mechComp))
             return;
 
-        var leftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        var leftArmEquipment = mechComp.ContainerDict[PartSlot.LeftArm].ContainedEntity;
 
         if (leftArmEquipment is { Valid: true } leftArmEquipmentValidated)
             _parts.ProvideItems(mech, leftArmEquipmentValidated);
 
-        var rightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        var rightArmEquipment = mechComp.ContainerDict[PartSlot.RightArm].ContainedEntity;
 
         if (rightArmEquipment is { Valid: true } rightArmEquipmentValidated)
             _parts.ProvideItems(mech, rightArmEquipmentValidated);
@@ -404,12 +403,12 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!TryComp<AltMechComponent>(mech, out var mechComp))
             return;
 
-        var leftArmEquipment = mechComp.ContainerDict["left-arm"].ContainedEntity;
+        var leftArmEquipment = mechComp.ContainerDict[PartSlot.LeftArm].ContainedEntity;
 
         if (leftArmEquipment is { Valid: true } leftArmEquipmentValidated)
             _parts.RemoveProvidedItems(mech, leftArmEquipmentValidated);
 
-        var rightArmEquipment = mechComp.ContainerDict["right-arm"].ContainedEntity;
+        var rightArmEquipment = mechComp.ContainerDict[PartSlot.RightArm].ContainedEntity;
 
         if (rightArmEquipment is { Valid: true } rightArmEquipmentValidated)
             _parts.RemoveProvidedItems(mech, rightArmEquipmentValidated);
@@ -507,7 +506,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     {
         FixedPoint2 maxMass = 1;
 
-        if (TryComp<MechChassisComponent>(ent.Comp.ContainerDict["chassis"].ContainedEntity, out var chassisComp))
+        if (TryComp<MechChassisComponent>(ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity, out var chassisComp))
             maxMass = chassisComp.MaximalMass;
 
         var massDiff = ent.Comp.OverallMass - maxMass;
@@ -626,7 +625,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         if (!base.TryChangeEnergy(ent, delta))
             return false;
 
-        var battery = ent.Comp.ContainerDict["power"].ContainedEntity;
+        var battery = ent.Comp.ContainerDict[PartSlot.Power].ContainedEntity;
 
         if (battery is not { Valid: true } batteryValidated)
             return false;
