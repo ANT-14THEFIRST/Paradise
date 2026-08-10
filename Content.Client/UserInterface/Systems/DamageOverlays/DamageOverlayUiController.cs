@@ -77,6 +77,7 @@ public sealed partial class DamageOverlayUiController : UIController
     //TODO: Jezi: adjust oxygen and hp overlays to use appropriate systems once bodysim is implemented
     private void UpdateOverlays(EntityUid entity, MobStateComponent? mobState, DamageableComponent? damageable = null, MobThresholdsComponent? thresholds = null, InjurableComponent? injurable = null)
     {
+        // PARADISE EDIT START - Mech overhaul
         if (thresholds != null ||
             EntityManager.TryGetComponent(entity, out thresholds) &&
             !thresholds.ShowOverlays)
@@ -96,5 +97,6 @@ public sealed partial class DamageOverlayUiController : UIController
             damageable,
             thresholds,
             injurable);
+        // PARADISE EDIT END
     }
 }

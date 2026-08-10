@@ -105,8 +105,10 @@ public sealed partial class HandsComponent : Component
     [DataField]
     public bool CanBeStripped = true;
 
+    // PARADISE EDIT START - Hands extension
     [DataField]
     public bool HandsOverrideDamage = false;
+    // PARADISE EDIT END
 }
 
 [DataDefinition]
@@ -141,8 +143,10 @@ public partial record struct Hand
     [DataField]
     public EntityWhitelist? Blacklist;
 
+    // PARADISE EDIT START - Hands extension
     [DataField]
     public HandOverrideData? HandOverride;
+    // PARADISE EDIT END
 
     public Hand()
     {
@@ -185,6 +189,7 @@ public enum HandLocation : byte
     Left
 }
 
+// PARADISE EDIT START - Hands extension
 [DataDefinition]
 [Serializable, NetSerializable]
 public partial struct HandOverrideData
@@ -210,3 +215,4 @@ public partial struct HandOverrideData
     [DataField, AutoNetworkedField]
     public SoundSpecifier? HitSound = null;
 }
+// PARADISE EDIT END

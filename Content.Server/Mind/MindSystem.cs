@@ -138,8 +138,10 @@ public sealed partial class MindSystem : SharedMindSystem
         if (_players.TryGetSessionById(mind.UserId, out var session))
             _players.SetAttachedEntity(session, entity);
 
+        // PARADISE EDIT START - Visiting mind overhaul
         var ev = new EntityVisitedEvent(mindId, mind);
         RaiseLocalEvent(entity, ref ev);
+        // PARADISE EDIT END
 
         Log.Info($"Session {session?.Name} visiting entity {entity}.");
     }
@@ -154,7 +156,7 @@ public sealed partial class MindSystem : SharedMindSystem
         if (mind.VisitingEntity == null)
             return;
 
-        var oldVisitingEnt = mind.VisitingEntity.Value;
+        var oldVisitingEnt = mind.VisitingEntity.Value; // PARADISE EDIT - Visiting mind overhaul
 
         RemoveVisitingEntity(mindId, mind);
 
@@ -164,6 +166,7 @@ public sealed partial class MindSystem : SharedMindSystem
         if (session.AttachedEntity == mind.VisitingEntity)
             return;
 
+        // PARADISE EDIT START - Visiting mind overhaul
         var owned = mind.OwnedEntity;
         _players.SetAttachedEntity(session, owned);
 
@@ -175,6 +178,7 @@ public sealed partial class MindSystem : SharedMindSystem
             var ev = new EntityUnvisitedEvent(mindId, mind);
             RaiseLocalEvent(ownedEntValid, ref ev);
         }
+        // PARADISE EDIT END
 
         if (owned.HasValue)
         {

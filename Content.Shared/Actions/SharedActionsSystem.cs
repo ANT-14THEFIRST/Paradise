@@ -250,6 +250,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         DirtyField(ent, ent.Comp, nameof(ActionComponent.Enabled));
     }
 
+    // PARADISE EDIT START - ActionsOverhaul
     public void SetStyle(Entity<ActionComponent?>? action, ItemActionIconStyle style)
     {
         if (GetAction(action) is not { } ent)
@@ -259,6 +260,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
         UpdateAction(ent);
         DirtyField(ent, ent.Comp, nameof(ActionComponent.ItemIconStyle));
     }
+    // PARADISE EDIT END
 
     #endregion
 
@@ -281,7 +283,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     /// <param name="ev">The Request Perform Action Event</param>
     /// <param name="user">The user/performer of the action</param>
     /// <param name="skipDoActionRequest">Should this skip the initial doaction request?</param>
-    public bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false)
+    public bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false) // PARADISE EDIT START - ActionsOverhaul
     {
         if (!_actionsQuery.TryComp(user, out var component))
             return false;

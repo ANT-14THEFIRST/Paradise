@@ -9,7 +9,7 @@ using Content.Shared.Stacks;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.ComplexRepairable;
+namespace Content.Shared._Paradise.ComplexRepairable;
 
 public sealed partial class ComplexRepairableSystem : EntitySystem
 {

@@ -66,6 +66,7 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
         if (component.Standing != null && !_standing.IsMatchingState(args.Owner, component.Standing.Value))
             return;
 
+        // PARADISE EDIT START - Physical parameters
         if (component.AffectedByParameters &&
             TryComp<ItemExtensionComponent>(uid, out var itemExtensionComp) &&
             TryComp<PhysicalParametersComponent>(args.Owner, out var parametersComp))
@@ -80,6 +81,7 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
             args.Args.ModifySpeed(1 - (1 - component.WalkModifier) * parameterMultiplier, 1 - (1 - component.SprintModifier) * parameterMultiplier);
             return;
         }
+        // PARADISE EDIT END
 
         args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
     }
