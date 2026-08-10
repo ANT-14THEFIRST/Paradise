@@ -68,12 +68,6 @@
       containers:
         - part-container
       skill: ElectronicsConstructionAdvanced
-    - type: Item
-      inhandVisuals:
-        left:
-          - state: inhand-left-big
-        right:
-          - state: inhand-right-big
 
 - type: entity
   id: LightServoChassis
@@ -108,9 +102,3 @@
               node: start
             - !type:DoActsBehavior
               acts: ["Destruction"]
-    - type: Item
-      inhandVisuals:
-        left:
-          - state: inhand-left-big
-        right:
-          - state: inhand-right-big

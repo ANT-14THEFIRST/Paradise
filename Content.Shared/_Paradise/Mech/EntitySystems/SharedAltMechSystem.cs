@@ -84,6 +84,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         SubscribeLocalEvent<AltMechComponent, DragDropTargetEvent>(OnDragDrop);
         SubscribeLocalEvent<AltMechComponent, CanDropTargetEvent>(OnCanDragDrop);
 
+        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
+        SubscribeLocalEvent<AltMechComponent, EntRemovedFromContainerMessage>(OnEntityRemoved);
+
+        SubscribeLocalEvent<AltMechComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMoveSpeedMod);
+
         SubscribeLocalEvent<AltMechComponent, MechPilotRelayedEvent<FlashAttemptEvent>>(OnPilotFlashed);
         SubscribeLocalEvent<AltMechComponent, FlashAttemptEvent>(OnMechFlashed);
         SubscribeLocalEvent<AltMechComponent, GetEyeProtectionEvent>(OnMechGetEyeProtection);
@@ -111,6 +116,81 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         var ev = new OnMechExitEvent();
         RaiseLocalEvent(ent, ref ev);
+    }
+
+    protected virtual void OnEntityInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        string containerID = args.Container.ID;
+
+        if (TryComp<MechPartComponent>(args.Entity, out var partComp) && containerID.StartsWith(PartContainerPrefix))
+        {
+            var ev = new MechPartInsertedEvent(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref ev);
+
+            Dirty(ent);
+            return;
+        }
+
+        if (TryComp<AltMechEquipmentComponent>(args.Entity, out var moduleComp) && containerID.StartsWith(ent.Comp.EquipmentContainerId))
+        {
+            var ev = new MechEquipmentInsertedEvent(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref ev);
+        }
+
+        Dirty(ent);
+    }
+
+    protected virtual void OnEntityRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        string containerID = args.Container.ID;
+
+        if (TryComp<MechPartComponent>(args.Entity, out var partComp) && containerID.StartsWith(PartContainerPrefix))
+        {
+            var ev = new MechPartInsertedEvent(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref ev);
+
+            Dirty(ent);
+            return;
+        }
+
+        if (TryComp<AltMechEquipmentComponent>(args.Entity, out var moduleComp) && containerID.StartsWith(ent.Comp.EquipmentContainerId))
+        {
+            var ev = new MechEquipmentRemovedEvent(ent.Owner);
+            RaiseLocalEvent(args.Entity, ref ev);
+        }
+
+        Dirty(ent);
+    }
+
+    private void OnRefreshMoveSpeedMod(Entity<AltMechComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+            return;
+
+        FixedPoint2 maxMass = 1;
+
+        if (!ent.Comp.ContainerDict.TryGetValue(PartSlot.Chassis, out var chassisContainer))
+            return;
+
+        if (TryComp<MechChassisComponent>(chassisContainer.ContainedEntity, out var chassisComp))
+            maxMass = chassisComp.MaximalMass;
+
+        var massDiff = ent.Comp.OverallMass - maxMass;
+
+        if (massDiff < 0)
+            massDiff = 0;
+
+        FixedPoint2 massRel = 1 - massDiff / maxMass;
+
+        ent.Comp.MovementSpeedModifier = massRel.Float();
+
+        args.ModifySpeed(ent.Comp.MovementSpeedModifier, ent.Comp.MovementSpeedModifier);
     }
 
     private void OnMechRelayEvent(Entity<AltMechComponent> ent, ref MechRelayActionEvent args)
@@ -186,7 +266,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         ent.Comp.Integrity = ent.Comp.MaxIntegrity;
 
         if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
-            _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * 0.5f, ent.Comp.OverallBaseMovementSpeed, ent.Comp.OverallBaseAcceleration, movementComp);
+            _movementSpeedModifier.RefreshMovementModifiers(ent.Owner);
 
         if (ent.Comp.ContainerDict[PartSlot.Head].ContainedEntity == null && !ent.Comp.Transparent)
         {

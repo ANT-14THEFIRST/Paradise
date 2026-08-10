@@ -4,6 +4,7 @@ using Content.Shared._Paradise.CustomColorableLayer;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.EntityEffects.Effects.StatusEffects;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
@@ -13,6 +14,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Paradise.Mech;
 using Content.Shared.Paradise.Mech.Components;
 using Content.Shared.Paradise.Mech.Parts.Components;
@@ -35,6 +37,7 @@ public sealed partial class MechPartSystem : EntitySystem
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private BlindableSystem _blindable = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -267,12 +270,21 @@ public sealed partial class MechPartSystem : EntitySystem
         mechComp.OverallBaseAcceleration = ent.Comp.Acceleration;
         mechComp.MaximalMass = ent.Comp.MaximalMass;
 
+        Dirty(args.Mech, mechComp);
+
+        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
+        {
+            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, mechComp.OverallBaseMovementSpeed * 0.5f, mechComp.OverallBaseMovementSpeed, mechComp.OverallBaseAcceleration, movementComp);
+            Dirty(args.Mech, movementComp);
+        }
+
+        _movementSpeedModifier.RefreshMovementModifiers((args.Mech, movementComp));
+
         if (!TryComp<FootstepModifierComponent>(args.Mech, out var footstepModifierComp))
             return;
 
         footstepModifierComp.FootstepSoundCollection = ent.Comp.FootstepSound;
 
-        Dirty(ent.Owner, ent.Comp);
         Dirty(args.Mech, footstepModifierComp);
     }
 
@@ -283,6 +295,16 @@ public sealed partial class MechPartSystem : EntitySystem
 
         mechComp.OverallBaseMovementSpeed = 0;
         mechComp.OverallBaseAcceleration = 0;
+
+        Dirty(args.Mech, mechComp);
+
+        if (TryComp<MovementSpeedModifierComponent>(args.Mech, out var movementComp))
+        {
+            _movementSpeedModifier.ChangeBaseSpeed(args.Mech, mechComp.OverallBaseMovementSpeed * 0.5f, mechComp.OverallBaseMovementSpeed, mechComp.OverallBaseAcceleration, movementComp);
+            Dirty(args.Mech, movementComp);
+        }
+
+        _movementSpeedModifier.RefreshMovementModifiers((args.Mech, movementComp));
 
         Dirty(ent.Owner, ent.Comp);
     }

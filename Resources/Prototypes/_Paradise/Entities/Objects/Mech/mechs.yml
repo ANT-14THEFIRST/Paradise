@@ -11,7 +11,6 @@
     - type: StatusEffectContainer
     - type: ArmorBlock
     - type: Stripping
-    - type: MobMover
     - type: Sprite
       layers:
         - map: ["enum.MechPartVisualLayers.Chassis"]
@@ -52,12 +51,20 @@
         - map: ["enum.MechPartVisualLayers.LeftArmColored"]
           visible: false
       noRot: true
-    - type: Flammable
-      fireSpread: true
-      canResistFire: true
-      damage:
-        types:
-          Heat: 0
+    #- type: Flammable
+    #  fireSpread: true
+    #  canResistFire: true
+    #  damage:
+    #    types:
+    #      Heat: 0
+    - type: MobCollision
+    - type: Physics
+      bodyType: KinematicController
+    - type: InputMover
+    - type: MobMover
+    - type: LagCompensation
+    - type: RelayHUDLogicToContainers
+      containerIDs: [mech-pilot-slot, mech_part_Head]
     - type: PhysicalParameters
     - type: AltMech
       pilotWhitelist:
@@ -88,7 +95,6 @@
           type: StrippableBoundUserInterface
     - type: Puller
       needsHands: false
-    - type: InputMover
     - type: InteractionOutline
     - type: ComplexRepairable
       material: Steel
@@ -105,12 +111,9 @@
         - DoorBumpOpener
         - FootstepSound
     - type: Pullable
-    - type: Physics
-      bodyType: KinematicController
     - type: GravityAffected
     - type: Clickable
     #- type: WiresPanel
-    - type: LagCompensation
     - type: HealthExaminable
       examinableTypes:
         - Blunt
@@ -129,7 +132,8 @@
         fix1:
           shape: !type:PhysShapeCircle
             radius: 0.45
-          density: 100000 #Rofls indeed do begin here
+          density: 400 #Rofls indeed do begin here
+          restitution: 0.0
           mask:
             - MobMask
           layer:
@@ -217,6 +221,19 @@
       maxIntegrity: 250
       maximalArmMass: 250
       ownMass: 250
+
+- type: entity
+  id: MechLoaderPartialAssembly
+  parent: MechLoader
+  components:
+    - type: ContainerFill
+      containers:
+        mech_part_Power:
+          - MechBatterySmallNuclear
+        mech_part_Chassis:
+          - PowerloaderChassis
+        mech_part_Head:
+          - MechVisorBasic
 
 - type: entity
   id: MechLight

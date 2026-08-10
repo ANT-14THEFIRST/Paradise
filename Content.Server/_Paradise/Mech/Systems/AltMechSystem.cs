@@ -118,7 +118,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, UpdateCanMoveEvent>(OnMechCanMoveEvent);
         SubscribeLocalEvent<AltMechComponent, MassChangedEvent>(OnMassChanged);
-        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnEntityInserted);
         SubscribeLocalEvent<AltMechPilotComponent, ToolUserAttemptUseEvent>(OnToolUseAttempt);
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
 
@@ -133,6 +132,21 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
     protected override void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
     {
         base.OnStartup(ent, ref args);
+    }
+
+    protected override void OnEntityInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        base.OnEntityInserted(ent, ref args);
+
+        if (!HasComp<GasTankComponent>(args.Entity))
+            return;
+
+        UpdateUserInterface(ent);
+    }
+
+    protected override void OnEntityRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        base.OnEntityRemoved(ent, ref args);
     }
 
     private void OnMechCanMoveEvent(Entity<AltMechComponent> ent, ref UpdateCanMoveEvent args)
@@ -504,22 +518,8 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     private void OnMassChanged(Entity<AltMechComponent> ent, ref MassChangedEvent args)
     {
-        FixedPoint2 maxMass = 1;
-
-        if (TryComp<MechChassisComponent>(ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity, out var chassisComp))
-            maxMass = chassisComp.MaximalMass;
-
-        var massDiff = ent.Comp.OverallMass - maxMass;
-
-        if (massDiff < 0)
-            massDiff = 0;
-
-        FixedPoint2 massRel = 1 - (massDiff / maxMass);
-
-        ent.Comp.MovementSpeedModifier = massRel.Float();
-
-        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp) && ent.Comp.Online)
-            _movementSpeedModifier.ChangeBaseSpeed(ent.Owner, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier * 0.5f, ent.Comp.OverallBaseMovementSpeed * ent.Comp.MovementSpeedModifier, ent.Comp.OverallBaseAcceleration * ent.Comp.MovementSpeedModifier);
+        if (TryComp<MovementSpeedModifierComponent>(ent.Owner, out var movementComp))
+            _movementSpeedModifier.RefreshMovementModifiers(ent.Owner);
     }
 
     private void ToggleMechUi(EntityUid uid, AltMechComponent? component = null, EntityUid? user = null)
@@ -677,14 +677,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         //args.Gas = _gasTank.RemoveAirVolume((tankVerified, tankComp), args.Respirator.BreathVolume);
         UpdateUserInterface((ent.Comp.Mech, mechComp));
         _alerts.ShowAlert(ent.Owner, "Internals", GetSeverity((ent.Comp.Mech, mechComp)));
-    }
-
-    private void OnEntityInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
-    {
-        if (!HasComp<GasTankComponent>(args.Entity))
-            return;
-
-        UpdateUserInterface(ent);
     }
 
     private short GetSeverity(Entity<AltMechComponent> ent)

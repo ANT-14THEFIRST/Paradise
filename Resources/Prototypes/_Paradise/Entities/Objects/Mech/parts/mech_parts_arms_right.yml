@@ -109,12 +109,6 @@
                   Structural: 30
               altDisarm: false
               attackRate: 1.5
-    - type: Item
-      inhandVisuals:
-        left:
-          - state: inhand-left-big
-        right:
-          - state: inhand-right-big
     - type: MechPart
       integrity: 100
       maxIntegrity: 100
@@ -179,12 +173,6 @@
         - hand:
             location: Right
           item: BorgHypo
-    - type: Item
-      inhandVisuals:
-        left:
-          - state: inhand-left-big
-        right:
-          - state: inhand-right-big
     - type: MechPart
       integrity: 65
       maxIntegrity: 65
@@ -305,12 +293,6 @@
               sizes:
                 - Ginormous
           item: MechSpray
-    - type: Item
-      inhandVisuals:
-        left:
-          - state: inhand-left-big
-        right:
-          - state: inhand-right-big
     - type: MechPart
       integrity: 150
       maxIntegrity: 150

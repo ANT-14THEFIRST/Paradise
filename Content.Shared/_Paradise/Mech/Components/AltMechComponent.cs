@@ -152,9 +152,6 @@ public sealed partial class AltMechComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public Dictionary<PartSlot, ContainerSlot> ContainerDict = new Dictionary<PartSlot, ContainerSlot>();
 
-    //[ViewVariables(VVAccess.ReadWrite)]
-    //public List<string> ContainersToCreate = new List<string> { "head", "right-arm", "left-arm", "chassis", "power" };
-
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public List<string> SlotsToDrop = new List<string> { "shoes", "outerClothing", "gloves", "neck", "mask", "eyes", "head", "pocket1", "pocket2", "suitstorage", "belt", "back" };// items from those slots will be dropped on mech enter. Intended to be everything except for PDA, inner clothing and headset
@@ -276,7 +273,5 @@ public sealed partial class AltMechComponent : Component
     [DataField] public EntityUid? MechCycleActionEntity;
     [DataField] public EntityUid? MechUiActionEntity;
     [DataField] public EntityUid? MechEjectActionEntity;
-    //[DataField] public EntityUid? PilotUiActionEntity;
-    //[DataField] public EntityUid? PilotEjectActionEntity;
 
 }

@@ -1,3 +1,4 @@
+using Content.Shared._Paradise.RelayHUDLogic;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -16,6 +17,7 @@ namespace Content.Client.Overlays;
 public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
     [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     [ViewVariables]
     public bool IsActive { get; private set; }
@@ -64,7 +66,7 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
 
     protected virtual void DeactivateInternal() { }
 
-    // PARADISE EDIT START - <mech overhaul>
+    // PARADISE EDIT START - Mech overhaul
     private void OnCompEquip(Entity<T> ent, ref EntGotInsertedIntoContainerMessage args)
     {
         if (TryComp<AltMechComponent>(args.Container.Owner, out var _))
@@ -132,6 +134,20 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
 
         var ev = new RefreshEquipmentHudEvent<T>(TargetSlots);
         RaiseLocalEvent(entity, ref ev);
+
+        // PARADISE EDIT START - Mech overhaul
+        if (TryComp<RelayHUDLogicToContainersComponent>(entity, out var relayHUDComp))
+        {
+            foreach (var id in relayHUDComp.ContainerIDs)
+            {
+                if (!_container.TryGetContainer(entity, id, out var container))
+                    continue;
+
+                foreach (var ent in container.ContainedEntities)
+                    RaiseLocalEvent(ent, ref ev);
+            }
+        }
+        // PARADISE EDIT END
 
         if (ev.Active)
             Update(ev);

@@ -32,9 +32,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
         SubscribeLocalEvent<AltMechComponent, AppearanceChangeEvent>(OnAppearanceChanged);
 
-        SubscribeLocalEvent<AltMechComponent, EntInsertedIntoContainerMessage>(OnInserted);
-        SubscribeLocalEvent<AltMechComponent, EntRemovedFromContainerMessage>(OnRemoved);
-
         SubscribeLocalEvent<AltMechComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<MechPartComponent, DamageChangedEvent>(OnPartDamageChanged);
 
@@ -85,8 +82,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
     }
 
-    private void OnInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
+    protected override void OnEntityInserted(Entity<AltMechComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        base.OnEntityInserted(ent, ref args);
+
         string containerID = args.Container.ID;
 
         if (!containerID.StartsWith(PartContainerPrefix))
@@ -109,8 +108,10 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
     }
 
-    private void OnRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
+    protected override void OnEntityRemoved(Entity<AltMechComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        base.OnEntityRemoved(ent, ref args);
+
         string containerID = args.Container.ID;
 
         if (!containerID.StartsWith(PartContainerPrefix))
