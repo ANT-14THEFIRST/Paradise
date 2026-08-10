@@ -2,13 +2,12 @@
 - type: loadoutEffectGroup
   id: Roboticist
   effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobScientist
-      time: 36000
+    - !type:JobRequirementLoadoutEffect
+      requirement: !type:RoleTimeRequirement
+        role: JobScientist
+        time: 36000
   sponsorTierLoadoutEffects:
-  - !type:GroupLoadoutEffect
-    proto: SeniorDevTeamTier
-  - !type:GroupLoadoutEffect
-    proto: AdministratorSponsorTier
+    - !type:GroupLoadoutEffect
+      proto: SeniorDevTeamTier
+    - !type:GroupLoadoutEffect
+      proto: AdministratorSponsorTier

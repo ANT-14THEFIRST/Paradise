@@ -1,9 +1,9 @@
+using Content.Shared._Paradise.AltArmor;
+using Content.Shared._Paradise.AltArmor.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
-using Content.Shared.AltArmor;
-using Content.Shared.AltArmor.Components;
 
-namespace Content.Shared.WearableAltArmor;
+namespace Content.Shared._Paradise.WearableAltArmor;
 
 public sealed partial class WearableAltArmorSystem : EntitySystem
 {

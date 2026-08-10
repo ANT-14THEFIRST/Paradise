@@ -1,4 +1,4 @@
-using Content.Shared.Paradise.CustomColorableLayer;
+using Content.Shared._Paradise.CustomColorableLayer;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._Paradise.CustomColorableLayer;

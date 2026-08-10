@@ -11,7 +11,7 @@
       state: mainboard
     - type: Tag
       tags:
-      - PowerSupplyElectronics
+        - PowerSupplyElectronics
 
 - type: entity
   id: HydraulicsControlElectronics
@@ -24,7 +24,7 @@
       state: id_mod
     - type: Tag
       tags:
-      - HydraulicsControlElectronics
+        - HydraulicsControlElectronics
 
 - type: entity
   id: ServoControlElectronics
@@ -37,7 +37,7 @@
       state: cyborg_upgrade2
     - type: Tag
       tags:
-      - ServoControlElectronics
+        - ServoControlElectronics
 
 - type: entity
   id: OpticalProcessorElectronics
@@ -52,7 +52,7 @@
       state: std_mod
     - type: Tag
       tags:
-      - OpticalElectronics
+        - OpticalElectronics
 
 - type: entity
   id: DimensionalOrientationElectronics
@@ -67,4 +67,4 @@
       state: mcontroller
     - type: Tag
       tags:
-      - DimensionalElectronics
+        - DimensionalElectronics

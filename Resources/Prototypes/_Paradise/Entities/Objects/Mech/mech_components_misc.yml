@@ -11,7 +11,7 @@
       state: mainboard
     - type: Tag
       tags:
-      - OpticalCamera
+        - OpticalCamera
 
 - type: entity
   id: AnatomicalSensor
@@ -26,7 +26,7 @@
       state: mainboard
     - type: Tag
       tags:
-      - AnatomicalCamera
+        - AnatomicalCamera
 
 - type: entity
   id: ThermalSensor
@@ -41,4 +41,4 @@
       state: mainboard
     - type: Tag
       tags:
-      - ThermalCamera
+        - ThermalCamera

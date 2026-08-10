@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Paradise.CustomColorableLayer;
+namespace Content.Shared._Paradise.CustomColorableLayer;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

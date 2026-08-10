@@ -4,8 +4,8 @@
   description: neural interface
   parent: BaseImplantOnlyImplanter
   components:
-  - type: Implanter
-    implant: NeuralInterfaceImplant
+    - type: Implanter
+      implant: NeuralInterfaceImplant
 
 - type: entity
   id: MilitaryNeuralInterfaceImplanter
@@ -13,5 +13,5 @@
   description: neural interface
   parent: BaseImplantOnlyImplanter
   components:
-  - type: Implanter
-    implant: MilitaryNeuralInterfaceImplant
+    - type: Implanter
+      implant: MilitaryNeuralInterfaceImplant

@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.ArmorBlock;
+namespace Content.Shared._Paradise.ArmorBlock;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

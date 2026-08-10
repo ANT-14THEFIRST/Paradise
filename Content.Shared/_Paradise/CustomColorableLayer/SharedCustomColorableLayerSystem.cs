@@ -3,7 +3,7 @@ using Content.Shared.Interaction;
 using Content.Shared.SprayPainter.Components;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.Paradise.CustomColorableLayer;
+namespace Content.Shared._Paradise.CustomColorableLayer;
 
 public abstract partial class SharedCustomColorableLayerSystem : EntitySystem
 {

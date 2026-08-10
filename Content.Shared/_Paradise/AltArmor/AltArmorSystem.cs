@@ -1,12 +1,12 @@
+using Content.Shared._Paradise.AltArmor.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.AltArmor.Components;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.AltArmor;
+namespace Content.Shared._Paradise.AltArmor;
 
 public sealed partial class AltArmorSystem : EntitySystem
 {

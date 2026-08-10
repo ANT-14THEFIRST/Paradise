@@ -3,7 +3,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.AltArmor.Components;
+namespace Content.Shared._Paradise.AltArmor.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

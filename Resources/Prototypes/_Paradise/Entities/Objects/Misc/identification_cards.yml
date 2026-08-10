@@ -11,6 +11,6 @@
       job: Roboticist
     - type: Tag
       tags:
-      - DoorBumpOpener
-      - WhitelistChameleon
-      - WhitelistChameleonIdCard
+        - DoorBumpOpener
+        - WhitelistChameleon
+        - WhitelistChameleonIdCard

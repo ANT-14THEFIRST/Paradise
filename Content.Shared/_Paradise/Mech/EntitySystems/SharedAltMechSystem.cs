@@ -1,7 +1,7 @@
+using Content.Shared._Paradise.ArmorBlock;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
-using Content.Shared.ArmorBlock;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;

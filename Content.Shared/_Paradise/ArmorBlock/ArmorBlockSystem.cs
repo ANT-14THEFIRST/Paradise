@@ -1,7 +1,7 @@
+using Content.Shared._Paradise.AltArmor;
 using Content.Shared.Damage.Systems;
-using Content.Shared.AltArmor;
 
-namespace Content.Shared.ArmorBlock;
+namespace Content.Shared._Paradise.ArmorBlock;
 
 public sealed partial class ArmorBlockSystem : EntitySystem
 {

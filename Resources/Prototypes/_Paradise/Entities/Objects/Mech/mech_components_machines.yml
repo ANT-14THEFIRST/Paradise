@@ -9,7 +9,7 @@
       state: psu
     - type: Tag
       tags:
-      - PowerSupplyUnit
+        - PowerSupplyUnit
 
 - type: entity
   id: PowerSupplyUnitLarge
@@ -22,7 +22,7 @@
       state: large_psu
     - type: Tag
       tags:
-      - PowerSupplyUnitLarge
+        - PowerSupplyUnitLarge
 
 - type: entity
   id: HydraulicPump
@@ -35,7 +35,7 @@
       state: hydraulic_pump
     - type: Tag
       tags:
-      - HydraulicPump
+        - HydraulicPump
 
 - type: entity
   id: ServoLarge
@@ -48,7 +48,7 @@
       state: servo_large
     - type: Tag
       tags:
-      - ServoMotorLarge
+        - ServoMotorLarge
 
 - type: entity
   id: MechDrill
@@ -61,7 +61,7 @@
       state: drill
     - type: Tag
       tags:
-      - MechDrill
+        - MechDrill
 
 - type: entity
   id: HydraulicPiston
@@ -74,7 +74,7 @@
       state: hydraulic_piston_black
     - type: Tag
       tags:
-      - HydraulicPiston
+        - HydraulicPiston
 
 - type: entity
   id: HydraulicClamp
@@ -87,7 +87,7 @@
       state: hydraulic_clamp
     - type: Tag
       tags:
-      - HydraulicPump
+        - HydraulicPump
 
 - type: entity
   id: Servo
@@ -100,7 +100,7 @@
       state: id_mod
     - type: Tag
       tags:
-      - ServoMotor
+        - ServoMotor
 
 - type: entity
   id: ArtificialMuscle
@@ -113,5 +113,4 @@
       state: id_mod
     - type: Tag
       tags:
-      - ArtificialMuscle
-
+        - ArtificialMuscle

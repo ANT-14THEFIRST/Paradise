@@ -10,20 +10,20 @@
     - !type:SpeciesRequirement
       inverted: true
       species:
-      - Vox
-      - Diona
-      - Arachnid
+        - Vox
+        - Diona
+        - Arachnid
   startingGear: RoboticistGear
   experienceDefinition: RoboticistRoleExperience
   icon: "JobIconRoboticist"
   supervisors: job-supervisors-rd
   canBeAntag: true
   access:
-  - Research
-  - Maintenance
+    - Research
+    - Maintenance
   special:
-  - !type:AddImplantSpecial
-    implants: [ NeuralInterfaceImplant ]
+    - !type:AddImplantSpecial
+      implants: [NeuralInterfaceImplant]
 
 - type: startingGear
   id: RoboticistGear
@@ -34,7 +34,7 @@
   id: RoboticistPDA
   name: loadout-group-scientist-id
   loadouts:
-  - RoboticistPDA
+    - RoboticistPDA
 
 - type: loadout
   id: RoboticistPDA

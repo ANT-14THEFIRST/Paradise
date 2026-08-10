@@ -64,7 +64,7 @@ public sealed partial class AltMechMenu : FancyWindow
 
         foreach (var key in ButtonDict.Keys)
         {
-            key.TexturePath = "/Textures/Paradise/Interface/Mech/detach_button.png";
+            key.TexturePath = "/Textures/_Paradise/Interface/Mech/detach_button.png";
             key.OnPressed += _ => OnRemovePartButtonPressed?.Invoke(ButtonDict[key]);
         }
 
