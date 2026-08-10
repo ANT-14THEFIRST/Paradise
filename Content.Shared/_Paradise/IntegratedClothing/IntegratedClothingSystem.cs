@@ -1,5 +1,6 @@
+using Content.Shared._Paradise.Clothing.Components;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.Components.Paradise;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -8,7 +9,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
-namespace Content.Shared.Clothing.Systems;
+namespace Content.Shared._Paradise.Clothing.Systems;
 
 public sealed partial class IntegratedClothingSystem : EntitySystem
 {

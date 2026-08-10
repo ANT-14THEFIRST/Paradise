@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Clothing.Components;
+namespace Content.Shared._Paradise.Clothing.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class IntegratedToClothingComponent : Component

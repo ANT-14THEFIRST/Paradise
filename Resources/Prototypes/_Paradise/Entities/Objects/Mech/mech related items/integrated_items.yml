@@ -10,8 +10,8 @@
     tags:
     - Pickaxe
   - type: Sprite
-    sprite: Objects/Specific/Mech/mecha_equipment.rsi
-    state: mecha_drill
+    sprite: _Paradise/Objects/Mechs/items/mech_items.rsi
+    state: hydraulicdrill
   - type: MeleeWeapon
     autoAttack: true
     angle: 0

@@ -1,10 +1,9 @@
+using Content.Shared._Paradise.PoweredClothing;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.PowerCell;
-using Content.Shared.PoweredClothing;
-using Content.Shared.SS220.PoweredClothing;
 using Robust.Shared.Timing;
 
-namespace Content.Server.PhysicalParameters;
+namespace Content.Server._Paradise.PhysicalParameters;
 
 public sealed partial class PoweredClothingSystem : SharedPoweredClothingSystem
 {

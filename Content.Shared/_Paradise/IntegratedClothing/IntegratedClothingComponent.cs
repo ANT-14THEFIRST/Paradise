@@ -3,7 +3,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.Clothing.Components.Paradise;
+namespace Content.Shared._Paradise.Clothing.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class IntegratedClothingComponent : Component

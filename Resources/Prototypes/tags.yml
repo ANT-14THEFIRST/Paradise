@@ -45,12 +45,6 @@
 - type: Tag
   id: ArtifactFragment # Storage whitelist: OreBag. CargoBounty: BountyArtifactFragment. ConstructionGraph: Artifact
 
-- type: Tag
-  id: ArtificialMuscle
-
-- type: Tag
-  id: AnatomicalCamera
-
 ## B ##
 
 - type: Tag
@@ -518,9 +512,6 @@
 - type: Tag
   id: Duck # Reproductive partner key. MetamorphRecipe: FoodBurgerDuck
 
-- type: Tag
-  id: DimensionalElectronics
-
 ## E ##
 
 - type: Tag
@@ -813,18 +804,6 @@
 - type: Tag
   id: Hypospray # ItemMapper: ClothingBeltMedical
 
-- type: Tag
-  id: HydraulicsControlElectronics
-
-- type: Tag
-  id: HydraulicPump
-
-- type: Tag
-  id: HydraulicClamp
-
-- type: Tag
-  id: HydraulicPiston
-
 ## I ##
 
 - type: Tag
@@ -948,12 +927,6 @@
 
 - type: Tag
   id: MagazineShotgun # WeaponShotgunBulldog
-
-- type: Tag
-  id: MechDrill
-
-- type: Tag
-  id: MechPowerGrid
 
 #endregion
 
@@ -1083,9 +1056,6 @@
 
 - type: Tag
   id: OreUranium # CargoBounty: BountySalvageOreUranium
-
-- type: Tag
-  id: OpticalElectronics
 
 ## P ##
 
@@ -1219,15 +1189,6 @@
   id: Powerdrill # Storage whitelist: BaseClothingBeltEngineering. ItemMapper: BaseClothingBeltEngineering
 
 - type: Tag
-  id: PowerSupplyElectronics
-
-- type: Tag
-  id: PowerSupplyUnit
-
-- type: Tag
-  id: PowerSupplyUnitLarge
-
-- type: Tag
   id: PreventAccessLogging # Tagged entities (aghost) will not be added to a device's log. Used by AccessReaderSystem.
 
 - type: Tag
@@ -1337,9 +1298,6 @@
 
 - type: Tag
   id: SecurityHelmet # ConstructionGraph: HelmetJustice
-
-- type: Tag
-  id: ServoControlElectronics
 
 - type: Tag
   id: Sheep # Reproductive partner key
