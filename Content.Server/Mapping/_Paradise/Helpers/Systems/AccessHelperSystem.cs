@@ -1,5 +1,4 @@
 using Content.Server._Paradise.GameObjects.GatherTargets;
-using Content.Server.GameObjects.GatherTargets;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Doors.Components;
