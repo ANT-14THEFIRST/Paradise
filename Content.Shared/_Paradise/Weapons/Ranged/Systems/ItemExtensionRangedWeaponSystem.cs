@@ -1,11 +1,12 @@
 using Content.Shared._Paradise.ItemExtension;
 using Content.Shared._Paradise.PhysicalParameters;
+using Content.Shared._Paradise.Weapons.Ranged.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 
-namespace Content.Shared.Weapons.Ranged.Systems;
+namespace Content.Shared._Paradise.Weapons.Ranged.Systems;
 
 public sealed partial class ItemExtensionRangedWeaponSystem : EntitySystem
 {

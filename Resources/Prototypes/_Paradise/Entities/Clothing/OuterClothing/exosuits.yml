@@ -9,12 +9,14 @@
     sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
   - type: Clothing
     sprite: SS220/Clothing/OuterClothing/Misc/industrial_exosuit.rsi
-    quickEquip: false
+    #quickEquip: false
     equipDelay: 4
     unequipDelay: 4
   - type: PhysicalParametersModifyingClothing
     parameterDict:
       Strength: 1.7
+  - type: SpeciesRestrictedClothing
+    allowedSpecies: [ Human, Dwarf, Slime, Reptilian]
   - type: PoweredClothing
     selfPowered: false
     drawRate: 0.03
@@ -39,7 +41,7 @@
     sprite: Clothing/OuterClothing/Misc/industrial_exosuit.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Misc/industrial_exosuit.rsi
-    quickEquip: false
+    #quickEquip: false
     equipDelay: 4
     unequipDelay: 4
   - type: PhysicalParametersModifyingClothing

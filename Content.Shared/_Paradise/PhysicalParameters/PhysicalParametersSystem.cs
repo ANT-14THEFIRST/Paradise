@@ -1,3 +1,5 @@
+using Content.Shared._Paradise.ItemExtension;
+using Content.Shared._Paradise.Weapons.Melee.Components;
 using Content.Shared.Clothing;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -7,10 +9,8 @@ using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Containers;
-using Content.Shared._Paradise.ItemExtension;
 
 namespace Content.Shared._Paradise.PhysicalParameters;
 

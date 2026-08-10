@@ -9,8 +9,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
-using Content.Shared.Projectiles.Components;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 

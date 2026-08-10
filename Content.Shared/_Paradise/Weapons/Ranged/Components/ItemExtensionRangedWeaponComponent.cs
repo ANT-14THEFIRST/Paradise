@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Weapons.Ranged.Components;
+namespace Content.Shared._Paradise.Weapons.Ranged.Components;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
