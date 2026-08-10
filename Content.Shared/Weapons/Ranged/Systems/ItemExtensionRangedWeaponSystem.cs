@@ -1,7 +1,7 @@
+using Content.Shared._Paradise.ItemExtension;
+using Content.Shared._Paradise.PhysicalParameters;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
-using Content.Shared.ItemExtension;
-using Content.Shared.PhysicalParameters;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 

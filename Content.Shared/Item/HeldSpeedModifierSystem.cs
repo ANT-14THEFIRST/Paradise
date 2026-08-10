@@ -1,10 +1,9 @@
+using Content.Shared._Paradise.ItemExtension;
+using Content.Shared._Paradise.PhysicalParameters;
 using Content.Shared.Clothing;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
-using Content.Shared.ItemExtension;
-using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.PhysicalParameters;
 
 namespace Content.Shared.Item;
 
@@ -14,7 +13,7 @@ namespace Content.Shared.Item;
 public sealed partial class HeldSpeedModifierSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
-    [Dependency] private PhysicalParametersSystem _parameters = default!;
+    [Dependency] private PhysicalParametersSystem _parameters = default!;// PARADISE EDIT - Physical parameters
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -35,17 +34,18 @@ public sealed partial class HeldSpeedModifierSystem : EntitySystem
         _movementSpeedModifier.RefreshMovementModifiers(args.User);
     }
 
-    public (float, float) GetHeldMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, EntityUid? owner = null)
+    public (float, float) GetHeldMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, EntityUid? owner = null) // PARADISE EDIT - Physical parameters
     {
         var walkMod = component.WalkModifier;
         var sprintMod = component.SprintModifier;
 
-        ClothingSpeedModifierComponent? clothingSpeedModComp = null;
+        ClothingSpeedModifierComponent? clothingSpeedModComp = null; // PARADISE EDIT START - Physical parameters
 
         if (component.MirrorClothingModifier && TryComp<ClothingSpeedModifierComponent>(uid, out var clothingSpeedModifier))
         {
             walkMod = clothingSpeedModifier.WalkModifier;
             sprintMod = clothingSpeedModifier.SprintModifier;
+        // PARADISE EDIT START - Physical parameters
             clothingSpeedModComp = clothingSpeedModifier;
         }
 
@@ -64,11 +64,12 @@ public sealed partial class HeldSpeedModifierSystem : EntitySystem
             walkMod = 1 - (1 - walkMod) * parameterMultiplier;
             sprintMod = 1 - (1 - sprintMod) * parameterMultiplier;
         }
+        // PARADISE EDIT END
 
         return (walkMod, sprintMod);
     }
 
-    private void OnRefreshMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
+    private void OnRefreshMovementSpeedModifiers(EntityUid uid, HeldSpeedModifierComponent component, HeldRelayedEvent<RefreshMovementSpeedModifiersEvent> args) // PARADISE EDIT - Physical parameters
     {
         var (walkMod, sprintMod) = GetHeldMovementSpeedModifiers(uid, component, args.Owner);
         args.Args.ModifySpeed(walkMod, sprintMod);

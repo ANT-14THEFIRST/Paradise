@@ -1,11 +1,11 @@
+using Content.Shared._Paradise.ItemExtension;
+using Content.Shared._Paradise.PhysicalParameters;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.ItemExtension;
 using Content.Shared.Movement.Systems;
-using Content.Shared.PhysicalParameters;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;

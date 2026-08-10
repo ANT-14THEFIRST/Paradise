@@ -5,14 +5,14 @@ using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item.ItemToggle.Components;
-using Content.Shared.ItemExtension;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Components;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Containers;
+using Content.Shared._Paradise.ItemExtension;
 
-namespace Content.Shared.PhysicalParameters;
+namespace Content.Shared._Paradise.PhysicalParameters;
 
 public sealed partial class PhysicalParametersSystem : EntitySystem
 {

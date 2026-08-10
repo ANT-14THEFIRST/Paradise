@@ -1,7 +1,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.ItemExtension;
+namespace Content.Shared._Paradise.ItemExtension;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]

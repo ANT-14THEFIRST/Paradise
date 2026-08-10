@@ -352,8 +352,8 @@ namespace Content.Shared.Hands
     {
         public TEvent Args;
 
+        // PARADISE EDIT START - Hand overhaul
         public EntityUid? Owner;
-
 
         public HeldRelayedEvent(TEvent args, EntityUid? owner)
         {
@@ -361,5 +361,6 @@ namespace Content.Shared.Hands
 
             Owner = owner;
         }
+        // PARADISE EDIT END
     }
 }

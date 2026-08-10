@@ -1,10 +1,10 @@
+using Content.Shared._Paradise.ItemExtension;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Item;
-using Content.Shared.ItemExtension;
 using Content.Shared.Popups;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
@@ -12,7 +12,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using System.Linq;
 
-namespace Content.Shared.PhysicalParameters;
+namespace Content.Shared._Paradise.PhysicalParameters;
 
 public sealed partial class ItemExtensionSystem : EntitySystem
 {

@@ -33,7 +33,7 @@ public abstract partial class SharedHandsSystem
     public event Action<Entity<HandsComponent>, string>? OnPlayerRemoveHand;
     protected event Action<Entity<HandsComponent>?>? OnHandSetActive;
 
-    private DamageSpecifier NoHandDamage = new DamageSpecifier();
+    private DamageSpecifier NoHandDamage = new DamageSpecifier(); // PARADISE EDIT - Mech overhaul
 
     public override void Initialize()
     {
@@ -342,6 +342,7 @@ public abstract partial class SharedHandsSystem
         if (TryGetHeldItem(ent, handId, out var newHeld))
             RaiseLocalEvent(newHeld.Value, new HandSelectedEvent(ent));
 
+        // PARADISE EDIT START - Hand overhaul
         if (TryComp<MeleeWeaponComponent>(ent.Owner, out var meleeComp) &&
             ent.Comp.Hands.TryGetValue(handId, out var hand))//or we overrdie all hands or we don't do it at all
         {
@@ -379,6 +380,7 @@ public abstract partial class SharedHandsSystem
 
             Dirty(ent.Owner, meleeComp);
         }
+        // PARADISE EDIT END
 
         Dirty(ent);
         return true;

@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.PhysicalParameters;
+namespace Content.Shared._Paradise.PhysicalParameters;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
