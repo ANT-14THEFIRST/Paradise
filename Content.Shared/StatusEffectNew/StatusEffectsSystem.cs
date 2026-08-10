@@ -124,8 +124,10 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         var ev = new StatusEffectRemovedEvent(ent);
         RaiseLocalEvent(args.Entity, ref ev);
 
+        // PARADISE EDIT START - extended status effect logic
         var targetEv = new StatusEffectRemovedFromEvent(args.Entity);
         RaiseLocalEvent(ent, ref targetEv);
+        // PARADISE EDIT END
 
         // Clear AppliedTo after events are handled so event handlers can use it.
         if (statusComp.AppliedTo == null)
@@ -159,8 +161,10 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         var ev = new StatusEffectAppliedEvent(statusEffectEnt.Comp.AppliedTo.Value);
         RaiseLocalEvent(statusEffectEnt, ref ev);
 
+        // PARADISE EDIT START - extended status effect logic
         var targetEv = new StatusEffectAppliedToEvent(statusEffectEnt);
         RaiseLocalEvent(statusEffectEnt.Comp.AppliedTo.Value, ref targetEv);
+        // PARADISE EDIT END
 
         statusEffectEnt.Comp.Applied = true;
 
@@ -178,7 +182,7 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         if (!_whitelist.CheckBoth(uid, effectProtoComp.Blacklist, effectProtoComp.Whitelist))
             return false;
 
-        var ev = new BeforeStatusEffectAddedEvent(effectProto);
+        var ev = new BeforeStatusEffectAddedEvent(effectProto);// PARADISE EDIT START - extended status effect logic
         RaiseLocalEvent(uid, ref ev);
 
         if (ev.Cancelled)
@@ -366,8 +370,12 @@ public record struct StatusEffectEndTimeUpdatedEvent(EntityUid Target, TimeSpan?
 [ByRefEvent]
 public record struct StatusEffectStartTimeUpdatedEvent(EntityUid Target, TimeSpan? StartTime);
 
+// PARADISE EDIT START - extended status effect logic
+
 [ByRefEvent]
 public readonly record struct StatusEffectAppliedToEvent(EntityUid Effect);
 
 [ByRefEvent]
 public readonly record struct StatusEffectRemovedFromEvent(EntityUid Effect);
+
+// PARADISE EDIT END
