@@ -21,7 +21,8 @@ public sealed partial class DamageOverlayUiController : UIController
     [Dependency] private IOverlayManager _overlayManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
 
-    [UISystemDependency] private readonly DamageOverlayUiHandlerSystem _handler = default!;
+    [UISystemDependency] private readonly DamageOverlayUiHandlerSystem _handler = default!; // PARADISE EDIT - Mech overhaul
+    
     private Overlays.DamageOverlay _overlay = default!;
 
     public override void Initialize()
