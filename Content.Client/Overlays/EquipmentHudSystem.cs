@@ -17,7 +17,7 @@ namespace Content.Client.Overlays;
 public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private SharedContainerSystem _container = default!; // PARADISE EDIT START - Mech overhaul
+    [Dependency] private SharedContainerSystem _container = default!; // PARADISE EDIT - Mech overhaul
 
     [ViewVariables]
     public bool IsActive { get; private set; }
