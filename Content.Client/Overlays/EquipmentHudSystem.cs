@@ -17,7 +17,7 @@ namespace Content.Client.Overlays;
 public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
     [Dependency] private IPlayerManager _player = default!;
-    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedContainerSystem _container = default!; // PARADISE EDIT START - Mech overhaul
 
     [ViewVariables]
     public bool IsActive { get; private set; }
@@ -33,7 +33,7 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
 
-        // PARADISE EDIT START - <mech overhaul>
+        // PARADISE EDIT START - Mech overhaul
         SubscribeLocalEvent<T, EntGotInsertedIntoContainerMessage>(OnCompEquip);
         SubscribeLocalEvent<T, EntGotRemovedFromContainerMessage>(OnCompUnequip);
         // PARADISE EDIT END
