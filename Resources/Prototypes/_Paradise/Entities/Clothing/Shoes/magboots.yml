@@ -5,10 +5,10 @@
   description: Integrated boots with magpads. They are much better than common ones because of access to exosuit's battery and electronics.
   components:
     - type: Sprite
-      sprite: Clothing/Shoes/Specific/exomagboots.rsi
+      sprite: _Paradise/Clothing/Shoes/exomagboots.rsi
       state: icon
     - type: Clothing
-      sprite: Clothing/Shoes/Specific/exomagboots.rsi
+      sprite: _Paradise/Clothing/Shoes/exomagboots.rsi
     - type: ClothingSpeedModifier
       walkModifier: 1
       sprintModifier: 0.9

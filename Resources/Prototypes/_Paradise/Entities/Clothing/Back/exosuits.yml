@@ -5,7 +5,7 @@
   description: This power module allows your exoskeleton to operate.
   components:
     - type: Sprite
-      sprite: Clothing/Back/Backpacks/industrial_exosuit_backpack.rsi
+      sprite: _Paradise/Clothing/OuterClothing/Misc/industrial_exosuit_backpack.rsi
       state: icon
     - type: Item
       size: Huge
