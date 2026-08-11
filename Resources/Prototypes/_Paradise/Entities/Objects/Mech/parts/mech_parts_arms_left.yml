@@ -86,7 +86,7 @@
   description: A manipulator with an industrial spray mounted on it. This one is designed to be installed in mech's left arm slot.
   components:
     - type: Sprite
-      sprite: _Paradise/Objects/Specific/Mech/mecha_equipment.rsi
+      sprite: Objects/Specific/Mech/mecha_equipment.rsi
       state: mecha_drill
     - type: MechArm
       hands:
@@ -103,7 +103,7 @@
       maxIntegrity: 150
       ownMass: 125
       attachedSprite:
-        sprite: _Paradise/Objects/Mechs/lefthand.rsi
+        sprite: Objects/Mechs/lefthand.rsi
         state: hydraulicdrill
     - type: Destructible
       thresholds:

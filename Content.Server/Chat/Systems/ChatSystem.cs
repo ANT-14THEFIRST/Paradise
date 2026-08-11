@@ -1,3 +1,4 @@
+using System.Globalization;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
@@ -22,7 +23,6 @@ using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
-using System.Globalization;
 
 namespace Content.Server.Chat.Systems;
 
