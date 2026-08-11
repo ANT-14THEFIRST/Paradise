@@ -1,7 +1,7 @@
-using Content.Server._Paradise.GameObjects.GatherTargets;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Disposal.Components;
 using Content.Shared.Disposal.Router;
-using System.Diagnostics.CodeAnalysis;
+using Content.Server._Paradise.GameObjects.GatherTargets;
 
 namespace Content.Server._Paradise.MailSortingHelper;
 
