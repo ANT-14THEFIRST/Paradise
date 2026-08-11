@@ -6,7 +6,6 @@ using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Players;
-using NetCord;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Network;
