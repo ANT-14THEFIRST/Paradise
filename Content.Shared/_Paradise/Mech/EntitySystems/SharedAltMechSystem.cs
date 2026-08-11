@@ -152,7 +152,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         if (TryComp<MechPartComponent>(args.Entity, out var partComp) && containerID.StartsWith(PartContainerPrefix))
         {
-            var ev = new MechPartInsertedEvent(ent.Owner);
+            var ev = new MechPartRemovedEvent(ent.Owner);
             RaiseLocalEvent(args.Entity, ref ev);
 
             Dirty(ent);
