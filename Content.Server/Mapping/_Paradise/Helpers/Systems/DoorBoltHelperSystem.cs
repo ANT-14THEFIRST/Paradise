@@ -1,9 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Server._Paradise.GameObjects.GatherTargets;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server._Paradise.DoorBoltHelper;
 
