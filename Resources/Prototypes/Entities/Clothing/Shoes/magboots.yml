@@ -133,7 +133,7 @@
   name: Toggle Magboots
   description: Toggles the magboots on and off.
   components:
-  - type: Action
-    itemIconStyle: BigItem
-  - type: InstantAction
-    event: !type:ToggleActionEvent
+    - type: Action
+      itemIconStyle: BigItem
+    - type: InstantAction
+      event: !type:ToggleActionEvent

@@ -16,8 +16,6 @@
       layers:
         - map: ["enum.PdaVisualLayers.Base"]
           state: "pda"
-        - state: "screen-security"
-          shader: "unshaded"
         - state: "light_overlay"
           map: ["enum.PdaVisualLayers.Flashlight"]
           shader: "unshaded"
@@ -32,11 +30,10 @@
         - CrewManifestCartridge
         - NotekeeperCartridge
         - NewsReaderCartridge
-        - AstroNavCartridge
-        - MessengerCartridgeClient
+    #    - AstroNavCartridge
+    #    - MessengerCartridgeClient
     - type: Tag
       tags:
-        - WhitelistPdaIdPainter
         - DoorBumpOpener
         - WhitelistChameleon
         - WhitelistChameleonPDA

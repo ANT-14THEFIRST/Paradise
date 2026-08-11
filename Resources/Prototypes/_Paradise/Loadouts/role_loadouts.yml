@@ -2,10 +2,10 @@
 - type: roleLoadout
   id: JobRoboticist
   groups:
-    - ScientistHead
+    - RoboticistCap
     - ScientistNeck
-    - ScientistJumpsuit
-    - SeniorSciensistOuterClothing
+    - RoboticistJumpsuit
+    - RoboticistOuterClothing
     - ScientistGloves
     - ScientistBackpack
     - ScientistShoes
