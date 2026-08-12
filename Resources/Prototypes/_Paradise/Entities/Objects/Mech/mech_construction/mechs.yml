@@ -34,7 +34,6 @@
       node: powerloaderframe
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
 
 - type: entity
@@ -82,7 +81,6 @@
       node: basichydraulicchassis
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
 
 - type: entity
@@ -128,7 +126,6 @@
       node: rightarmbase
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
 
 - type: entity
@@ -181,7 +178,6 @@
       node: rightarmframehydraulic
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
 
 - type: entity
@@ -227,7 +223,6 @@
       node: leftarmbase
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
 
 - type: entity
@@ -280,5 +275,4 @@
       node: leftarmframehydraulic
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Pullable
