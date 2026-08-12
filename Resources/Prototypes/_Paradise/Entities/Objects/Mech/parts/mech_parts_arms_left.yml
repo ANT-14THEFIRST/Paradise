@@ -162,7 +162,6 @@
               node: start
             - !type:DoActsBehavior
               acts: ["Destruction"]
-
 # - type: entity
 #   id: SprayLeftArm
 #   parent: BaseMechLeftArm

@@ -38,7 +38,7 @@
     - type: MechChassis
       maximalMass: 900
       baseMovementSpeed: 3.3
-      acceleration: 1.2
+      acceleration: 3
       efficiency: 0.003
     - type: MechPart
       integrity: 250
@@ -68,7 +68,6 @@
       containers:
         - part-container
       skill: ElectronicsConstructionAdvanced
-
 # - type: entity
 #   id: LightServoChassis
 #   parent: BaseMechChassis
