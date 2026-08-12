@@ -69,36 +69,36 @@
         - part-container
       skill: ElectronicsConstructionAdvanced
 
-- type: entity
-  id: LightServoChassis
-  parent: BaseMechChassis
-  name: electric servo chassis
-  description: Mech chassis made based on electro servos. It is lightweight, has low reaction time but won't be able to carry much weight
-  components:
-    - type: Sprite
-      sprite: _Paradise/Objects/Mechs/chassis.rsi
-      state: servo
-    - type: MechChassis
-      maximalMass: 500
-      baseMovementSpeed: 4.8
-      acceleration: 6
-      efficiency: 0.005
-    - type: MechPart
-      integrity: 175
-      maxIntegrity: 175
-      ownMass: 100
-      attachedSprite:
-        sprite: _Paradise/Objects/Mechs/chassis.rsi
-        state: servo
-    - type: Destructible
-      thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 175
-          behaviors:
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:ChangeConstructionNodeBehavior
-              node: start
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
+# - type: entity
+#   id: LightServoChassis
+#   parent: BaseMechChassis
+#   name: electric servo chassis
+#   description: Mech chassis made based on electro servos. It is lightweight, has low reaction time but won't be able to carry much weight
+#   components:
+#     - type: Sprite
+#       sprite: _Paradise/Objects/Mechs/chassis.rsi
+#       state: servo
+#     - type: MechChassis
+#       maximalMass: 500
+#       baseMovementSpeed: 4.8
+#       acceleration: 6
+#       efficiency: 0.005
+#     - type: MechPart
+#       integrity: 175
+#       maxIntegrity: 175
+#       ownMass: 100
+#       attachedSprite:
+#         sprite: _Paradise/Objects/Mechs/chassis.rsi
+#         state: servo
+#     - type: Destructible
+#       thresholds:
+#         - trigger: !type:DamageTrigger
+#             damage: 175
+#           behaviors:
+#             - !type:PlaySoundBehavior
+#               sound:
+#                 collection: MetalBreak
+#             - !type:ChangeConstructionNodeBehavior
+#               node: start
+#             - !type:DoActsBehavior
+#               acts: ["Destruction"]

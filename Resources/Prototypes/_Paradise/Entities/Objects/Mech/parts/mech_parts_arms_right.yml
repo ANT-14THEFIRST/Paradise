@@ -83,117 +83,6 @@
         state: basichydrauliccolor
 
 - type: entity
-  id: RightServoArm
-  parent: BaseMechRightArm
-  name: servo arm (right)
-  description: A servo-based manipulator made to fit into a standard mech right arm slot. It is way more presize than its hydraulic sibling but also much weaker
-  components:
-    #- type: Sprite
-    #  sprite: _Paradise/Objects/Specific/Mech/mecha_equipment.rsi
-    #  state: mecha_clamp
-    - type: MechArm
-      hands:
-        - hand:
-            location: Right
-            whitelist:
-              sizes:
-                - Ginormous
-                - Huge
-                - Large
-                - Normal
-            handOverride:
-              strengthModifier: 6
-              damageOverride:
-                types:
-                  Blunt: 14
-                  Structural: 30
-              altDisarm: false
-              attackRate: 1.5
-    - type: MechPart
-      integrity: 100
-      maxIntegrity: 100
-      ownMass: 80
-      attachedSprite:
-        sprite: _Paradise/Objects/Mechs/righthand.rsi
-        state: servo
-    - type: Destructible
-      thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 100
-          behaviors:
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:ChangeConstructionNodeBehavior
-              node: start
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
-
-- type: entity
-  id: RightMedicalMultitoolArm
-  parent: BaseMechRightArm
-  name: medical multitool (right)
-  description: A module that consists of three flexible manipulators two of which have small, precise and relatively weak cybernetic hands and the other one has a non-detachable hypospray on it. This one fits into a standard mech's right hand slot
-  components:
-    #- type: Sprite
-    #  sprite: _Paradise/Objects/Specific/Mech/mecha_equipment.rsi
-    #  state: mecha_clamp
-    - type: MechArm
-      hands:
-        - hand:
-            location: Right
-            whitelist:
-              sizes:
-                - Tiny
-                - Small
-                - Normal
-            handOverride:
-              damageOverride:
-                types:
-                  Slash: 5
-              strengthModifier: 0.3
-              attackRate: 2.5
-              altDisarm: false
-              autoAttack: true
-        - hand:
-            location: Right
-            whitelist:
-              sizes:
-                - Tiny
-                - Small
-                - Normal
-            handOverride:
-              damageOverride:
-                types:
-                  Slash: 5
-              strengthModifier: 0.3
-              attackRate: 2.5
-              altDisarm: false
-              autoAttack: true
-        - hand:
-            location: Right
-          item: BorgHypo
-    - type: MechPart
-      integrity: 65
-      maxIntegrity: 65
-      ownMass: 40
-      attachedSprite:
-        sprite: _Paradise/Objects/Mechs/righthand.rsi
-        state: medicalmultitool
-    - type: Destructible
-      thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 65
-          behaviors:
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:ChangeConstructionNodeBehavior
-              node: start
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
-
-- type: entity
   id: DrillRightArm
   parent: BaseMechRightArm
   name: integrated industrial drill manipulator (right)
@@ -274,41 +163,152 @@
             - !type:DoActsBehavior
               acts: ["Destruction"]
 
-- type: entity
-  id: SprayRightArm
-  parent: BaseMechRightArm
-  name: integrated industrial drill manipulator (right)
-  description: A manipulator with an industrial spray mounted on it. This one is designed to be installed in mech's right arm slot.
-  components:
-    - type: Sprite
-      sprite: Objects/Specific/Mech/mecha_equipment.rsi
-      state: mecha_drill
-    - type: MechArm
-      hands:
-        - hand:
-            location: Right
-            handOverride:
-              strengthModifier: 1
-            whitelist:
-              sizes:
-                - Ginormous
-          item: MechSpray
-    - type: MechPart
-      integrity: 150
-      maxIntegrity: 150
-      ownMass: 125
-      attachedSprite:
-        sprite: _Paradise/Objects/Mechs/righthand.rsi
-        state: hydraulicdrill
-    - type: Destructible
-      thresholds:
-        - trigger: !type:DamageTrigger
-            damage: 150
-          behaviors:
-            - !type:PlaySoundBehavior
-              sound:
-                collection: MetalBreak
-            - !type:ChangeConstructionNodeBehavior
-              node: start
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
+# - type: entity
+#   id: RightServoArm
+#   parent: BaseMechRightArm
+#   name: servo arm (right)
+#   description: A servo-based manipulator made to fit into a standard mech right arm slot. It is way more presize than its hydraulic sibling but also much weaker
+#   components:
+#     #- type: Sprite
+#     #  sprite: _Paradise/Objects/Specific/Mech/mecha_equipment.rsi
+#     #  state: mecha_clamp
+#     - type: MechArm
+#       hands:
+#         - hand:
+#             location: Right
+#             whitelist:
+#               sizes:
+#                 - Ginormous
+#                 - Huge
+#                 - Large
+#                 - Normal
+#             handOverride:
+#               strengthModifier: 6
+#               damageOverride:
+#                 types:
+#                   Blunt: 14
+#                   Structural: 30
+#               altDisarm: false
+#               attackRate: 1.5
+#     - type: MechPart
+#       integrity: 100
+#       maxIntegrity: 100
+#       ownMass: 80
+#       attachedSprite:
+#         sprite: _Paradise/Objects/Mechs/righthand.rsi
+#         state: servo
+#     - type: Destructible
+#       thresholds:
+#         - trigger: !type:DamageTrigger
+#             damage: 100
+#           behaviors:
+#             - !type:PlaySoundBehavior
+#               sound:
+#                 collection: MetalBreak
+#             - !type:ChangeConstructionNodeBehavior
+#               node: start
+#             - !type:DoActsBehavior
+#               acts: ["Destruction"]
+
+# - type: entity
+#   id: RightMedicalMultitoolArm
+#   parent: BaseMechRightArm
+#   name: medical multitool (right)
+#   description: A module that consists of three flexible manipulators two of which have small, precise and relatively weak cybernetic hands and the other one has a non-detachable hypospray on it. This one fits into a standard mech's right hand slot
+#   components:
+#     #- type: Sprite
+#     #  sprite: _Paradise/Objects/Specific/Mech/mecha_equipment.rsi
+#     #  state: mecha_clamp
+#     - type: MechArm
+#       hands:
+#         - hand:
+#             location: Right
+#             whitelist:
+#               sizes:
+#                 - Tiny
+#                 - Small
+#                 - Normal
+#             handOverride:
+#               damageOverride:
+#                 types:
+#                   Slash: 5
+#               strengthModifier: 0.3
+#               attackRate: 2.5
+#               altDisarm: false
+#               autoAttack: true
+#         - hand:
+#             location: Right
+#             whitelist:
+#               sizes:
+#                 - Tiny
+#                 - Small
+#                 - Normal
+#             handOverride:
+#               damageOverride:
+#                 types:
+#                   Slash: 5
+#               strengthModifier: 0.3
+#               attackRate: 2.5
+#               altDisarm: false
+#               autoAttack: true
+#         - hand:
+#             location: Right
+#           item: BorgHypo
+#     - type: MechPart
+#       integrity: 65
+#       maxIntegrity: 65
+#       ownMass: 40
+#       attachedSprite:
+#         sprite: _Paradise/Objects/Mechs/righthand.rsi
+#         state: medicalmultitool
+#     - type: Destructible
+#       thresholds:
+#         - trigger: !type:DamageTrigger
+#             damage: 65
+#           behaviors:
+#             - !type:PlaySoundBehavior
+#               sound:
+#                 collection: MetalBreak
+#             - !type:ChangeConstructionNodeBehavior
+#               node: start
+#             - !type:DoActsBehavior
+#               acts: ["Destruction"]
+
+# - type: entity
+#   id: SprayRightArm
+#   parent: BaseMechRightArm
+#   name: integrated industrial drill manipulator (right)
+#   description: A manipulator with an industrial spray mounted on it. This one is designed to be installed in mech's right arm slot.
+#   components:
+#     - type: Sprite
+#       sprite: Objects/Specific/Mech/mecha_equipment.rsi
+#       state: mecha_drill
+#     - type: MechArm
+#       hands:
+#         - hand:
+#             location: Right
+#             handOverride:
+#               strengthModifier: 1
+#             whitelist:
+#               sizes:
+#                 - Ginormous
+#           item: MechSpray
+#     - type: MechPart
+#       integrity: 150
+#       maxIntegrity: 150
+#       ownMass: 125
+#       attachedSprite:
+#         sprite: _Paradise/Objects/Mechs/righthand.rsi
+#         state: hydraulicdrill
+#     - type: Destructible
+#       thresholds:
+#         - trigger: !type:DamageTrigger
+#             damage: 150
+#           behaviors:
+#             - !type:PlaySoundBehavior
+#               sound:
+#                 collection: MetalBreak
+#             - !type:ChangeConstructionNodeBehavior
+#               node: start
+#             - !type:DoActsBehavior
+#               acts: ["Destruction"]
