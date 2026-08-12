@@ -18,8 +18,9 @@
       material: Steel
       materialRepairTreshold: 10.0
       doAfterModifier: 1.2
-    - type: Damageable
+    - type: DamageTypeRestriction
       damageContainer: Inorganic
+    - type: Damageable
       damageModifierSet: Metallic
     - type: Destructible
       thresholds:

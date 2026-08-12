@@ -101,8 +101,7 @@
       materialRepairTreshold: 10.0
       doAfterModifier: 1.2
     - type: TemperatureProtection
-      heatingCoefficient: 0.005
-      coolingCoefficient: 0.005
+      coefficient: 0.005
     - type: MovementSpeedModifier
       baseWalkSpeed: 0
       baseSprintSpeed: 0
@@ -161,6 +160,7 @@
         mech-battery-slot: !type:ContainerSlot
         mech-tank-slot: !type:ContainerSlot
     - type: Damageable
+    - type: DamageTypeRestriction
       damageContainer: Inorganic
     - type: FootstepModifier
       footstepSoundCollection:

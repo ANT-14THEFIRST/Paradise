@@ -25,13 +25,6 @@
           visible: false
     - type: Icon
       state: pda-roboticist
-    - type: CartridgeLoader
-      preinstalled:
-        - CrewManifestCartridge
-        - NotekeeperCartridge
-        - NewsReaderCartridge
-    #    - AstroNavCartridge
-    #    - MessengerCartridgeClient
     - type: Tag
       tags:
         - DoorBumpOpener

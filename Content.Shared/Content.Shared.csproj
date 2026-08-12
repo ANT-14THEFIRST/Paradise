@@ -24,6 +24,9 @@
     <Compile Update="_Paradise\Clothing\SpeciesRestrictedClothingComponent.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="_Paradise\Damageable\DamageTypeRestrictionComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="_Paradise\HUD\RelayHUDLogicToContainersComponent.cs">
       <SubType>Component</SubType>
     </Compile>
