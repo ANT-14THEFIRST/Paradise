@@ -122,11 +122,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         SubscribeLocalEvent<AltMechPilotComponent, InhaleLocationEvent>(OnInhale);
 
         SubscribeLocalEvent<AltMechPilotComponent, BeforeHeatExchangeEvent>(OnTemperatureChange);
-
-        #region Equipment UI message relays
-        SubscribeLocalEvent<AltMechComponent, MechGrabberEjectMessage>(ReceiveEquipmentUiMesssages);
-        SubscribeLocalEvent<AltMechComponent, MechSoundboardPlayMessage>(ReceiveEquipmentUiMesssages);
-        #endregion
     }
 
     protected override void OnStartup(Entity<AltMechComponent> ent, ref ComponentStartup args)
@@ -543,22 +538,6 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
         }
 
         _ui.TryToggleUi(uid, MechUiKey.Key, actor.PlayerSession);
-    }
-
-    private void ReceiveEquipmentUiMesssages<T>(EntityUid uid, AltMechComponent component, T args) where T : MechEquipmentUiMessage
-    {
-        if (!TryComp<MechPartComponent>(uid, out var partComp))
-            return;
-
-        var ev = new MechEquipmentUiMessageRelayEvent(args);
-        var allEquipment = new List<EntityUid>(component.EquipmentContainer.ContainedEntities);
-        var argEquip = GetEntity(args.Equipment);
-
-        foreach (var equipment in allEquipment)
-        {
-            if (argEquip == equipment)
-                RaiseLocalEvent(equipment, ev);
-        }
     }
 
     public void UpdateUserInterface(Entity<AltMechComponent> ent)

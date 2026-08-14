@@ -91,16 +91,6 @@ public sealed class MechEquipmentUiStateReadyEvent : EntityEventArgs
     public Dictionary<NetEntity, BoundUserInterfaceState> States = new();
 }
 
-public sealed class MechEquipmentUiMessageRelayEvent : EntityEventArgs
-{
-    public MechEquipmentUiMessage Message;
-
-    public MechEquipmentUiMessageRelayEvent(MechEquipmentUiMessage message)
-    {
-        Message = message;
-    }
-}
-
 [Serializable, NetSerializable]
 public sealed class MechEquipmentRemoveMessage : BoundUserInterfaceMessage
 {
@@ -109,36 +99,6 @@ public sealed class MechEquipmentRemoveMessage : BoundUserInterfaceMessage
     public MechEquipmentRemoveMessage(NetEntity equipment)
     {
         Equipment = equipment;
-    }
-}
-
-[Serializable, NetSerializable]
-public abstract class MechEquipmentUiMessage : BoundUserInterfaceMessage
-{
-    public NetEntity Equipment;
-}
-
-[Serializable, NetSerializable]
-public sealed class MechGrabberEjectMessage : MechEquipmentUiMessage
-{
-    public NetEntity Item;
-
-    public MechGrabberEjectMessage(NetEntity equipment, NetEntity uid)
-    {
-        Equipment = equipment;
-        Item = uid;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class MechSoundboardPlayMessage : MechEquipmentUiMessage
-{
-    public int Sound;
-
-    public MechSoundboardPlayMessage(NetEntity equipment, int sound)
-    {
-        Equipment = equipment;
-        Sound = sound;
     }
 }
 

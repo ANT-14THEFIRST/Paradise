@@ -130,6 +130,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             var ev = new MechPartInsertedEvent(ent.Owner);
             RaiseLocalEvent(args.Entity, ref ev);
 
+            AddMass(ent, partComp.OwnMass);
+
+            var massEv = new MassChangedEvent();
+            RaiseLocalEvent(ent, ref massEv);
+
             Dirty(ent);
             return;
         }
@@ -138,6 +143,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         {
             var ev = new MechEquipmentInsertedEvent(ent.Owner);
             RaiseLocalEvent(args.Entity, ref ev);
+
+            AddMass(ent, moduleComp.OwnMass);
+
+            var massEv = new MassChangedEvent();
+            RaiseLocalEvent(ent, ref massEv);
         }
 
         Dirty(ent);
@@ -155,6 +165,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             var ev = new MechPartRemovedEvent(ent.Owner);
             RaiseLocalEvent(args.Entity, ref ev);
 
+            RemoveMass(ent, partComp.OwnMass);
+
+            var massEv = new MassChangedEvent();
+            RaiseLocalEvent(ent, ref massEv);
+
             Dirty(ent);
             return;
         }
@@ -163,6 +178,11 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         {
             var ev = new MechEquipmentRemovedEvent(ent.Owner);
             RaiseLocalEvent(args.Entity, ref ev);
+
+            RemoveMass(ent, moduleComp.OwnMass);
+
+            var massEv = new MassChangedEvent();
+            RaiseLocalEvent(ent, ref massEv);
         }
 
         Dirty(ent);
@@ -375,17 +395,17 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         foreach (var part in ent.Comp.ContainerDict)
         {
-            if (part.Key == PartSlot.Power || part.Value == null || part.Value.ContainedEntity != null)
+            if (part.Key == PartSlot.Power || part.Value == null || part.Value.ContainedEntity is not { Valid: true } partValid)
                 continue;
 
-            if (!TryGetNetEntity(part.Value.ContainedEntity, out var netItem))
+            if (!TryGetNetEntity(partValid, out var netItem))
                 continue;
 
             //if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)NetMech, (NetEntity)NetItem))//this chance is hardcoded because using mech parts as shields is not planned, it's just a patch to make it work untill part damage UI is made
 
             if (SharedRandomExtensions.PredictedProb(_timing, 0.16f, (NetEntity)netItem))
             {
-                targetedPart = part.Value.ContainedEntity;
+                targetedPart = partValid;
                 return true;
             }
         }
@@ -537,14 +557,13 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         component.CurrentEquipmentAmount += equipmentComponent.EqipmentSize;
 
-        AddMass(component, equipmentComponent.OwnMass);
-
         equipmentComponent.EquipmentOwner = uid;
 
         Dirty(uid, component);
         Dirty(toInsert, equipmentComponent);
 
         _container.Insert(toInsert, component.EquipmentContainer);
+
         var ev = new MechEquipmentInsertedEvent(uid);
         RaiseLocalEvent(toInsert, ref ev);
     }
@@ -573,28 +592,20 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         partComponent.PartOwner = uid;
         _container.Insert(toInsert, component.ContainerDict[partComponent.Slot]);
 
-        AddMass(component, partComponent.OwnMass);
-
         Dirty(uid, component);
         Dirty(toInsert, partComponent);
-
-        var ev = new MechPartInsertedEvent(uid);
-        RaiseLocalEvent(toInsert, ref ev);
-
-        var massEv = new MassChangedEvent();
-        RaiseLocalEvent(uid, ref massEv);
 
         Dirty<AltMechComponent>((uid, component));
     }
 
-    public void AddMass(AltMechComponent mechComp, FixedPoint2 value)
+    public void AddMass(Entity<AltMechComponent> ent, FixedPoint2 value)
     {
-        mechComp.OverallMass += value;
+        ent.Comp.OverallMass += value;
     }
 
-    public void RemoveMass(AltMechComponent mechComp, FixedPoint2 value)
+    public void RemoveMass(Entity<AltMechComponent> ent, FixedPoint2 value)
     {
-        mechComp.OverallMass -= value;
+        ent.Comp.OverallMass -= value;
     }
 
     public void RemoveEquipment(EntityUid uid, EntityUid toRemove)
@@ -608,9 +619,6 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         if (equipmentComponent.EquipmentOwner != uid)
             return;
 
-        var ev = new MechEquipmentRemovedEvent(uid);
-        RaiseLocalEvent(toRemove, ref ev);
-
         if (equipmentComponent != null)
         {
             mechComp.CurrentEquipmentAmount -= equipmentComponent.EqipmentSize;
@@ -620,6 +628,9 @@ public abstract partial class SharedAltMechSystem : EntitySystem
         }
 
         _container.Remove(toRemove, mechComp.EquipmentContainer);
+
+        var ev = new MechEquipmentRemovedEvent(uid);
+        RaiseLocalEvent(toRemove, ref ev);
     }
 
     public void RemovePart(EntityUid uid, EntityUid toRemove)
@@ -643,15 +654,8 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         slot = partComponent.Slot;
         partComponent.PartOwner = null;
-        RemoveMass(component, partComponent.OwnMass);
 
         _container.Remove(toRemove, component.ContainerDict[partComponent.Slot]);
-
-        var ev = new MechPartRemovedEvent(uid);
-        RaiseLocalEvent(toRemove, ref ev);
-
-        var massEv = new MassChangedEvent();
-        RaiseLocalEvent(uid, ref massEv);
 
         Dirty(toRemove, partComponent);
 

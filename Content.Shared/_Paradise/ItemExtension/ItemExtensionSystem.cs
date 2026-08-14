@@ -105,7 +105,7 @@ public sealed partial class ItemExtensionSystem : EntitySystem
         if (userStrength < ent.Comp.MinimalStrengthToPickUp)
         {
             FixedPoint2 totalFreeStrength = usedStrength;
-            Dictionary<FixedPoint2, string> freeHands = new Dictionary<FixedPoint2, string>();
+            List<(FixedPoint2, string)> freeHands = new List<(FixedPoint2, string)>();
 
             foreach (var handId in _hands.EnumerateHands(args.User))
             {
@@ -114,12 +114,12 @@ public sealed partial class ItemExtensionSystem : EntitySystem
                 {
                     if (freeHand.Value.HandOverride == null)
                     {
-                        freeHands.Add(userStrength, handId);
+                        freeHands.Add((userStrength, handId));
                         totalFreeStrength += userStrength;
                         continue;
                     }
 
-                    freeHands.Add(freeHand.Value.HandOverride.Value.StrengthModifier, handId);
+                    freeHands.Add((freeHand.Value.HandOverride.Value.StrengthModifier, handId));
                     totalFreeStrength += freeHand.Value.HandOverride.Value.StrengthModifier;
                 }
             }
@@ -130,9 +130,7 @@ public sealed partial class ItemExtensionSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString(CannotPickupMessage), args.User);
             }
 
-            var sortedHands = freeHands
-                .OrderByDescending(pair => pair.Key)
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
+            var sortedHands = freeHands.OrderByDescending(pair => pair.Item1);
 
             foreach (var (handStrength, handId) in sortedHands)
             {
@@ -188,11 +186,11 @@ public sealed partial class ItemExtensionSystem : EntitySystem
         {
             if (TryComp(held, out VirtualItemComponent? virt) &&
                 virt.BlockingEntity == used &&
-                _container.TryGetContainingContainer(used, out var containerHand) &&
+                _container.TryGetContainingContainer(held, out var containerHand) &&
                 !handsUsed.ContainsKey(containerHand.ID) &&
                 _hands.TryGetHand(user, containerHand.ID, out var handHoldingVirtual))
             {
-                handsUsed.Add(containerHand.ID, handHoldingVirtual.Value);
+            handsUsed.Add(containerHand.ID, handHoldingVirtual.Value);
             }
         }
 
@@ -254,12 +252,12 @@ public sealed partial class ItemExtensionSystem : EntitySystem
 
         if (TryComp<WieldableComponent>(ent.Owner, out var wieldableComp) &&
             _wield.TryWield((ent.Owner, wieldableComp), args.User))
-            usedStrength = GetStrength(ent.Owner, args.User);
+            usedStrength = GetStrength(args.User, ent.Owner);
 
         if (usedStrength >= ent.Comp.MinimalStrengthToPickUp)
             return;
 
-        Dictionary<FixedPoint2, string> freeHands = new Dictionary<FixedPoint2, string>();
+        List<(FixedPoint2, string)> freeHands = new List<(FixedPoint2, string)>();
 
         foreach (var handId in _hands.EnumerateHands(args.User))
         {
@@ -271,17 +269,15 @@ public sealed partial class ItemExtensionSystem : EntitySystem
             {
                 if (freeHand.Value.HandOverride == null)
                 {
-                    freeHands.Add(userStrength, handId);
+                    freeHands.Add((userStrength, handId));
                     continue;
                 }
 
-                freeHands.Add(freeHand.Value.HandOverride.Value.StrengthModifier, handId);
+                freeHands.Add((freeHand.Value.HandOverride.Value.StrengthModifier, handId));
             }
         }
 
-        var sortedHands = freeHands
-            .OrderByDescending(pair => pair.Key)
-            .ToDictionary(pair => pair.Key, pair => pair.Value);
+        var sortedHands = freeHands.OrderByDescending(pair => pair.Item1);
 
         foreach (var (handStrength, handId) in sortedHands)
         {

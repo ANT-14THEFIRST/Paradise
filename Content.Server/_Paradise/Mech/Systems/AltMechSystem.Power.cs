@@ -52,10 +52,10 @@ public sealed partial class AltMechSystem
 
     public bool TryChangeMechCharge(Entity<AltMechComponent> ent, float amount)
     {
-        if (ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true } batteryValid)
+        if (ent.Comp.ContainerDict[PartSlot.Power].ContainedEntity is not { Valid: true } batteryValid)
             return false;
 
-        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict[PartSlot.Chassis].ContainedEntity, out var batteryComp))
+        if (!TryComp<BatteryComponent>(ent.Comp.ContainerDict[PartSlot.Power].ContainedEntity, out var batteryComp))
             return false;
 
         var actualChange = _battery.ChangeCharge(batteryValid, amount);

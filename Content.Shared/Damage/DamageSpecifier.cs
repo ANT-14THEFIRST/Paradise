@@ -92,6 +92,8 @@ namespace Content.Shared.Damage
         public DamageSpecifier(DamageSpecifier damageSpec)
         {
             DamageDict = new(damageSpec.DamageDict);
+
+            ArmourPiercing = damageSpec.ArmourPiercing; // PARADISE EDIT - Add armour piercing
         }
 
         /// <summary>
@@ -136,6 +138,8 @@ namespace Content.Shared.Damage
             DamageSpecifier newDamage = new();
             newDamage.DamageDict.EnsureCapacity(damageSpec.DamageDict.Count);
 
+            var minCoefficient = 1f;// PARADISE EDIT - Add armour piercing
+
             foreach (var (key, value) in damageSpec.DamageDict)
             {
                 if (value == 0)
@@ -159,12 +163,16 @@ namespace Content.Shared.Damage
                     var upperCap = Math.Max(1f, coefficient);
 
                     newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+
+                    minCoefficient = Math.Min(minCoefficient, coefficient);
                 }
                 // PARADISE EDIT END
 
                 if (newValue != 0)
                     newDamage.DamageDict[key] = FixedPoint2.New(newValue);
             }
+
+            newDamage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing), damageSpec.ArmourPiercing - (1f - minCoefficient) * 100f); // PARADISE EDIT - Add armour piercing
 
             return newDamage;
         }

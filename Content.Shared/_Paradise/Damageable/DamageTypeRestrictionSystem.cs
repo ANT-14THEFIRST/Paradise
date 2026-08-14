@@ -1,5 +1,6 @@
 using Content.Shared._Paradise.Damageable;
 using Content.Shared.Damage.Systems;
+using Content.Shared.FixedPoint;
 
 namespace Content.Shared._Paradise.Armor;
 
@@ -19,10 +20,10 @@ public sealed partial class DamageTypeRestrictionSystem : EntitySystem
 
         foreach (var type in args.OriginalDamage.DamageDict)
         {
-            if (!damageContainer.SupportedTypes.Contains(type.Key))
+            if (damageContainer.SupportedTypes.Contains(type.Key))
                 continue;
 
-            args.Damage.DamageDict.Add(type.Key, type.Value);
+            args.Damage.DamageDict[type.Key] = FixedPoint2.Zero;
         }
 
         args.Damage.ArmourPiercing = args.OriginalDamage.ArmourPiercing;

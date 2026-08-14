@@ -23,7 +23,7 @@ public sealed partial class WearableAltArmorSystem : EntitySystem
     {
         _altArmor.ModifyDamage(ent.Owner, args.Args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
 
-        _damageable.TryChangeDamage(ent.Owner, args.Args.Damage);
+        _damageable.TryChangeDamage(ent.Owner, resultArmorDamage);
 
         args.Args.Damage = resultDamage;
     }

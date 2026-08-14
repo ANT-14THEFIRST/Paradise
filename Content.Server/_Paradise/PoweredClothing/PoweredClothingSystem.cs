@@ -33,6 +33,8 @@ public sealed partial class PoweredClothingSystem : SharedPoweredClothingSystem
 
                 return;
             }
+
+            active.TargetTime += comp.DrawTime;
         }
     }
 }

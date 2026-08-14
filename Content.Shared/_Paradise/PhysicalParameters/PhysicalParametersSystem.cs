@@ -21,7 +21,6 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
     [Dependency] private ItemExtensionSystem _itemExt = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
 
-    private readonly FixedPoint2 _ungrabbableStrengthDifference = 1.7;
     private readonly FixedPoint2 _multiHandedMultiplier = 1;
 
     public override void Initialize()
@@ -185,11 +184,9 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
         if (ent.Comp.ParameterDict.ContainsKey(parameter))
             ent.Comp.ParameterDict[parameter] += value;
 
-        var ev = new ParametersChangedEvent();
+        UpdateParameterValues(ent);
 
-        RaiseLocalEvent(ent, ref ev);
-
-        var evHeld = new UserParametersChangedEvent();
+        var evHeld = new UserParametersChangedEvent(ent.Owner);
 
         foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
@@ -204,9 +201,7 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
         if (ent.Comp.ParameterDict.ContainsKey(parameter))
             ent.Comp.ParameterDict[parameter] = value;
 
-        var ev = new ParametersChangedEvent();
-
-        RaiseLocalEvent(ent, ref ev);
+        UpdateParameterValues(ent);
 
         var evHeld = new UserParametersChangedEvent(ent.Owner);
 
