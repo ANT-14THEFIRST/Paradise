@@ -2,6 +2,7 @@ using Content.Shared._Paradise.ItemExtension;
 using Content.Shared._Paradise.Weapons.Melee.Components;
 using Content.Shared.Clothing;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
@@ -16,10 +17,10 @@ namespace Content.Shared._Paradise.PhysicalParameters;
 
 public sealed partial class PhysicalParametersSystem : EntitySystem
 {
-    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSystem = default!;
     [Dependency] private ItemExtensionSystem _itemExt = default!;
-    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     private readonly FixedPoint2 _multiHandedMultiplier = 1;
 
@@ -117,7 +118,7 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
     public void OnActivated(Entity<PhysicalParametersModifyingClothingComponent> ent, ref ItemToggledEvent args)
     {
         if (ent.Comp.DependsOnActivation &&
-            _containerSystem.TryGetContainingContainer(ent.Owner, out var userContainer) &&
+            _container.TryGetContainingContainer(ent.Owner, out var userContainer) &&
             userContainer.Owner is { Valid: true } ownerValidated &&
             TryComp<PhysicalParametersComponent>(ownerValidated, out var userParametersComp))
             UpdateParameterValues((ownerValidated, userParametersComp));
@@ -188,7 +189,7 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
 
         var evHeld = new UserParametersChangedEvent(ent.Owner);
 
-        foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
+        foreach (var item in _hands.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
 
         Dirty(ent);
@@ -205,7 +206,7 @@ public sealed partial class PhysicalParametersSystem : EntitySystem
 
         var evHeld = new UserParametersChangedEvent(ent.Owner);
 
-        foreach (var item in _handsSystem.EnumerateHeld(ent.Owner))
+        foreach (var item in _hands.EnumerateHeld(ent.Owner))
             RaiseLocalEvent(item, ref evHeld);
 
         Dirty(ent);
