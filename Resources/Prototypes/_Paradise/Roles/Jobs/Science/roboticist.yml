@@ -2,6 +2,7 @@
   id: Roboticist
   name: job-name-roboticist
   description: job-description-roboticist
+  canBeAntag: true
   playTimeTracker: JobRoboticist
   requirements:
     - !type:DepartmentTimeRequirement
@@ -10,7 +11,6 @@
   startingGear: RoboticistGear
   icon: "JobIconRoboticist"
   supervisors: job-supervisors-rd
-  canBeAntag: true
   access:
     - Research
     - Maintenance
