@@ -7,9 +7,6 @@
     - type: FlashImmunity
     - type: EyeProtection
     - type: CustomColorableLayer
-    - type: Sprite
-      sprite: _Paradise/Objects/Mechs/items/mecha_parts.rsi
-      state: visor_basic
     - type: MechPart
       integrity: 70
       maxIntegrity: 70
@@ -34,9 +31,6 @@
   components:
     - type: FlashImmunity
     - type: EyeProtection
-    - type: Sprite
-      sprite: _Paradise/Objects/Mechs/items/mecha_parts.rsi
-      state: visor_basic
     - type: CustomColorableLayer
     - type: MechPart
       integrity: 50 #a large sensor array is not very durable
@@ -65,9 +59,6 @@
     - type: FlashImmunity
     - type: EyeProtection
     - type: CustomColorableLayer
-    - type: Sprite
-      sprite: _Paradise/Objects/Mechs/items/mecha_parts.rsi
-      state: visor_basic
     - type: MechPart
       integrity: 90
       maxIntegrity: 90

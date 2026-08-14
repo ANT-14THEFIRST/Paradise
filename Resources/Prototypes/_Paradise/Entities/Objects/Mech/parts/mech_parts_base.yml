@@ -126,6 +126,11 @@
       ownMass: 60
       integrity: 150
       maxIntegrity: 150
+    - type: Sprite
+      layers:
+        - map: ["enum.ColorableVisualLayer.CustomColor"]
+          sprite: _Paradise/Objects/Mechs/items/mecha_parts.rsi
+          state: visor_basic
     - type: MechArm
     - type: Destructible
       thresholds:
