@@ -542,17 +542,7 @@ public sealed partial class AltMechSystem : SharedAltMechSystem
 
     public void UpdateUserInterface(Entity<AltMechComponent> ent)
     {
-        var ev = new MechEquipmentUiStateReadyEvent();
-        foreach (var part in ent.Comp.ContainerDict.Values)
-        {
-            if (TryComp<MechPartComponent>(part.ContainedEntity, out var partcomp) || partcomp == null)
-                continue;
-
-            foreach (var equip in ent.Comp.EquipmentContainer.ContainedEntities)
-                RaiseLocalEvent(equip, ev);
-        }
-
-        var state = new AltMechBoundUiState { EquipmentStates = ev.States };
+        var state = new AltMechBoundUiState();
 
         FixedPoint2 pressure = FixedPoint2.Zero;
         FixedPoint2 temperature = FixedPoint2.Zero;

@@ -208,7 +208,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
 
         FixedPoint2 massRel = 1 - massDiff / maxMass;
 
-        ent.Comp.MovementSpeedModifier = massRel.Float();
+        ent.Comp.MovementSpeedModifier = Math.Clamp(massRel.Float(), 0, 1);
 
         args.ModifySpeed(ent.Comp.MovementSpeedModifier, ent.Comp.MovementSpeedModifier);
     }
@@ -522,7 +522,7 @@ public abstract partial class SharedAltMechSystem : EntitySystem
             {
                 if (!TryComp<ActiveRadioComponent>(slot.ContainedEntity, out var radioComp))
                     return;
-                mechRadio.Channels = radioComp.Channels;
+                mechRadio.Channels = new (radioComp.Channels);
             }
             if (TryComp<ActiveRadioComponent>(pilot, out var embeddedRadio))//in case the pilot is a radio himself
             {

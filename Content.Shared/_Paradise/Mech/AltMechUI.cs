@@ -79,8 +79,6 @@ public sealed class MechDetachTankMessage : BoundUserInterfaceMessage
 [Serializable, NetSerializable]
 public sealed class AltMechBoundUiState : BoundUserInterfaceState
 {
-    public Dictionary<NetEntity, BoundUserInterfaceState> EquipmentStates = new();
-
     public FixedPoint2 TankPressure;
 
     public FixedPoint2 TankTemperature;

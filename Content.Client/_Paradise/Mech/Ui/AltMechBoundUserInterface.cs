@@ -68,7 +68,6 @@ public sealed partial class AltMechBoundUserInterface : BoundUserInterface
         if (state is not AltMechBoundUiState msg)
             return;
 
-        UpdateEquipmentControls(msg);
         _menu?.UpdateMechStats();
         _menu?.UpdateMechTankData(msg);
         _menu?.UpdateEquipmentView();
@@ -78,24 +77,6 @@ public sealed partial class AltMechBoundUserInterface : BoundUserInterface
     {
         _menu?.UpdateMechStats();
         _menu?.UpdateEquipmentView();
-    }
-
-    public void UpdateEquipmentControls(AltMechBoundUiState state)
-    {
-        if (!EntMan.TryGetComponent<AltMechComponent>(Owner, out var mechComp))
-            return;
-
-        foreach (var ent in mechComp.EquipmentContainer.ContainedEntities)
-        {
-            var ui = GetEquipmentUi(ent);
-            if (ui == null)
-                continue;
-            foreach (var (attached, estate) in state.EquipmentStates)
-            {
-                if (ent == EntMan.GetEntity(attached))
-                    ui.UpdateState(estate);
-            }
-        }
     }
 
     public UIFragment? GetEquipmentUi(EntityUid? uid)

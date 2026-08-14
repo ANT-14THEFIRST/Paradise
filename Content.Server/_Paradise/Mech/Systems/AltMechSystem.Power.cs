@@ -91,17 +91,17 @@ public sealed partial class AltMechSystem
 
             TransferMindIntoPilot((mech, mechComp));
 
-            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
         if (mechComp.Energy > 0 && !mechComp.Online)
         {
             mechComp.Online = true;
 
-            if (mechComp.PilotSlot.ContainedEntity is not { Valid: true })
+            if (mechComp.PilotSlot.ContainedEntity is { Valid: true })
                 TransferMindIntoMech((mech, mechComp));
 
-            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is not { Valid: true })
+            if (mechComp.ContainerDict[PartSlot.Chassis].ContainedEntity is { Valid: true })
                 _actionBlocker.UpdateCanMove(mech);
         }
     }
