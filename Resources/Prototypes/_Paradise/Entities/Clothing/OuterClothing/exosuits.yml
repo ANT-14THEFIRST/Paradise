@@ -15,8 +15,6 @@
     - type: PhysicalParametersModifyingClothing
       parameterDict:
         Strength: 1.7
-    - type: SpeciesRestrictedClothing
-      allowedSpecies: [Human, Dwarf, SlimePerson, Reptilian]
     - type: PoweredClothing
       selfPowered: false
       drawRate: 0.03

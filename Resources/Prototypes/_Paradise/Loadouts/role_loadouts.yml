@@ -1,8 +1,6 @@
-# Робототехник
 - type: roleLoadout
   id: JobRoboticist
   groups:
-    - RoboticistCap
     - ScientistNeck
     - RoboticistJumpsuit
     - RoboticistOuterClothing
@@ -11,7 +9,5 @@
     - ScientistShoes
     - RoboticistPDA
     - Survival
-    - SurvivalVox
     - GroupSpeciesBreathTool
     - Trinkets
-    - WorkerCash

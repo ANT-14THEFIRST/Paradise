@@ -67,7 +67,6 @@
       node: basichydraulicchassis
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
 # - type: entity
 #   id: LightServoChassis
 #   parent: BaseMechChassis

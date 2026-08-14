@@ -70,7 +70,6 @@
       node: rightarmhydraulic
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: MechPart
       integrity: 150
       maxIntegrity: 150
@@ -149,7 +148,6 @@
       node: rightarmhydraulicdrill
       containers:
         - part-container
-      skill: ElectronicsConstructionAdvanced
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger
