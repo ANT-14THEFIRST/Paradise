@@ -2,7 +2,6 @@
   id: Roboticist
   name: job-name-roboticist
   description: job-description-roboticist
-  canBeAntag: true
   playTimeTracker: JobRoboticist
   requirements:
     - !type:DepartmentTimeRequirement
@@ -33,3 +32,11 @@
   id: RoboticistPDA
   equipment:
     id: RoboticistPDA
+
+- type: chameleonOutfit
+  id: RoboticistChameleonOutfit
+  job: Roboticist
+  hasMindShield: true
+  equipment:
+    outerClothing: ClothingOuterWinterRobo
+    gloves: ClothingHandsGlovesFingerless

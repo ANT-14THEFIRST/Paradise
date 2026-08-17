@@ -421,5 +421,5 @@
   description: This implant will inform the Centcomm radio channel should the user fall into critical condition or die.
   categories: [HideSpawnMenu]
   components:
-  - type: RattleOnTrigger
-    radioChannel: CentCom
+    - type: RattleOnTrigger
+      radioChannel: CentCom
