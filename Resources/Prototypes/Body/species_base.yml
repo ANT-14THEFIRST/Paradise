@@ -150,7 +150,7 @@
         - FootstepSound
         - DoorBumpOpener
         - AnomalyHost
-    # PARADISE EDIT START - Mech Overhaul
+    # PARADISE EDIT START - Physical
     - type: PhysicalParameters
     - type: Item
       size: Ginormous
