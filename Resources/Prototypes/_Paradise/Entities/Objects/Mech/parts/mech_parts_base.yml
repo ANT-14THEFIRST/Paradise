@@ -175,5 +175,4 @@
       tags:
         - MechPowerGrid
     - type: Appearance
-    - type: PowerCellVisuals
     - type: Riggable
