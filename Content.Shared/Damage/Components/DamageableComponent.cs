@@ -74,7 +74,7 @@ public sealed partial class DamageableComponent : Component
 
     // PARADISE EDIT START - Add armour piercing
     /// <summary>
-    ///    If a projectile or has more damage + AP of a single type than sum of this and corresponding user threshold of ArmourBlock(if present) it will pierce through
+    ///    If a projectile has more damage of a required type + AP than this it will pierce through
     /// </summary>
     [DataField]
     public FixedPoint2 PiercingThreshold = 0;
