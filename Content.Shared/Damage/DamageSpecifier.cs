@@ -1,12 +1,12 @@
-using System.Text.Json.Serialization;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
-using Robust.Shared.Utility;
 using System.Numerics;
 using System.Linq;
 using System.Numerics;
