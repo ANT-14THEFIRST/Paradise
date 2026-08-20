@@ -101,14 +101,11 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         if (projectile.Comp.PenetrationDamageTypeRequirement == null || target.Comp == null)
             return false;
 
-        var stopPenetration = false;
         foreach (var requiredDamageType in projectile.Comp.PenetrationDamageTypeRequirement)
         {
             if (!damage.DamageDict.Keys.Contains(requiredDamageType))
-            {
-                stopPenetration = true;
-                break;
-            }
+                return false;
+                
             FixedPoint2 targetThreshold = 0f;
 
             targetThreshold = target.Comp.PiercingThreshold.Float();
@@ -121,8 +118,6 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
 
             projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Max(projectile.Comp.Damage.DamageDict[requiredDamageType] - leftToRemove, FixedPoint2.Zero);
         }
-        if (stopPenetration)
-            return false;
 
         return true;
     }
