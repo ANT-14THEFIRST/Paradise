@@ -106,11 +106,7 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
             if (!damage.DamageDict.Keys.Contains(requiredDamageType))
                 return false;
                 
-            FixedPoint2 targetThreshold = 0f;
-
-            targetThreshold = target.Comp.PiercingThreshold.Float();
-
-            var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmorPenetration, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmorPenetration));
+            FixedPoint2 targetThreshold = target.Comp.PiercingThreshold.Float();
 
             var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmorPenetration);
 
