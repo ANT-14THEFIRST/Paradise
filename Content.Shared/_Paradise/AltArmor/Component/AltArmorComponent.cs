@@ -11,16 +11,16 @@ namespace Content.Shared._Paradise.AltArmor.Components;
 public sealed partial class AltArmorComponent : Component
 {
     /// <summary>
-    /// The damage tresholds(a.k.a. resists)
+    /// The damage Thresholds(a.k.a. resists)
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> TresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
+    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> ThresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
 
     /// <summary>
-    /// A list of armor damage tresholds(a.k.a. resist of the armor itself)
+    /// A list of armor damage Thresholds(a.k.a. resist of the armor itself)
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DurabilityTresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
+    public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DurabilityThresholdDict = new Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2>();
 
     /// <summary>
     /// Specifies what types of damage should be converted to others

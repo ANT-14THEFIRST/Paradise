@@ -5,6 +5,11 @@
   </PropertyGroup>
   <Import Project="../MSBuild/Content.props" />
   <ItemGroup>
+    <Compile Include="..\..\..\локалка 220\space-station-14-220-fork\Content.Shared\SS220\AltArmor\AltArmorSystem.cs" Link="_Paradise\AltArmor\AltArmorSystem.cs" />
+    <Compile Include="..\..\..\локалка 220\space-station-14-220-fork\Content.Shared\SS220\AltArmor\Components\WearableAltArmorComponent.cs" Link="_Paradise\AltArmor\Component\WearableAltArmorComponent.cs" />
+    <Compile Include="..\..\..\локалка 220\space-station-14-220-fork\Content.Shared\SS220\AltArmor\WearableAltArmorSystem.cs" Link="_Paradise\AltArmor\WearableAltArmorSystem.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="System.Numerics.Tensors" />
     <PackageReference Include="YamlDotNet" />

@@ -24,7 +24,7 @@ public sealed partial class RobustHarvest : EntityEffectBase<RobustHarvest>
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys) =>
         Loc.GetString("entity-effect-guidebook-plant-robust-harvest",
-            ("seedlesstreshold", PotencySeedlessThreshold),
+            ("seedlessThreshold", PotencySeedlessThreshold),
             ("limit", PotencyLimit),
             ("increase", PotencyIncrease),
             ("chance", Probability));

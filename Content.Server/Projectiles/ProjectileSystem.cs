@@ -120,15 +120,6 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
 
             targetThreshold = target.Comp.PiercingThreshold.Float();
 
-            if (TryComp<AltArmorComponent>(target, out var armorComp) && armorComp.TresholdDict.TryGetValue(requiredDamageType, out var value))
-                targetThreshold += value;
-
-            if (projectile.Comp.Damage[requiredDamageType] + projectile.Comp.Damage.ArmourPiercing < targetThreshold)
-            {
-                stopPenetration = true;
-                return false;
-            }
-
             var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
 
             var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmourPiercing);
