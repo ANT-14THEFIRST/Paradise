@@ -61,8 +61,7 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter))
         {
             // PARADISE EDIT START - Add structure piercing
-            if (damage != null)
-                component.Damage = damage;
+            component.Damage = damage;
             // PARADISE EDIT END
 
             if (!deleted)
