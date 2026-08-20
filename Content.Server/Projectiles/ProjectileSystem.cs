@@ -59,12 +59,9 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         }
         var deleted = Deleted(target);
 
-        if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out var damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter))
+        if (_damageableSystem.TryChangeDamage((target, damageableComponent), ev.Damage, out DamageSpecifier damage, component.IgnoreResistances, origin: component.Shooter) && Exists(component.Shooter)) // PARADISE EDIT - Add structure piercing
         {
-            // PARADISE EDIT START - Add structure piercing
-            if (damage != null)
-                component.Damage = damage;
-            // PARADISE EDIT END
+            component.Damage = damage; // PARADISE EDIT - Add structure piercing
 
             if (!deleted)
             {
@@ -100,11 +97,8 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
     }
 
     // PARADISE EDIT START - Add structure piercing
-    private bool TryPenetrate(Entity<ProjectileComponent> projectile, DamageSpecifier? damage, Entity<DamageableComponent?> target)
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, DamageSpecifier damage, Entity<DamageableComponent?> target)
     {
-        if (damage == null)
-            return false;
-
         if (projectile.Comp.PenetrationDamageTypeRequirement == null || target.Comp == null)
             return false;
 
@@ -120,11 +114,11 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
 
             targetThreshold = target.Comp.PiercingThreshold.Float();
 
-            var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmourPiercing, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmourPiercing));
+            var resultThreshold = FixedPoint2.Clamp(targetThreshold - projectile.Comp.Damage.ArmorPenetration, FixedPoint2.Zero, FixedPoint2.Abs(targetThreshold + projectile.Comp.Damage.ArmorPenetration));
 
-            var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmourPiercing);
+            var leftToRemove = FixedPoint2.Max(FixedPoint2.Zero, targetThreshold - projectile.Comp.Damage.ArmorPenetration);
 
-            projectile.Comp.Damage.ArmourPiercing = FixedPoint2.Max(FixedPoint2.Zero, projectile.Comp.Damage.ArmourPiercing - targetThreshold);
+            projectile.Comp.Damage.ArmorPenetration = FixedPoint2.Max(FixedPoint2.Zero, projectile.Comp.Damage.ArmorPenetration - targetThreshold);
 
             projectile.Comp.Damage.DamageDict[requiredDamageType] = FixedPoint2.Max(projectile.Comp.Damage.DamageDict[requiredDamageType] - leftToRemove, FixedPoint2.Zero);
         }

@@ -40,26 +40,26 @@ public sealed partial class AltArmorSystem : EntitySystem
 
         foreach (var type in damage.DamageDict.Keys)//Here we start counting damage for each type
         {
-            if (ent.Comp.DurabilityThresholdDict.ContainsKey(type))
+            if (ent.Comp.SelfDamageReductionByType.ContainsKey(type))
                 CountDifference(
                     resultArmorDamage.DamageDict,
                     damage.DamageDict[type],
-                    ent.Comp.DurabilityThresholdDict[type],
+                    ent.Comp.SelfDamageReductionByType[type],
                     type,
-                    piercing: damage.ArmourPiercing,
+                    piercing: damage.ArmorPenetration,
                     durabilityCoefficient: durabilityCoefficient
                 );//armor damage
             else
                 resultArmorDamage.DamageDict.Add(type, damage.DamageDict[type]);
 
-            if (ent.Comp.ThresholdDict.ContainsKey(type))
+            if (ent.Comp.UserDamageReductionByType.ContainsKey(type))
             {
                 var damageDiff = CountDifference(
                     resultDamage.DamageDict,
                     damage.DamageDict[type],
-                    ent.Comp.ThresholdDict[type],
+                    ent.Comp.UserDamageReductionByType[type],
                     type,
-                    damage.ArmourPiercing,
+                    damage.ArmorPenetration,
                     durabilityCoefficient: durabilityCoefficient
                 );//user damage
 
@@ -69,11 +69,11 @@ public sealed partial class AltArmorSystem : EntitySystem
                     maximalDamageType = type;
                 }
 
-                if (ent.Comp.TransformSpecifierDict.ContainsKey(type) && ent.Comp.ThresholdDict.ContainsKey(ent.Comp.TransformSpecifierDict[type]))
+                if (ent.Comp.TransformSpecifierDict.ContainsKey(type) && ent.Comp.UserDamageReductionByType.ContainsKey(ent.Comp.TransformSpecifierDict[type]))
                     CountDifference(
                         resultDamage.DamageDict,
                         damage.DamageDict[type] - damageDiff,
-                        ent.Comp.ThresholdDict[ent.Comp.TransformSpecifierDict[type]],
+                        ent.Comp.UserDamageReductionByType[ent.Comp.TransformSpecifierDict[type]],
                         ent.Comp.TransformSpecifierDict[type], FixedPoint2.Zero,
                         durabilityCoefficient: durabilityCoefficient
                     ); //Piercing is not applied here
@@ -87,12 +87,12 @@ public sealed partial class AltArmorSystem : EntitySystem
 
         if (maximalDamageType != null)
         {
-            if (damage.ArmourPiercing > ent.Comp.ThresholdDict[maximalDamageType])
+            if (damage.ArmorPenetration > ent.Comp.UserDamageReductionByType[maximalDamageType])
             {
-                resultDamage.ArmourPiercing = damage.ArmourPiercing - ent.Comp.ThresholdDict[maximalDamageType];
+                resultDamage.ArmorPenetration = damage.ArmorPenetration - ent.Comp.UserDamageReductionByType[maximalDamageType];
                 return;
             }
-            resultDamage.ArmourPiercing = 0;
+            resultDamage.ArmorPenetration = 0;
         }
     }
 

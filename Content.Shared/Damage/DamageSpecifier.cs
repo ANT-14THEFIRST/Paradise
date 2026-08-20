@@ -29,7 +29,7 @@ namespace Content.Shared.Damage
 
         // PARADISE EDIT START - Add armour piercing
         [DataField]
-        public FixedPoint2 ArmourPiercing = 0;
+        public FixedPoint2 ArmorPenetration = 0;
         // PARADISE EDIT END
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Content.Shared.Damage
         {
             DamageDict = new(damageSpec.DamageDict);
 
-            ArmourPiercing = damageSpec.ArmourPiercing; // PARADISE EDIT - Add armour piercing
+            ArmorPenetration = damageSpec.ArmorPenetration; // PARADISE EDIT - Add armour piercing
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Content.Shared.Damage
                     var lowerCap = Math.Min(0f, coefficient);
                     var upperCap = Math.Max(1f, coefficient);
 
-                    newValue *= Math.Clamp(coefficient + damageSpec.ArmourPiercing.Float() / 100f, lowerCap, upperCap);
+                    newValue *= Math.Clamp(coefficient + damageSpec.ArmorPenetration.Float() / 100f, lowerCap, upperCap);
 
                     minCoefficient = Math.Min(minCoefficient, coefficient);
                 }
@@ -174,9 +174,9 @@ namespace Content.Shared.Damage
             }
 
             // PARADISE EDIT - Add armour piercing
-            newDamage.ArmourPiercing = FixedPoint2.Max(
-                FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmourPiercing),
-                damageSpec.ArmourPiercing - (1f - minCoefficient) * 100f);
+            newDamage.ArmorPenetration = FixedPoint2.Max(
+                FixedPoint2.Min(FixedPoint2.Zero, damageSpec.ArmorPenetration),
+                damageSpec.ArmorPenetration - (1f - minCoefficient) * 100f);
             // PARADISE EDIT END
 
             return newDamage;
@@ -371,7 +371,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
-            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpec.ArmorPenetration * factor; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -382,7 +382,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value * factor);
             }
-            newDamage.ArmourPiercing = damageSpec.ArmourPiercing * factor; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpec.ArmorPenetration * factor; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -393,7 +393,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
-            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpec.ArmorPenetration / factor; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -405,7 +405,7 @@ namespace Content.Shared.Damage
             {
                 newDamage.DamageDict.Add(entry.Key, entry.Value / factor);
             }
-            newDamage.ArmourPiercing = damageSpec.ArmourPiercing / factor; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpec.ArmorPenetration / factor; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -423,7 +423,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] += entry.Value;
                 }
             }
-            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing + damageSpecB.ArmourPiercing; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpecA.ArmorPenetration + damageSpecB.ArmorPenetration; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -440,7 +440,7 @@ namespace Content.Shared.Damage
                     newDamage.DamageDict[entry.Key] -= entry.Value;
                 }
             }
-            newDamage.ArmourPiercing = damageSpecA.ArmourPiercing - damageSpecB.ArmourPiercing; // PARADISE EDIT - Add armour piercing
+            newDamage.ArmorPenetration = damageSpecA.ArmorPenetration - damageSpecB.ArmorPenetration; // PARADISE EDIT - Add armour piercing
             return newDamage;
         }
 
@@ -464,7 +464,7 @@ namespace Content.Shared.Damage
             }
 
             // PARADISE EDIT START - Add armour piercing
-            if (ArmourPiercing != other.ArmourPiercing)
+            if (ArmorPenetration != other.ArmorPenetration)
                 return false;
             // PARADISE EDIT END
 
