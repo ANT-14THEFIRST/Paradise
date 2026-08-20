@@ -9,7 +9,6 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 using System.Numerics;
 using System.Linq;
-using System.Numerics;
 using System.Text.Json.Serialization;
 
 namespace Content.Shared.Damage
@@ -31,6 +30,9 @@ namespace Content.Shared.Damage
         public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageDict { get; set; } = new();
 
         // PARADISE EDIT START - Add armour piercing
+        /// <summary>
+        /// The remaining amount of armor resistance this damage can bypass.
+        /// </summary>
         [DataField]
         public FixedPoint2 ArmorPenetration = 0;
         // PARADISE EDIT END

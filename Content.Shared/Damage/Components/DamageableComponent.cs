@@ -74,10 +74,11 @@ public sealed partial class DamageableComponent : Component
 
     // PARADISE EDIT START - Add armour piercing
     /// <summary>
-    ///    If a projectile has more damage of a required type + AP than this it will pierce through
+    /// The minimum effective damage required for a projectile to penetrate this entity.
+    /// Effective damage is the projectile's damage of a required type plus its armor penetration.
     /// </summary>
     [DataField]
-    public FixedPoint2 PiercingThreshold = 0;
+    public FixedPoint2 PenetrationThreshold = 0;
     // PARADISE EDIT END
 }
 
