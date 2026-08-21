@@ -29,13 +29,14 @@ public abstract partial class AltArmorComponent : Component
     public Dictionary<ProtoId<DamageTypePrototype>, ProtoId<DamageTypePrototype>> TransformSpecifierDict = new Dictionary<ProtoId<DamageTypePrototype>, ProtoId<DamageTypePrototype>>();
 
     /// <summary>
-    /// Does damage on this entity affect it's protection
+    /// Whether the protection provided by this entity decreases as the entity takes damage.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool DamageAffectsProtection = false;//for now
+    public bool DamageAffectsProtection = false;
 
     /// <summary>
-    /// At which amount of damage taken does this entity looses all it's protection
+    /// The total damage at which the protection provided by this entity is reduced to zero.
+    /// Protection decreases linearly as the entity's damage approaches this value.
     /// </summary>
     [DataField, AutoNetworkedField]
     public int ZeroProtectionThreshold = 100;
