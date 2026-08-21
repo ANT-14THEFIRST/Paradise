@@ -161,9 +161,7 @@ public sealed partial class DamageableSystem
 
         var evt = new DamageDealtEvent(damage, origin, interruptsDoAfters);
         RaiseLocalEvent(ent, ref evt);
-
-        damageDone.ArmorPenetration = damage.ArmorPenetration; // PARADISE EDIT - Add armor piercing
-
+        
         return damage;
     }
 
