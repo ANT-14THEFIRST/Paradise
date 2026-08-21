@@ -8,7 +8,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Paradise.AltArmor;
 
-public sealed partial class AltArmorSystem : EntitySystem
+public abstract partial class AltArmorSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
 

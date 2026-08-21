@@ -4,10 +4,9 @@ using Content.Shared.Inventory;
 
 namespace Content.Shared._Paradise.AltArmor;
 
-public sealed partial class WearableAltArmorSystem : EntitySystem
+public sealed partial class WearableAltArmorSystem : AltArmorSystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private AltArmorSystem _altArmor = default!;
 
     public override void Initialize()
     {
@@ -20,7 +19,7 @@ public sealed partial class WearableAltArmorSystem : EntitySystem
 
     public void OnDamageModify(Entity<WearableAltArmorComponent> ent, ref InventoryRelayedEvent<DamageModifyEvent> args)
     {
-        _altArmor.ModifyDamage(ent.Owner, args.Args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
+        ModifyDamage(ent.Owner, args.Args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
 
         _damageable.TryChangeDamage(ent.Owner, args.Args.Damage);
 
@@ -29,6 +28,6 @@ public sealed partial class WearableAltArmorSystem : EntitySystem
 
     public void OnDamageModifyDirect(Entity<WearableAltArmorComponent> ent, ref DamageModifyEvent args)
     {
-        _altArmor.ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out args.Damage);
+        ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out args.Damage);
     }
 }

@@ -8,7 +8,7 @@ namespace Content.Shared._Paradise.AltArmor.Components;
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
 
-public sealed partial class AltArmorComponent : Component
+public abstract partial class AltArmorComponent : Component
 {
     /// <summary>
     /// The amount of damage blocked for the user, by damage type.
