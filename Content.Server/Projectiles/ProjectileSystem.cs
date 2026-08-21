@@ -101,6 +101,8 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
         if (projectile.Comp.PenetrationDamageTypeRequirement == null || target.Comp == null)
             return false;
 
+        var stopPenetration = false;
+        
         foreach (var requiredDamageType in projectile.Comp.PenetrationDamageTypeRequirement)
         {
             if (!damage.DamageDict.Keys.Contains(requiredDamageType))
