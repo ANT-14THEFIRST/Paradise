@@ -31,7 +31,7 @@ namespace Content.Shared.Damage
 
         // PARADISE EDIT START - Add armour piercing
         /// <summary>
-        /// The remaining amount of armor resistance this damage can bypass.
+        /// The remaining amount of armor resistance this damage can bypass. Can be below zero
         /// </summary>
         [DataField]
         public FixedPoint2 ArmorPenetration = 0;
