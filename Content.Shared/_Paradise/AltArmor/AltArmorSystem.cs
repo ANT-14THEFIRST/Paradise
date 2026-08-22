@@ -33,7 +33,12 @@ public abstract partial class AltArmorSystem : EntitySystem
 
         if (TryComp<DamageableComponent>(ent, out var damageableComp) && ent.Comp.DamageAffectsProtection)
         {
-            durabilityCoefficient = 1 - _damageable.GetTotalDamage(ent.Owner) / ent.Comp.ZeroProtectionThreshold;
+            int zeroThreshold = ent.Comp.ZeroProtectionThreshold;
+
+            if (zeroThreshold <= 0)
+                zeroThreshold = 100; //default value
+
+            durabilityCoefficient = 1 - _damageable.GetTotalDamage(ent.Owner) / zeroThreshold;
 
             durabilityCoefficient = FixedPoint2.Clamp(durabilityCoefficient, 0, 1);
         }
