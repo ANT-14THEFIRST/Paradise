@@ -7,9 +7,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
-using System.Numerics;
-using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace Content.Shared.Damage
 {
