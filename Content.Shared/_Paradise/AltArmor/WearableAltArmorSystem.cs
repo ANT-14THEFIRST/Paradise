@@ -5,7 +5,7 @@ using Content.Shared.Inventory;
 
 namespace Content.Shared._Paradise.AltArmor;
 
-public sealed partial class WearableAltArmorSystem : AltArmorSystem
+public sealed partial class WearableAltArmorSystem : AltArmorSystem<WearableAltArmorComponent>
 {
     [Dependency] private DamageableSystem _damageable = default!;
 

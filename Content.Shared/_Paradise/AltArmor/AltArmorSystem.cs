@@ -8,11 +8,11 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Paradise.AltArmor;
 
-public abstract partial class AltArmorSystem : EntitySystem
+public abstract partial class AltArmorSystem<T> : EntitySystem where T : AltArmorComponent
 {
     [Dependency] private DamageableSystem _damageable = default!;
 
-    public void ModifyDamage(Entity<AltArmorComponent?> ent, DamageSpecifier? damage, out DamageSpecifier resultDamage, out DamageSpecifier resultArmorDamage)
+    public void ModifyDamage(Entity<T?> ent, DamageSpecifier? damage, out DamageSpecifier resultDamage, out DamageSpecifier resultArmorDamage)
     {
         resultDamage = new DamageSpecifier();
         resultArmorDamage = new DamageSpecifier();
