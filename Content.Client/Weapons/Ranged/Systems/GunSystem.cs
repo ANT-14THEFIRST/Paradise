@@ -87,7 +87,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     private bool _spreadOverlay;
 
-    // PARADISE EDIT START - Add reload hotkey
+    // PARADISE EDIT START - Add aiming
     public bool SpreadOverlayIngame
     {
         get => _spreadOverlayIngame;

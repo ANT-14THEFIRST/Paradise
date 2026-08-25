@@ -29,9 +29,6 @@ namespace Content.Client.Input
             common.AddFunction(ContentKeyFunctions.OpenAHelp);
             common.AddFunction(ContentKeyFunctions.TakeScreenshot);
             common.AddFunction(ContentKeyFunctions.TakeScreenshotNoUI);
-            // PARADISE EDIT START - Add reload hotkey
-            common.AddFunction(ContentKeyFunctions.UseGunInHand);
-            // PARADISE EDIT END
             common.AddFunction(ContentKeyFunctions.ToggleFullscreen);
             common.AddFunction(ContentKeyFunctions.MoveStoredItem);
             common.AddFunction(ContentKeyFunctions.RotateStoredItem);
