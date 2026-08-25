@@ -7,6 +7,9 @@ namespace Content.Shared.Input
     {
         public static readonly BoundKeyFunction ToggleKnockdown = "ToggleKnockdown";
         public static readonly BoundKeyFunction UseItemInHand = "ActivateItemInHand";
+        // PARADISE EDIT START - Add reload hotkey
+        public static readonly BoundKeyFunction UseGunInHand = "ActivateGunInHand";
+        // PARADISE EDIT END
         public static readonly BoundKeyFunction AltUseItemInHand = "AltActivateItemInHand";
         public static readonly BoundKeyFunction ActivateItemInWorld = "ActivateItemInWorld";
         public static readonly BoundKeyFunction AltActivateItemInWorld = "AltActivateItemInWorld";
