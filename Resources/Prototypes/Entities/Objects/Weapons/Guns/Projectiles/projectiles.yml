@@ -68,7 +68,7 @@
       fixtures:
         projectile:
           shape: !type:PhysShapeAabb
-            bounds: "-0.1,-0.30,0.1,0.30" #PARADISE EDIT - Weapon overhaul
+            bounds: "-0.1,-0.40,0.1,0.30" #PARADISE EDIT - Weapon overhaul
           hard: false
           mask:
             - Impassable
@@ -85,7 +85,7 @@
     - type: Projectile
       #PARADISE EDIT START - Add aiming
       penetrationDamageTypeRequirement:
-      - Piercing
+        - Piercing
       #PARADISE EDIT END
       impactEffect: BulletImpactEffect
       damage:
