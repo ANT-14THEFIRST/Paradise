@@ -2,7 +2,7 @@
   parent: BaseBullet
   id: PelletShotgunSlug
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 slug)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 slug) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -18,7 +18,7 @@
   parent: BaseBullet
   id: PelletShotgunBeanbag
   categories: [HideSpawnMenu]
-  name: beanbag (18,5x72)  #PARADISE EDIT - Weapon overhaul
+  name: beanbag (18,5x72) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
@@ -34,7 +34,7 @@
   parent: BaseBullet
   id: PelletShotgun
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Projectile
       damage:
@@ -57,7 +57,7 @@
   parent: BaseBulletIncendiary
   id: PelletShotgunIncendiary
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 incendiary)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 incendiary) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Projectile
       damage:
@@ -85,7 +85,7 @@
   parent: BaseBulletPractice
   id: PelletShotgunPractice
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 practice)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 practice) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Projectile
       damage:
@@ -132,7 +132,7 @@
   parent: [SolutionAmmo, SolutionToolVeryTiny, BaseBulletPractice]
   id: PelletShotgunTranquilizer
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 tranquilizer)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 tranquilizer) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Projectile
       damage:
@@ -145,7 +145,7 @@
 - type: entity
   id: PelletShotgunFlare
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 flare)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 flare) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Physics
       bodyType: Dynamic
@@ -192,7 +192,7 @@
   parent: BaseBulletUranium
   id: PelletShotgunUranium
   categories: [HideSpawnMenu]
-  name: pellet (18,5x72 uranium)  #PARADISE EDIT - Weapon overhaul
+  name: pellet (18,5x72 uranium) #PARADISE EDIT - Weapon overhaul
   components:
     - type: Projectile
       damage:

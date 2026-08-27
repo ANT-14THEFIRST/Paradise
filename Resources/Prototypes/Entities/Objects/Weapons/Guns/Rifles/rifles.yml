@@ -305,9 +305,6 @@
       minAngle: -4
       maxAngle: -25
       angleIncrease: -1.25
-    - type: GunAimable
-      minAngle: -8
-      maxAngle: -10
     - type: ItemSlots
       slots:
         gun_magazine:

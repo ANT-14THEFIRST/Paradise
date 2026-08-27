@@ -175,13 +175,13 @@
   parent: Pulse
   id: PulseHeavy
   name: blue high-energy laser ray
-  categories: [ HideSpawnMenu ]
+  categories: [HideSpawnMenu]
   components:
-  - type: HitscanBasicDamage
-    damage:
-      types:
-        Heat: 55
-      armourPiercing: 45
+    - type: HitscanBasicDamage
+      damage:
+        types:
+          Heat: 55
+        armourPiercing: 45
 #PARADISE EDIT END
 
 - type: entity

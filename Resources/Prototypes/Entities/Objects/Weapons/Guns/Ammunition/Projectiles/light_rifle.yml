@@ -30,7 +30,7 @@
     - type: Projectile
       damage:
         types:
-        #PARADISE EDIT - Weapon overhaul
+          #PARADISE EDIT - Weapon overhaul
           Piercing: 16
           Heat: 3
         armorPenetration: 7
