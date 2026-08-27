@@ -1,0 +1,23 @@
+- type: entity
+  id: BulletPistolHP
+  name: bullet (9x20 HP)
+  parent: BaseBullet
+  categories: [HideSpawnMenu]
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Piercing: 27
+        armorPenetration: -10
+
+- type: entity
+  id: BulletPistolAP
+  name: bullet (9x20 AP)
+  parent: BaseBullet
+  categories: [HideSpawnMenu]
+  components:
+    - type: Projectile
+      damage:
+        types:
+          Piercing: 20
+        armorPenetration: 15
