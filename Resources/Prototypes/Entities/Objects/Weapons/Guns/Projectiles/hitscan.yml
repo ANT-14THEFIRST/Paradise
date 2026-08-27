@@ -56,7 +56,7 @@
     - type: HitscanBasicDamage
       damage:
         types:
-          Heat: 26 #PARADISE EDIT - Weapon overhaul
+          Heat: 27 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   parent: BasicHitscan
@@ -67,7 +67,7 @@
     - type: HitscanBasicDamage
       damage:
         types:
-          Heat: 17
+          Heat: 28 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   parent: BasicHitscan
