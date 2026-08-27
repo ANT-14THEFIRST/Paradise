@@ -2,11 +2,11 @@
   parent: BaseCartridge
   id: TaserDartCartridge
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
-    state: tip
-  - type: Tag
-    tags:
-      - TaserDart
-  - type: CartridgeAmmo
-    proto: TaserDart
+    - type: Sprite
+      sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+      state: tip
+    - type: Tag
+      tags:
+        - TaserDart
+    - type: CartridgeAmmo
+      proto: TaserDart
