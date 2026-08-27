@@ -8,7 +8,7 @@
       damage:
         types:
           Piercing: 33
-        armorPenetration: -7
+        armorPenetration: 4
 
 - type: entity
   id: BulletLightRifleAP
