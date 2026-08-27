@@ -154,11 +154,17 @@
   id: BoxMagazineShotgun
   description: A box full of (18,5x72 pellet) ammo drums. #PARADISE EDIT - Weapon overhaul
   components:
+    #PARADISE EDIT START - Weapon overhaul
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,2,2
+    #PARADISE EDIT END
     - type: EntityTableContainerFill
       containers:
         storagebase:
           id: MagazineShotgun
-          amount: 4
+          amount: 1 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: box of (18,5x72 beanbag) ammo drums #PARADISE EDIT - Weapon overhaul
@@ -166,11 +172,17 @@
   id: BoxMagazineShotgunBeanbag
   description: A box full of (18,5x72 beanbag) ammo drums. #PARADISE EDIT - Weapon overhaul
   components:
+    #PARADISE EDIT START - Weapon overhaul
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,2,2
+    #PARADISE EDIT END
     - type: EntityTableContainerFill
       containers:
         storagebase:
           id: MagazineShotgunBeanbag
-          amount: 4
+          amount: 1 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: box of (18,5x72 slug) ammo drums #PARADISE EDIT - Weapon overhaul
@@ -178,11 +190,17 @@
   id: BoxMagazineShotgunSlug
   description: A box full of (18,5x72 slug) ammo drums. #PARADISE EDIT - Weapon overhaul
   components:
+    #PARADISE EDIT START - Weapon overhaul
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,2,2
+    #PARADISE EDIT END
     - type: EntityTableContainerFill
       containers:
         storagebase:
           id: MagazineShotgunSlug
-          amount: 4
+          amount: 1 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: box of (18,5x72 incendiary) ammo drums #PARADISE EDIT - Weapon overhaul
@@ -190,11 +208,17 @@
   id: BoxMagazineShotgunIncendiary
   description: A box full of (18,5x72 incendiary) ammo drums. #PARADISE EDIT - Weapon overhaul
   components:
+    #PARADISE EDIT START - Weapon overhaul
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,2,2
+    #PARADISE EDIT END
     - type: EntityTableContainerFill
       containers:
         storagebase:
           id: MagazineShotgunIncendiary
-          amount: 4
+          amount: 1 #PARADISE EDIT - Weapon overhaul
 
 # Rifle
 - type: entity
