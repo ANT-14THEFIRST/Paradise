@@ -788,7 +788,7 @@
   name: energy shotgun
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseSecurityContraband, GasTankBase] #PARADISE EDIT - Weapon overhaul
   id: WeaponEnergyShotgun
-  description: Basically a plasma cannon that throws EM-contained clouds of overheated gas. Has fairly short effective distance but that doesn't matter much on close ranges. #PARADISE EDIT - Weapon overhaul
+  description: Basically a plasma cannon that throws EM-contained clouds of overheated gas. Has fairly short effective distance but that doesn't matter much on close ranges. Requires pure phorone to work. #PARADISE EDIT - Weapon overhaul
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
@@ -811,7 +811,8 @@
     - type: Clothing
       sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
     - type: Gun
-      fireRate: 1 #PARADISE EDIT START - Weapon overhaul
+      fireRate: 1 #PARADISE EDIT - Weapon overhaul
+      projectileSpeed: 30 #PARADISE EDIT - Weapon overhaul
       soundGunshot:
         path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
     - type: BatteryAmmoProvider

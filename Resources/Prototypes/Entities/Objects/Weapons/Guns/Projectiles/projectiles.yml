@@ -296,13 +296,11 @@
             - BulletImpassable
         fly-by: *flybyfixture
     - type: Ammo
-    - type: StaminaDamageOnCollide
-      damage: 33
     - type: Projectile
       impactEffect: BulletImpactEffectDisabler
       damage:
         types:
-          Heat: 0
+          Shock: 3 #PARADISE EDIT - Stun Overhaul
       soundHit:
         collection: WeakHit
       forceSound: true
@@ -1150,13 +1148,11 @@
             - BulletImpassable
         fly-by: *flybyfixture
     - type: Ammo
-    - type: StaminaDamageOnCollide
-      damage: 15
     - type: Projectile
       impactEffect: BulletImpactEffectDisabler
       damage:
         types:
-          Heat: 0
+          Shock: 2 #PARADISE EDIT - Stun Overhaul
       soundHit:
         collection: WeakHit
       forceSound: true
@@ -1292,7 +1288,7 @@
       fixtures:
         projectile:
           shape: !type:PhysShapeAabb
-            bounds: "-0.15,-0.3,0.15,0.3"
+            bounds: "-0.3,-0.5,0.3,0.5" #PARADISE EDIT - Weapon overhaul
           hard: false
           mask:
             - Opaque
@@ -1304,7 +1300,7 @@
       impactEffect: BulletImpactEffectOrangeDisabler
       damage:
         types:
-          Heat: 27 #PARADISE EDIT - Weapon overhaul
+          Heat: 33 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: wide laser barrage
@@ -1325,8 +1321,8 @@
   components:
     - type: ProjectileSpread
       proto: BulletLaser
-      count: 4
-      spread: 8 #PARADISE EDIT - Weapon overhaul
+      count: 3 #PARADISE EDIT - Weapon overhaul
+      spread: 5 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: disabling laser barrage
@@ -1408,21 +1404,14 @@
       damage:
         types:
           Piercing: 2
-    - type: StunOnCollide #somewhat mirror to taser stats, meant to be tot 'sidegrade'
-      stunAmount: 0
-      knockdownAmount: 2.5
-      slowdownAmount: 2.5
-      walkSpeedModifier: 0.2
-      sprintSpeedModifier: 0.2
-      drop: false
     - type: StaminaDamageOnCollide #additional stam damage to make repeated pushups less of a viable counter
       damage: 45
     - type: Solution
       solution:
-        maxVol: 1.5
+        maxVol: 2.5 #PARADISE EDIT - Stun overhaul
         reagents:
           - ReagentId: Toxin
-            Quantity: 1.5
+            Quantity: 2.5 #PARADISE EDIT - Stun overhaul
     - type: SolutionInjectOnProjectileHit
-      transferAmount: 1.5
+      transferAmount: 2.5 #PARADISE EDIT - Stun overhaul
       solution: ammo
