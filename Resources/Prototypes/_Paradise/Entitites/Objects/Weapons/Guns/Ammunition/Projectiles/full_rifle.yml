@@ -55,8 +55,8 @@
     - type: Projectile
       damage:
         types:
-          Piercing: 28
-          Heat: 10
+          Piercing: 32
+          Heat: 6
         armorPenetration: 5
     - type: IgniteOnCollide
-      fireStacks: 0.75
+      fireStacks: 0.5

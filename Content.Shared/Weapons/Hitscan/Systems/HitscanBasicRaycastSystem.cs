@@ -1,9 +1,7 @@
-using Content.Shared._Paradise.Weapons.Components;
+using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage.Components;
 using Content.Shared.Database;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Standing;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -13,7 +11,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
-using System.Numerics;
 
 namespace Content.Shared.Weapons.Hitscan.Systems;
 
@@ -23,7 +20,6 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ISharedAdminLogManager _log = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!; // PARADISE EDIT - Add aiming
 
     [Dependency] private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
@@ -38,8 +34,7 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
     {
         var shooter = args.Shooter ?? args.Gun;
         var mapCords = _transform.ToMapCoordinates(args.FromCoordinates);
-        var ray = new CollisionRay(mapCords.Position, args.ShotDirection, (int) ent.Comp.CollisionMask);
-        var gun = args.Gun; // PARADISE EDIT - Add aiming
+        var ray = new CollisionRay(mapCords.Position, args.ShotDirection, (int)ent.Comp.CollisionMask);
         var rayCastResults = _physics.IntersectRay(mapCords.MapId, ray, ent.Comp.MaxDistance, shooter, false);
 
         var target = args.Target;
@@ -50,7 +45,7 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
             : rayCastResults.FirstOrNull(hit => hit.HitEntity == target
-                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true || ShouldIgnoreRequireTarget(hit.HitEntity, gun, shooter));// PARADISE EDIT - Add aiming
+                                                || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true);
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 
@@ -150,24 +145,4 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
             }, Filter.Pvs(fromCoordinates, entityMan: EntityManager));
         }
     }
-
-    // PARADISE EDIT START - Add aiming
-    private bool ShouldIgnoreRequireTarget(EntityUid target, EntityUid gun, EntityUid user)
-    {
-        if (!TryComp<RequireProjectileTargetComponent>(target, out var requireTargetComp))
-            return false;
-
-        if (!TryComp<MobStateComponent>(target, out var statesComp) || (statesComp.CurrentState != Mobs.MobState.Alive))
-            return false;
-
-        if (TryComp<StandingStateComponent>(user, out var standingState) && _standing.IsDown((user, standingState)))
-            if (TryComp<StandingStateComponent>(target, out var standingStateTarget) && _standing.IsDown((target, standingStateTarget)))
-                return true;
-
-        if (!TryComp<GunAimableComponent>(gun, out var aimableComp) || !aimableComp.IsAimed)
-            return false;
-
-        return true;
-    }
-    // PARADISE EDIT END
 }
