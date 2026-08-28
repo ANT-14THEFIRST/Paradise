@@ -177,7 +177,7 @@
   name: C-20r assault rifle
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponSubMachineGunC20r
-  description: A well-known bullpup assault rifle with state-of-the-art recoil compensation system. Uses classic 6,3x47 intermediate cartridge.
+  description: A well-known bullpup assault rifle featuring state-of-the-art recoil compensation system. Uses classic 6,3x47 intermediate cartridge.
   components:
     - type: Sprite
       sprite: Objects/Weapons/Guns/SMGs/c20r.rsi

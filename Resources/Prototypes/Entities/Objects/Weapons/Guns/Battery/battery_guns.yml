@@ -886,6 +886,6 @@
       minAngle: 0
       maxAngle: 0
     - type: Gun
-      fireRate: 2
+      fireRate: 1 #PARADISE EDIT START - Weapon overhaul #With my tweaks laser cannon itself stopped being trash, there's no point in doubling the DPS
       minAngle: 1
       maxAngle: 2
