@@ -8,7 +8,7 @@
       damage:
         types:
           Piercing: 29
-        armorPenetration: 18
+        armorPenetration: 22
 
 - type: entity
   id: BulletRifleHP
