@@ -8,4 +8,4 @@
       damage:
         types:
           Piercing: 46
-        armorPenetration: -10
+        armorPenetration: -3
