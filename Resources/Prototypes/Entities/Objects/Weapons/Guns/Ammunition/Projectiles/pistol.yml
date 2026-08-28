@@ -7,7 +7,7 @@
     - type: Projectile
       damage:
         types:
-          Piercing: 20 #PARADISE EDIT - Weapon overhaul
+          Piercing: 21 #PARADISE EDIT - Weapon overhaul
         armorPenetration: 5 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
