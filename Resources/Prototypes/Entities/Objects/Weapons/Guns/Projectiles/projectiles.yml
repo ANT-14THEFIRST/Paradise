@@ -300,7 +300,7 @@
       impactEffect: BulletImpactEffectDisabler
       damage:
         types:
-          Shock: 3 #PARADISE EDIT - Stun Overhaul
+          Shock: 3.5 #PARADISE EDIT - Stun Overhaul
       soundHit:
         collection: WeakHit
       forceSound: true
@@ -1152,7 +1152,7 @@
       impactEffect: BulletImpactEffectDisabler
       damage:
         types:
-          Shock: 2 #PARADISE EDIT - Stun Overhaul
+          Shock: 2.3 #PARADISE EDIT - Stun Overhaul
       soundHit:
         collection: WeakHit
       forceSound: true
@@ -1300,7 +1300,7 @@
       impactEffect: BulletImpactEffectOrangeDisabler
       damage:
         types:
-          Heat: 33 #PARADISE EDIT - Weapon overhaul
+          Heat: 32 #PARADISE EDIT - Weapon overhaul
 
 - type: entity
   name: wide laser barrage
