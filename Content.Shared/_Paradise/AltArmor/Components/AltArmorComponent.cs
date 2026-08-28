@@ -5,8 +5,9 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Paradise.AltArmor.Components;
 
+[RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
-public abstract partial class AltArmorComponent : Component
+public partial class AltArmorComponent : Component
 {
     /// <summary>
     /// The amount of damage blocked for the user, by damage type.
