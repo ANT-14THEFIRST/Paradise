@@ -8,7 +8,7 @@
       damage:
         types:
           Piercing: 27
-        armorPenetration: -10
+        armorPenetration: -5
 
 - type: entity
   id: BulletPistolAP
