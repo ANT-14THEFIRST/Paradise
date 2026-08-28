@@ -26,6 +26,14 @@ namespace Content.Shared.Damage
         [DataField("types")]
         public Dictionary<ProtoId<DamageTypePrototype>, FixedPoint2> DamageDict { get; set; } = new();
 
+        // PARADISE EDIT START - Add armour piercing
+        /// <summary>
+        /// The remaining amount of armor resistance this damage can bypass. Can be below zero
+        /// </summary>
+        [DataField]
+        public FixedPoint2 ArmorPenetration = 0;
+        // PARADISE EDIT END
+
         /// <summary>
         ///     Returns a sum of the damage values.
         /// </summary>

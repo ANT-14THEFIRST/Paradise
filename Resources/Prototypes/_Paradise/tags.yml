@@ -1,0 +1,8 @@
+- type: Tag
+  id: ArmInstallationRight
+
+- type: Tag
+  id: ArmInstallationLeft
+
+- type: Tag
+  id: Synthetic

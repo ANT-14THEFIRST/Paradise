@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.PDA.Ringer;
 using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
@@ -10,8 +9,10 @@ using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.Traitor.Uplink;
 
@@ -23,11 +24,13 @@ public sealed partial class UplinkSystem : EntitySystem
     [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private RingerSystem _ringer = default!;
+    [Dependency] private TagSystem _tag = default!; //PARADISE EDIT - Fallback uplink options
 
     public static readonly EntProtoId<StoreComponent> TraitorUplinkStore = "StorePresetRemoteUplink";
     public static readonly ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype = "Telecrystal";
     private static readonly EntProtoId FallbackUplinkImplant = "UplinkImplant";
     private static readonly ProtoId<ListingPrototype> FallbackUplinkCatalog = "UplinkUplinkImplanter";
+    private static readonly ProtoId<TagPrototype> UnimplantableTag = "Unimplantable";//PARADISE EDIT - Fallback uplink options
 
     public override void Initialize()
     {
@@ -84,10 +87,12 @@ public sealed partial class UplinkSystem : EntitySystem
             return AddUplinkResult.Pda;
         }
 
-        if (TryImplantUplink(user, storeEntity, balance, giveDiscounts))
-        {
-            return AddUplinkResult.Implant;
-        }
+        //PARADISE EDIT START - Fallback uplink options
+        var result = TryImplantUplink(user, storeEntity, balance, giveDiscounts); 
+
+        if (result != AddUplinkResult.Failure)
+            return result;
+        //PARADISE EDIT END
 
         Del(storeEntity);
         return AddUplinkResult.Failure;
@@ -159,18 +164,31 @@ public sealed partial class UplinkSystem : EntitySystem
     /// <summary>
     /// Implant an uplink as a fallback measure if the traitor had no PDA
     /// </summary>
-    public bool TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts)
+    public AddUplinkResult TryImplantUplink(EntityUid user, EntityUid storeEntity, FixedPoint2 balance, bool giveDiscounts) //PARADISE EDIT - Fallback uplink options
     {
         if (!ProtoMan.Resolve(FallbackUplinkCatalog, out var catalog))
-            return false;
+            return AddUplinkResult.Failure; //PARADISE EDIT - Fallback uplink options
 
         if (!catalog.Cost.TryGetValue(TelecrystalCurrencyPrototype, out var cost))
-            return false;
+            return AddUplinkResult.Failure; //PARADISE EDIT - Fallback uplink options
 
         if (balance < cost) // Can't use Math functions on FixedPoint2
             balance = 0;
         else
             balance = balance - cost;
+
+        //PARADISE EDIT START - Fallback uplink options
+        if (_tag.HasTag(user, UnimplantableTag))
+        {
+            var fallbackEv = new FallbackUplinkRequiredEvent(user, balance, giveDiscounts, TelecrystalCurrencyPrototype, FallbackUplinkCatalog);
+            RaiseLocalEvent(user, ref fallbackEv);
+
+            if (fallbackEv.Handled)
+                return AddUplinkResult.Hidden;
+
+            return AddUplinkResult.Failure;
+        }
+        //PARADISE EDIT END
 
         SetUplink(user, storeEntity, balance, giveDiscounts);
         var implant = _subdermalImplant.AddImplant(user, FallbackUplinkImplant);
@@ -178,10 +196,10 @@ public sealed partial class UplinkSystem : EntitySystem
         if (!HasComp<RemoteStoreComponent>(implant))
         {
             Log.Error($"Implant does not have the store component {implant}");
-            return false;
+            return AddUplinkResult.Failure; //PARADISE EDIT - Fallback uplink options
         }
 
-        return true;
+        return AddUplinkResult.Implant; //PARADISE EDIT - Fallback uplink options
     }
 
     /// <summary>
@@ -218,4 +236,16 @@ public enum AddUplinkResult
     Pda,
     Implant,
     Failure,
+    Hidden, //PARADISE EDIT - Fallback uplink options
 }
+
+//PARADISE EDIT START - Fallback uplink options
+[ByRefEvent]
+public record struct FallbackUplinkRequiredEvent(
+    EntityUid Owner,
+    FixedPoint2 Balance,
+    bool GiveDiscounts,
+    ProtoId<CurrencyPrototype> TelecrystalCurrencyPrototype,
+    ProtoId<ListingPrototype> FallbackUplinkCatalog,
+    bool Handled = false);
+//PARADISE EDIT END

@@ -1,3 +1,4 @@
+using Content.Shared._Paradise.SiliconComponents;
 using Content.Shared.Camera;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Inventory;
@@ -142,7 +143,7 @@ public sealed class CanSeeAttemptEvent : CancellableEntityEventArgs, IInventoryR
     public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
 }
 
-public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent
+public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEvent, ISiliconPartRelayEvent //PARADISE EDIT - Silicon update
 {
     /// <summary>
     ///     Time to subtract from any temporary blindness sources.
@@ -150,4 +151,6 @@ public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEven
     public TimeSpan Protection;
 
     public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
+
+    PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //PARADISE EDIT - Silicon update
 }

@@ -1,3 +1,4 @@
+using Content.Shared._Paradise.SiliconComponents;
 using Content.Shared.Inventory;
 
 namespace Content.Shared.Flash;
@@ -7,9 +8,11 @@ namespace Content.Shared.Flash;
 /// Raised on the target hit by the flash and their inventory items.
 /// </summary>
 [ByRefEvent]
-public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, EntityUid? Used, bool Cancelled = false) : IInventoryRelayEvent
+public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, EntityUid? Used, bool Cancelled = false) : IInventoryRelayEvent, ISiliconPartRelayEvent//PARADISE EDIT - Silicon update
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.HEAD | SlotFlags.EYES | SlotFlags.MASK;
+
+    PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //PARADISE EDIT - Silicon update
 }
 
 /// <summary>
