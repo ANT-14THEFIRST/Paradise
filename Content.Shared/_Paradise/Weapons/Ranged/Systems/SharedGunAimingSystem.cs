@@ -94,6 +94,8 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
     private void OnUnequip(Entity<GunAimableComponent> ent, ref GotUnequippedHandEvent args)
     {
         ent.Comp.IsAimed = false;
+        _gun.RefreshModifiers(ent.Owner);
+
         Dirty(ent);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
@@ -101,6 +103,8 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
     private void OnDrop(Entity<GunAimableComponent> ent, ref DroppedEvent args)
     {
         ent.Comp.IsAimed = false;
+        _gun.RefreshModifiers(ent.Owner);
+
         Dirty(ent);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
@@ -108,6 +112,8 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
     private void OnDeselect(Entity<GunAimableComponent> ent, ref HandDeselectedEvent args)
     {
         ent.Comp.IsAimed = false;
+        _gun.RefreshModifiers(ent.Owner);
+
         Dirty(ent);
         _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
     }
