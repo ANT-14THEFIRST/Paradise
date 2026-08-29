@@ -115,6 +115,11 @@ public sealed partial class PowerCellSystem : EntitySystem
 
     private void OnCellSlotExamined(Entity<PowerCellSlotComponent> ent, ref ExaminedEvent args)
     {
+        //PARADISE EDIT START - PowerCell visibility tweaks
+        if (!ent.Comp.ShowOnExamine)
+            return;
+        //PARADISE EDIT END
+
         if (TryGetBatteryFromSlot(ent.AsNullable(), out var battery))
             OnBatteryExamined(battery.Value, ref args);
         else

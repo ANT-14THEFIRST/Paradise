@@ -7,7 +7,7 @@
     - type: Item
       storedRotation: -90
     - type: Sprite
-      sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+      sprite: _Paradise/Objects/Specific/Robotics/Synthetic/parts.rsi
       state: biocapsule
 
 - type: entity
@@ -19,7 +19,7 @@
     - type: Item
       storedRotation: -90
     - type: Sprite
-      sprite: SS220/Objects/Specific/Robotics/Synthetic/posibrainsynth.rsi
+      sprite: _Paradise/Objects/Specific/Robotics/Synthetic/posibrainsynth.rsi
       state: posibrain-occupied
     - type: TypingIndicator
       proto: robot

@@ -23,5 +23,9 @@ public sealed partial class PowerCellSlotComponent : Component
     [DataField, AutoNetworkedField]
     public bool FitsInCharger = true;
 
+    //PARADISE EDIT START - PowerCell visibility tweaks
+    [DataField, AutoNetworkedField]
+    public bool ShowOnExamine = true;
+    //PARADISE EDIT END
 }
 

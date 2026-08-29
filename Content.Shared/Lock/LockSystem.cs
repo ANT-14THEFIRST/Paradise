@@ -74,12 +74,20 @@ public sealed partial class LockSystem : EntitySystem
             return;
 
         // Only attempt an unlock by default on Activate
-        if (lockComp.Locked && lockComp.UnlockOnClick)
+        //PARADISE EDIT START - Lock system tweaks
+        if (lockComp.Locked &&
+            lockComp.UnlockOnClick &&
+            (!lockComp.OnlyOwnerCanUnlock || args.Target == args.User))
+        //PARADISE EDIT END
         {
             args.Handled = true;
             TryUnlock(uid, args.User, lockComp);
         }
-        else if (!lockComp.Locked && lockComp.LockOnClick)
+        //PARADISE EDIT START - Lock system tweaks
+        else if (!lockComp.Locked &&
+            lockComp.LockOnClick &&
+            (!lockComp.OnlyOwnerCanUnlock || args.Target == args.User))
+        //PARADISE EDIT END
         {
             args.Handled = true;
             TryLock(uid, args.User, lockComp);
@@ -360,7 +368,14 @@ public sealed partial class LockSystem : EntitySystem
 
     private void AddToggleLockVerb(EntityUid uid, LockComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
-        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || !component.ShowLockVerbs)
+        //PARADISE EDIT START - Lock system tweaks
+        if (!args.CanAccess ||
+            !args.CanInteract ||
+            !args.CanComplexInteract ||
+            !component.ShowLockVerbs ||
+            component.OnlyOwnerCanUnlock &&
+            args.Target != args.User)
+        //PARADISE EDIT END
             return;
 
         AlternativeVerb verb = new()

@@ -31,7 +31,8 @@ public sealed partial class SiliconComponentsSystem : SharedSiliconComponentsSys
         if (!_container.Insert(uplinkEnt, ent.Comp.ModuleContainer))
             return;
 
-        if (_uplink.TryAddEntityUplink(ent, args.Balance, out var generatedCode, uplinkEnt, uplinkEnt, args.GiveDiscounts, false))
-            args.Handled = true;
+        _uplink.SetUplink(ent, uplinkEnt, args.Balance, args.GiveDiscounts);
+        //if (_uplink.TryAddEntityUplink(ent, args.Balance, out var generatedCode, uplinkEnt, uplinkEnt, args.GiveDiscounts, false))
+        args.Handled = true;
     }
 }

@@ -1,8 +1,7 @@
 using Content.Shared._Paradise.AltArmor;
-using Content.Shared._Paradise.ArmorBlock;
 using Content.Shared.Damage.Systems;
 
-namespace Content.Shared.SS220.ArmorBlock;
+namespace Content.Shared._Paradise.ArmorBlock;
 
 public sealed partial class ArmorBlockSystem : AltArmorSystem<ArmorBlockComponent>
 {

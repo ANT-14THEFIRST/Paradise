@@ -9,3 +9,15 @@
   youngAge: 0 #You can't tell a synth's age by it's appearance
   oldAge: 9999
   maxAge: 99
+
+- type: species
+  id: SynthHuman
+  name: species-name-fba
+  roundStart: true
+  prototype: MobSyntheticHuman
+  defaultSkinTone: "#ffffff"
+  dollPrototype: AppearanceSynth
+  skinColoration: Hues
+  youngAge: 0
+  oldAge: 9999
+  maxAge: 99

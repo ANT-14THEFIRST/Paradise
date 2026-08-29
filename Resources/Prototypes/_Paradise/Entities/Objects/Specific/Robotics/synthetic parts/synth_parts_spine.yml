@@ -12,7 +12,7 @@
       minDamageToMalfunction: 40
       maxDamageToRemainFunctional: 60
     - type: Sprite
-      sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+      sprite: _Paradise/Objects/Specific/Robotics/Synthetic/parts.rsi
       state: frame_steel
 
 - type: entity
@@ -39,7 +39,7 @@
               - !type:DoActsBehavior
                 acts: ["Destruction"]
     - type: Sprite
-      sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+      sprite: _Paradise/Objects/Specific/Robotics/Synthetic/parts.rsi
       state: frame_carbon
 
 - type: entity
@@ -66,5 +66,5 @@
               - !type:DoActsBehavior
                 acts: ["Destruction"]
     - type: Sprite
-      sprite: SS220/Objects/Specific/Robotics/Synthetic/parts.rsi
+      sprite: _Paradise/Objects/Specific/Robotics/Synthetic/parts.rsi
       state: frame_plasteel

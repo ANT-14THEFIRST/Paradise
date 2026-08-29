@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._Paradise.InternalComponentDamageRelay;
 
 [RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
+[NetworkedComponent]
 
 public sealed partial class InternalComponentDamageRelayComponent : AltArmorComponent
 {

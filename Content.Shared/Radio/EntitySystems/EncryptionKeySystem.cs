@@ -163,6 +163,11 @@ public sealed partial class EncryptionKeySystem : EntitySystem
 
     private void OnHolderExamined(EntityUid uid, EncryptionKeyHolderComponent component, ExaminedEvent args)
     {
+        //PARADISE EDIT START - EncryptionKey visibility tweaks
+        if (!component.ShowOnExamine)
+            return;
+        //PARADISE EDIT END
+
         if (!args.IsInDetailsRange)
             return;
 

@@ -41,7 +41,7 @@ public sealed partial class UplinkSystem : EntitySystem
 
     private void OnRemoteStoreImplanted(Entity<RemoteStoreComponent> entity, ref ImplantImplantedEvent args)
     {
-        if (_mind.GetMind(args.Implanted) is not { } mind )
+        if (_mind.GetMind(args.Implanted) is not { } mind)
             return;
 
         var storeEnumerator = EntityQueryEnumerator<RingerAccessUplinkComponent, StoreComponent>();
@@ -138,7 +138,7 @@ public sealed partial class UplinkSystem : EntitySystem
     /// <summary>
     /// Configure TC for the uplink
     /// </summary>
-    private void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts)
+    public void SetUplink(EntityUid user, EntityUid store, FixedPoint2 balance, bool giveDiscounts) //PARADISE EDIT - Fallback uplink options
     {
         if (!_mind.TryGetMind(user, out var mind, out _))
             return;

@@ -49,4 +49,9 @@ public sealed partial class EncryptionKeyHolderComponent : Component
     /// </summary>
     [ViewVariables]
     public string? DefaultChannel;
+
+    //PARADISE EDIT START - EncryptionKey visibility tweaks
+    [DataField]
+    public bool ShowOnExamine = true;
+    //PARADISE EDIT END
 }

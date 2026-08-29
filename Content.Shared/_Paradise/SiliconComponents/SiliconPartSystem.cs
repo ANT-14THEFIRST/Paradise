@@ -60,9 +60,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
         SubscribeLocalEvent<MovementSpeedModifyingPartComponent, ComponentGotRemovedFromUser>(OnMovementModifierRemoved);
 
         SubscribeLocalEvent<SiliconPartComponent, MindAddedMessage>(OnBrainMindAdded);
-        SubscribeLocalEvent<SiliconComponentsComponent, MindAddedMessage>(OnSiliconMindAdded);
 
-        SubscribeLocalEvent<DamabeableSiliconPartComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<DamabeableSiliconPartComponent, DamageDealtEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<DamabeableSiliconPartComponent, ComponentGotInsertedIntoUser>(OnDamageableInserted);
     }
@@ -77,7 +76,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
         UpdateDamageStatus(ent);
     }
 
-    private void OnDamageChanged(Entity<DamabeableSiliconPartComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageChanged(Entity<DamabeableSiliconPartComponent> ent, ref DamageDealtEvent args)
     {
         UpdateDamageStatus(ent);
     }
@@ -203,7 +202,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
             _player.TryGetSessionById(mind.UserId, out var session))
-            _mind.Visit(mindId, ownerValidated, mind: mind);
+            _mind.TransferTo(mindId, ownerValidated, mind: mind);
 
     }
 
@@ -215,11 +214,8 @@ public sealed partial class SiliconPartSystem : EntitySystem
         if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
             return;
 
-        if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
-            _player.TryGetSessionById(mind.UserId, out var session) &&
-            TryComp<VisitingMindComponent>(args.Owner, out var ownerVisitComp) &&
-            ownerVisitComp.MindId == mindId)
-            _mind.UnVisit(mindId);
+        if (_mind.TryGetMind(args.Owner, out var mindId, out var mind))
+            _mind.TransferTo(mindId, ent.Owner, mind: mind);
     }
 
     private void OnBrainMindAdded(Entity<SiliconPartComponent> ent, ref MindAddedMessage args)
@@ -236,22 +232,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
 
         if (_mind.TryGetMind(ent.Owner, out var mindId, out var mind) &&
             _player.TryGetSessionById(mind.UserId, out var session))
-            _mind.Visit(mindId, ownerValidated, mind: mind);
-    }
-
-    private void OnSiliconMindAdded(Entity<SiliconComponentsComponent> ent, ref MindAddedMessage args)
-    {
-        if (!ent.Comp.Parts.TryGetValue(PartType.Brain, out var brainContainer))
-            return;
-
-        if (brainContainer.ContainedEntity is not { Valid: true } brainValidated || !HasComp<BrainComponent>(brainValidated))
-            return;
-
-        if (!_mind.TryGetMind(ent.Owner, out var mindId, out var mind) ||
-            !_player.TryGetSessionById(mind.UserId, out var session))
-            return;
-
-        _mind.TransferTo(mindId, brainValidated, mind: mind);
+            _mind.TransferTo(mindId, ownerValidated, mind: mind);
     }
 
     private void OnOpticsInserted(Entity<ActiveOpticsComponent> ent, ref ComponentGotInsertedIntoUser args)

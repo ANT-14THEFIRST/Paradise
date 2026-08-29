@@ -120,6 +120,11 @@ public sealed partial class LockComponent : Component
     [AutoNetworkedField]
     public TimeSpan UnlockTime;
 
+    //PARADISE EDIT START - Lock system tweaks
+    [DataField, AutoNetworkedField]
+    public bool OnlyOwnerCanUnlock = false;
+    //PARADISE EDIT END
+
     /// <summary>
     /// Whether this lock can be locked again after being unlocked.
     /// </summary>

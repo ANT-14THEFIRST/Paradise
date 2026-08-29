@@ -1,4 +1,3 @@
-using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
@@ -83,7 +82,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconEjectBatteryBuiMessage>(OnEjectBatteryBuiMessage);
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconRemoveModuleBuiMessage>(OnRemoveModuleBuiMessage);
 
-        SubscribeLocalEvent<SiliconComponentsComponent, DamageChangedEvent>(OnDamageChanged);
+        SubscribeLocalEvent<SiliconComponentsComponent, DamageDealtEvent>(OnDamageChanged);
 
         SubscribeLocalEvent<SiliconComponentsComponent, FlashAttemptEvent>(RefRelayPartEvent);
         SubscribeLocalEvent<SiliconComponentsComponent, GetEyeProtectionEvent>(RefRelayPartEvent);
@@ -392,7 +391,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterEventArgs);
     }
 
-    private void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageChangedEvent args)
+    private void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageDealtEvent args)
     {
         _parts.RefreshAlerts(ent.AsNullable());
     }
