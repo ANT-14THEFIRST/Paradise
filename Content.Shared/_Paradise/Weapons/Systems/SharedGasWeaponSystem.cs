@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._Paradise.Weapons.Ranged.Systems;
 
-public abstract class SharedGasWeaponSystem : EntitySystem
+public abstract partial class SharedGasWeaponSystem : EntitySystem
 {
     [Dependency] protected SharedContainerSystem _container = default!;
     [Dependency] protected SharedPopupSystem _popup = default!;
