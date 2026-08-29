@@ -26,6 +26,7 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         SubscribeLocalEvent<GunAimableComponent, GotUnequippedHandEvent>(OnUnequip);
         SubscribeLocalEvent<GunAimableComponent, DroppedEvent>(OnDrop);
         SubscribeLocalEvent<GunAimableComponent, HandDeselectedEvent>(OnDeselect);
+        SubscribeLocalEvent<GunAimableComponent, HeldRelayedEvent<CombatModeOffEvent>>(OnCombatOff);
     }
 
     private void OnAimStatusChanged(AimStatusChangeAttemptEvent message, EntitySessionEventArgs args)
@@ -62,7 +63,8 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         if (!_gun.TryGetGun(ent.Owner, out var gun) || !TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
-        if (aimableComp.AimedSprintSpeedModifier == null && aimableComp.AimedWalkingSpeedModifier == null)
+        if (aimableComp.AimedSprintSpeedModifier == null &&
+            aimableComp.AimedWalkingSpeedModifier == null)
             return;
 
         float sprintMod = 1f;
@@ -93,28 +95,32 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
 
     private void OnUnequip(Entity<GunAimableComponent> ent, ref GotUnequippedHandEvent args)
     {
-        ent.Comp.IsAimed = false;
-        _gun.RefreshModifiers(ent.Owner);
-
-        Dirty(ent);
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        StopAiming(ent, args.User);
     }
 
     private void OnDrop(Entity<GunAimableComponent> ent, ref DroppedEvent args)
     {
-        ent.Comp.IsAimed = false;
-        _gun.RefreshModifiers(ent.Owner);
-
-        Dirty(ent);
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        StopAiming(ent, args.User);
     }
 
     private void OnDeselect(Entity<GunAimableComponent> ent, ref HandDeselectedEvent args)
+    {
+        StopAiming(ent, args.User);
+    }
+
+    private void OnCombatOff(Entity<GunAimableComponent> ent, ref HeldRelayedEvent<CombatModeOffEvent> args)
+    {
+        ent.Comp.IsAimed = false;
+        _gun.RefreshModifiers(ent.Owner);
+        Dirty(ent);
+    }
+
+    private void StopAiming(Entity<GunAimableComponent> ent, EntityUid user)
     {
         ent.Comp.IsAimed = false;
         _gun.RefreshModifiers(ent.Owner);
 
         Dirty(ent);
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(args.User);
+        _movementSpeedModifier.RefreshMovementSpeedModifiers(user);
     }
 }
