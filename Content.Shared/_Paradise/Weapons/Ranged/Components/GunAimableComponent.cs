@@ -11,7 +11,7 @@ public sealed partial class GunAimableComponent : Component//This component sign
     public bool IsAimed = false;
 
     [ViewVariables(VVAccess.ReadWrite), DataField("minAngle")]
-    public Angle MinAngle = Angle.FromDegrees(0);
+    public Angle MinAngle = Angle.FromDegrees(0); //Those values are added to the gun's base onen when aiming
 
     /// <summary>
     /// Angle bonus applied upon being aimed.
