@@ -86,7 +86,7 @@
     - type: Projectile
       #PARADISE EDIT START - Add aiming
       penetrationDamageTypeRequirement:
-      - Piercing
+        - Piercing
       #PARADISE EDIT END
       impactEffect: BulletImpactEffect
       damage:
