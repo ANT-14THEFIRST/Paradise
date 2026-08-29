@@ -28,9 +28,12 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         SubscribeLocalEvent<GunAimableComponent, HandDeselectedEvent>(OnDeselect);
     }
 
-    private void OnAimStatusChanged(AimStatusChangeAttemptEvent args)
+    private void OnAimStatusChanged(AimStatusChangeAttemptEvent message, EntitySessionEventArgs args)
     {
-        EntityUid user = GetEntity(args.User);
+        EntityUid user = GetEntity(message.User);
+
+        if (args.SenderSession.AttachedEntity != user)
+            return;
 
         if (!TryComp<CombatModeComponent>(user, out var combatComp) || !combatComp.IsInCombatMode)
             return;
@@ -38,13 +41,13 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         if (!_gun.TryGetGun(user, out var gun) || !gun.Comp.UseKey)
             return;
 
-        if (gun.Owner != GetEntity(args.Gun))
+        if (gun.Owner != GetEntity(message.Gun))
             return;
 
         if (!TryComp<GunAimableComponent>(gun.Owner, out var aimableComp))
             return;
 
-        aimableComp.IsAimed = args.Aim;
+        aimableComp.IsAimed = message.Aim;
 
         if (_net.IsServer)
             Dirty(gun.Owner, aimableComp);
