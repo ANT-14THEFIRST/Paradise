@@ -57,7 +57,7 @@ public sealed partial class CombatModeSystem : SharedCombatModeSystem
     public override void SetInCombatMode(EntityUid entity, bool value, CombatModeComponent? component = null)
     {
         base.SetInCombatMode(entity, value, component);
-        _gunSystem.SpreadOverlayIngame = value;// PARADISE EDIT - Add gun spread overlay
+        _gunSystem.SpreadOverlayInGame = value;// PARADISE EDIT - Add gun spread overlay
         UpdateHud(entity);
     }
 
