@@ -88,17 +88,17 @@ public sealed partial class GunSystem : SharedGunSystem
     private bool _spreadOverlay;
 
     // PARADISE EDIT START - Add aiming
-    public bool SpreadOverlayIngame
+    public bool SpreadOverlayInGame
     {
-        get => _spreadOverlayIngame;
+        get => _SpreadOverlayInGame;
         set
         {
-            if (_spreadOverlayIngame == value)
+            if (_SpreadOverlayInGame == value)
                 return;
 
-            _spreadOverlayIngame = value;
+            _SpreadOverlayInGame = value;
 
-            if (_spreadOverlayIngame)
+            if (_SpreadOverlayInGame)
             {
                 _overlayManager.AddOverlay(new GunTargetingOverlay(
                     EntityManager,
@@ -116,7 +116,7 @@ public sealed partial class GunSystem : SharedGunSystem
         }
     }
 
-    private bool _spreadOverlayIngame;
+    private bool _SpreadOverlayInGame;
     // PARADISE EDIT END
 
     public override void Initialize()
