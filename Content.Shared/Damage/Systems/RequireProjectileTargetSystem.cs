@@ -37,12 +37,12 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
         // PARADISE EDIT START - Add aiming
         if (TryComp(other, out ProjectileComponent? projectile) && (projectile.Shooter is { Valid: true } shooterValidated))
         {
-            if (_standing.IsDown(shooterValidated) &&
+            if (_standing.IsDown(shooterValidated) && //The shooter and the target are both down and the target is alive => we'll hit, otherwise we won't
                 _standing.IsDown(ent.Owner) &&
                 _state.IsAlive(ent.Owner))
                 return;
 
-            if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) &&
+            if (TryComp<GunAimableComponent>(projectile.Weapon, out var aimComp) && //The shooter is aiming and the target is alive? We hit
                 aimComp.IsAimed &&
                 _state.IsAlive(ent.Owner))
                 return;
