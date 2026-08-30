@@ -8,10 +8,10 @@ namespace Content.Shared._Paradise.Weapons.Components;
 public sealed partial class GunAimableComponent : Component//This component signalises that the gun can be used for aimed shooting
 {
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
-    public bool IsAimed = false;
+    public bool IsAimed = false; //True when aimed. Aiming state applies following parameters
 
     [ViewVariables(VVAccess.ReadWrite), DataField("minAngle")]
-    public Angle MinAngle = Angle.FromDegrees(0); //Those values are added to the gun's base onen when aiming
+    public Angle MinAngle = Angle.FromDegrees(0); 
 
     /// <summary>
     /// Angle bonus applied upon being aimed.
@@ -36,7 +36,7 @@ public sealed partial class GunAimableComponent : Component//This component sign
     public Angle AngleIncrease = Angle.FromDegrees(0);
 
     [DataField]
-    public float? AimedSprintSpeedModifier = 0.5f;
+    public float? AimedSprintSpeedModifier = 0.5f; //User's speed is multiplied by this value
 
     [DataField]
     public float? AimedWalkingSpeedModifier = 1f;
