@@ -23,7 +23,7 @@ public sealed partial class HitscanBasicRaycastSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ISharedAdminLogManager _log = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!; // PARADISE EDIT - Add aiming
+    [Dependency] private StandingStateSystem _standing = default!; // PARADISE EDIT - Add aiming
 
     [Dependency] private EntityQuery<HitscanBasicVisualsComponent> _visualsQuery = default!;
 
