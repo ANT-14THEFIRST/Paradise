@@ -34,7 +34,7 @@ public sealed partial class GunTargetingOverlay : Overlay
 
     private readonly Color _defaultOverlayColor = Color.LightBlue;
 
-    private readonly Color _activeOverlayColor= Color.Orange;
+    private readonly Color _activeOverlayColor = Color.Orange;
 
     protected override void Draw(in OverlayDrawArgs args)
     {
@@ -73,7 +73,7 @@ public sealed partial class GunTargetingOverlay : Overlay
         var overlayColor = _defaultOverlayColor;
 
         if (_entManager.TryGetComponent<GunAimableComponent>(gun.Owner, out var aimableComp) && aimableComp.IsAimed)
-            overlayColor = ActiveOverlayColor;
+            overlayColor = _activeOverlayColor;
 
         // Show current angle
         worldHandle.DrawCircle(mapPos.Position + currentAngle.RotateVec(direction), 0.08f, overlayColor, true);
