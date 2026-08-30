@@ -32,9 +32,9 @@ public sealed partial class GunTargetingOverlay : Overlay
         _transform = transform;
     }
 
-    private readonly Color DefaultOverlayColor = Color.LightBlue;
+    private readonly Color _defaultOverlayColor = Color.LightBlue;
 
-    private readonly Color ActiveOverlayColor = Color.Orange;
+    private readonly Color _activeOverlayColor= Color.Orange;
 
     protected override void Draw(in OverlayDrawArgs args)
     {
@@ -70,7 +70,7 @@ public sealed partial class GunTargetingOverlay : Overlay
             gun.Comp.MinAngleModified.Theta, gun.Comp.MaxAngleModified.Theta));
         var direction = (mousePos.Position - mapPos.Position);
 
-        var overlayColor = DefaultOverlayColor;
+        var overlayColor = _defaultOverlayColor;
 
         if (_entManager.TryGetComponent<GunAimableComponent>(gun.Owner, out var aimableComp) && aimableComp.IsAimed)
             overlayColor = ActiveOverlayColor;
