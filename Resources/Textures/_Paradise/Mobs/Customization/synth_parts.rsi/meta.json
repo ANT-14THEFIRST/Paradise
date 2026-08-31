@@ -8,6 +8,14 @@
   },
     "states": [
         {
+            "name": "head_top_perception_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_perception_secondary",
+            "directions": 4
+        },
+        {
             "name": "head_top_cyclops_primary",
             "directions": 4
         },
@@ -77,6 +85,22 @@
         },
         {
             "name": "l_hand_plating",
+            "directions": 4
+        },
+        {
+            "name": "torso_plating",
+            "directions": 4
+        },
+        {
+            "name": "lower_torso_plating",
+            "directions": 4
+        },
+        {
+            "name": "r_leg_plating",
+            "directions": 4
+        },
+        {
+            "name": "l_leg_plating",
             "directions": 4
         }
     ]
