@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Made by JustSmartgun",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "head_top_cyclops_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_cyclops_secondary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_linear_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_linear_secondary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_omnidirectional_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_omnidirectional_secondary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_simple_eyes_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_top_simple_eyes_secondary",
+            "directions": 4
+        },
+        {
+            "name": "head_side_plating",
+            "directions": 4
+        },
+        {
+            "name": "head_side_plating_light",
+            "directions": 4
+        },
+        {
+            "name": "head_side_plating_optics_primary",
+            "directions": 4
+        },
+        {
+            "name": "head_side_plating_optics_secondary",
+            "directions": 4
+        },
+        {
+            "name": "l_arm_plating_primary",
+            "directions": 4
+        },
+        {
+            "name": "l_arm_plating_secondary",
+            "directions": 4
+        },
+        {
+            "name": "r_arm_plating_primary",
+            "directions": 4
+        },
+        {
+            "name": "r_arm_plating_secondary",
+            "directions": 4
+        },
+        {
+            "name": "r_hand_plating",
+            "directions": 4
+        },
+        {
+            "name": "l_hand_plating",
+            "directions": 4
+        }
+    ]
+}

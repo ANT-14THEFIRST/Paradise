@@ -4,7 +4,6 @@ using Content.Shared.Random.Helpers;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._Paradise.InternalComponentDamageRelay;
 

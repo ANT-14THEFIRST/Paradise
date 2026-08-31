@@ -1,0 +1,101 @@
+- type: marking
+  id: SynthHeadCyclops
+  bodyPart: HeadTop
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_cyclops_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_cyclops_secondary
+
+- type: marking
+  id: SynthHeadLinear
+  bodyPart: HeadTop
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_linear_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_linear_secondary
+
+- type: marking
+  id: SynthHeadOmnidirectional
+  bodyPart: HeadTop
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_omnidirectional_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_omnidirectional_secondary
+
+- type: marking
+  id: SynthHeadEyes
+  bodyPart: HeadTop
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_simple_eyes_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_top_simple_eyes_secondary
+
+- type: marking
+  id: SynthHeadPlating
+  bodyPart: HeadSide
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_side_plating
+
+- type: marking
+  id: SynthHeadPlatingLight
+  bodyPart: HeadSide
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_side_plating_light
+
+- type: marking
+  id: SynthHeadPlatingOptics
+  bodyPart: HeadSide
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_side_plating_optics_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: head_side_plating_optics_secondary
+
+- type: marking
+  id: SynthLeftArmPlating
+  bodyPart: LArm
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: l_arm_plating_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: l_arm_plating_secondary
+
+- type: marking
+  id: SynthRightArmPlating
+  bodyPart: RArm
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: r_arm_plating_primary
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: r_arm_plating_secondary
+
+- type: marking
+  id: SynthLeftHandPlating
+  bodyPart: LHand
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: l_hand_plating
+
+- type: marking
+  id: SynthRightHandPlating
+  bodyPart: RHand
+  groupWhitelist: [Synth, SynthHuman]
+  sprites:
+    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+      state: r_hand_plating

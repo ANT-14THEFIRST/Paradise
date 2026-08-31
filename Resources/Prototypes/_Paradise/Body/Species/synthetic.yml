@@ -1,15 +1,16 @@
 - type: markingsGroup
   parent: Undergarments
   id: Synth
+  onlyGroupWhitelisted: true
   limits:
     enum.HumanoidVisualLayers.HeadTop:
-      limit: 0
-      required: false
-    enum.HumanoidVisualLayers.Hair:
-      limit: 0
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.FacialHair:
       limit: 0
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
       required: false
     enum.HumanoidVisualLayers.Chest:
       limit: 1
@@ -54,6 +55,8 @@
   categories: [HideSpawnMenu]
   name: synth appearance
   components:
+    - type: Inventory
+      templateId: synth
     - type: InitialBody
       organs:
         Torso: OrganRoboticTorso
