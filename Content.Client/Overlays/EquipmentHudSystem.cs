@@ -1,3 +1,4 @@
+using Content.Shared._Paradise.SiliconComponents;
 using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -25,6 +26,11 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
         SubscribeLocalEvent<T, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<T, ComponentRemove>(OnRemove);
 
+        //PARADISE EDIT START - Synthetic update
+        SubscribeLocalEvent<T, ComponentGotInsertedIntoUser>(OnCompInserted);
+        SubscribeLocalEvent<T, ComponentGotRemovedFromUser>(OnCompRemoved);
+        //PARADISE EDIT END
+
         SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
 
@@ -35,6 +41,8 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
         SubscribeLocalEvent<T, InventoryRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshEquipmentHud);
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+
+        SubscribeLocalEvent<T, PartRelayedEvent<RefreshEquipmentHudEvent<T>>>(OnRefreshPartHud); //PARADISE EDIT - Synthetic update
     }
 
     private void Update(RefreshEquipmentHudEvent<T> ev)
@@ -87,6 +95,18 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
         RefreshOverlay();
     }
 
+    //PARADISE EDIT START - Synthetic update
+    private void OnCompInserted(Entity<T> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        RefreshOverlay();
+    }
+
+    private void OnCompRemoved(Entity<T> ent, ref ComponentGotRemovedFromUser args)
+    {
+        RefreshOverlay();
+    }
+    //PARADISE EDIT END
+
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
         Deactivate();
@@ -96,6 +116,13 @@ public abstract partial class EquipmentHudSystem<T> : EntitySystem where T : ICo
     {
         OnRefreshComponentHud(ent, ref args.Args);
     }
+
+    //PARADISE EDIT START - Synthetic update
+    protected virtual void OnRefreshPartHud(Entity<T> ent, ref PartRelayedEvent<RefreshEquipmentHudEvent<T>> args)
+    {
+        OnRefreshComponentHud(ent, ref args.Args);
+    }
+    //PARADISE EDIT END
 
     protected virtual void OnRefreshComponentHud(Entity<T> ent, ref RefreshEquipmentHudEvent<T> args)
     {

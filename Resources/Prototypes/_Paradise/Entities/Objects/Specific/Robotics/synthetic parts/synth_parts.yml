@@ -16,6 +16,9 @@
     - type: Damageable
       damageContainer: Synthetic
       damageModifierSet: Synthetic
+    - type: Injurable
+      painDamageGroups: []
+      damageContainer: Synthetic
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger
@@ -67,6 +70,9 @@
     - type: Damageable
       damageContainer: Synthetic
       damageModifierSet: Synthetic
+    - type: Injurable
+      painDamageGroups: []
+      damageContainer: Synthetic
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger
@@ -89,6 +95,9 @@
     - type: Damageable
       damageContainer: Synthetic
       damageModifierSet: Synthetic
+    - type: Injurable
+      painDamageGroups: []
+      damageContainer: Synthetic
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger
@@ -111,6 +120,9 @@
     - type: Damageable
       damageContainer: Synthetic
       damageModifierSet: Synthetic
+    - type: Injurable
+      painDamageGroups: []
+      damageContainer: Synthetic
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger

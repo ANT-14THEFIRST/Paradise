@@ -113,6 +113,10 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
         foreach (PartType part in Enum.GetValues(typeof(PartType)))
         {
+            if (part == PartType.ALL ||
+                part == PartType.NONE)
+                continue;
+
             if (ent.Comp.Parts.ContainsKey(part))
                 continue;
 

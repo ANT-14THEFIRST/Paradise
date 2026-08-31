@@ -1,9 +1,11 @@
-using Content.Shared.StatusEffectNew;
-using Content.Shared.Inventory;
-using Content.Shared.Eye.Blinding.Components;
-using Content.Shared.Tools.Components;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Eye.Blinding.Components;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Tools.Components;
 
 namespace Content.Shared.Eye.Blinding.Systems
 {
@@ -18,8 +20,9 @@ namespace Content.Shared.Eye.Blinding.Systems
             SubscribeLocalEvent<RequiresEyeProtectionComponent, ToolUseAttemptEvent>(OnUseAttempt);
             SubscribeLocalEvent<RequiresEyeProtectionComponent, ItemToggledEvent>(OnWelderToggled);
 
-            SubscribeLocalEvent<EyeProtectionComponent, GetEyeProtectionEvent>(OnGetProtection);
-            SubscribeLocalEvent<EyeProtectionComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
+            //SubscribeLocalEvent<EyeProtectionComponent, GetEyeProtectionEvent>(OnGetProtection);
+            //SubscribeLocalEvent<EyeProtectionComponent, InventoryRelayedEvent<GetEyeProtectionEvent>>(OnGetRelayedProtection);
+            Subs.SubscribeWithRelay<EyeProtectionComponent, GetEyeProtectionEvent>(OnGetProtection, held: false); //PARADISE EDIT - Synthetic update
         }
 
         private void OnGetRelayedProtection(EntityUid uid, EyeProtectionComponent component,

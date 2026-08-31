@@ -95,6 +95,9 @@
           color: "#FF0000"
         Burn:
           sprite: Mobs/Effects/burn_damage.rsi
+    - type: Injurable
+      painDamageGroups: []
+      damageContainer: Synthetic
     - type: StatusIcon
       bounds: -0.5,-0.5,0.5,0.5
     - type: JobStatus
@@ -290,6 +293,10 @@
       templateId: borg
     - type: Hands
     - type: ComplexInteraction
+    - type: ComplexRepairable
+      material: SheetSteel
+      materialRepairTreshold: 10.0
+      doAfterModifier: 1.2
     - type: IntrinsicRadioReceiver
     - type: IntrinsicRadioTransmitter
       channels:

@@ -1,4 +1,5 @@
-﻿using Content.Shared.Hands;
+using Content.Shared._Paradise.SiliconComponents;
+using Content.Shared.Hands;
 
 namespace Content.Shared.Inventory;
 
@@ -21,6 +22,7 @@ public static class RelaySubscriptionHelpers
         EntityEventRefHandler<TComp, TEvent> handler,
         bool baseEvent = true,
         bool inventory = true,
+        bool siliconComponents = true, //PARADISE EDIT - Synthetic update
         bool held = true)
         where TEvent : notnull
         where TComp : IComponent
@@ -43,6 +45,16 @@ public static class RelaySubscriptionHelpers
                 handler(ent, ref ev.Args);
             });
         }
+
+        //PARADISE EDIT START - Synthetic update
+        if (siliconComponents)
+        {
+            subs.SubscribeLocalEvent((Entity<TComp> ent, ref PartRelayedEvent<TEvent> ev) =>
+            {
+                handler(ent, ref ev.Args);
+            });
+        }
+        //PARADISE EDIT END
     }
 
     /// <summary>
@@ -59,6 +71,7 @@ public static class RelaySubscriptionHelpers
         ComponentEventHandler<TComp, TEvent> handler,
         bool baseEvent = true,
         bool inventory = true,
+        bool siliconComponents = true, //PARADISE EDIT - Synthetic update
         bool held = true)
         where TEvent : notnull
         where TComp : IComponent
@@ -81,6 +94,16 @@ public static class RelaySubscriptionHelpers
                 handler(uid, component, args.Args);
             });
         }
+
+        //PARADISE EDIT START - Synthetic update
+        if (siliconComponents)
+        {
+            subs.SubscribeLocalEvent((EntityUid uid, TComp component, ref PartRelayedEvent<TEvent> args) =>
+            {
+                handler(uid, component, args.Args);
+            });
+        }
+        //PARADISE EDIT END
     }
 
     /// <summary>
@@ -97,6 +120,7 @@ public static class RelaySubscriptionHelpers
         ComponentEventRefHandler<TComp, TEvent> handler,
         bool baseEvent = true,
         bool inventory = true,
+        bool siliconComponents = true, //PARADISE EDIT - Synthetic update
         bool held = true)
         where TEvent : notnull
         where TComp : IComponent
@@ -119,5 +143,15 @@ public static class RelaySubscriptionHelpers
                 handler(uid, component, ref args.Args);
             });
         }
+
+        //PARADISE EDIT START - Synthetic update
+        if (siliconComponents)
+        {
+            subs.SubscribeLocalEvent((EntityUid uid, TComp component, ref PartRelayedEvent<TEvent> args) =>
+            {
+                handler(uid, component, ref args.Args);
+            });
+        }
+        //PARADISE EDIT END
     }
 }

@@ -1,0 +1,53 @@
+- type: entity
+  name: SW002 (installation)
+  parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
+  id: WeaponSubMachineGunSw002Integrated
+  description: A Shneider&Webber 002 SMG installed into a synthetic's hand.
+  components:
+    - type: Sprite
+      sprite: _Paradise/Objects/Weapons/Guns/SMGs/sw002.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-0
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: Clothing
+      sprite: _Paradise/Objects/Weapons/Guns/SMGs/sw002.rsi
+    - type: ChamberMagazineAmmoProvider
+    - type: Gun
+      fireRate: 6.6
+      minAngle: 1
+      maxAngle: 6
+      angleIncrease: 1.5
+      angleDecay: 6
+      selectedMode: FullAuto
+      shotsPerBurst: 5
+      burstCooldown: 0.2
+      burstFireRate: 7
+      availableModes:
+        - Burst
+        - FullAuto
+        - SemiAuto
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: MagazinePistolSubMachineGunTopMounted
+          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - MagazinePistolSubMachineGunTopMounted
+          whitelistFailPopup: gun-magazine-whitelist-fail
+        gun_chamber:
+          name: Chamber
+          priority: 1
+          whitelist:
+            tags:
+              - CartridgePistol
+    - type: MagazineVisuals
+      magState: mag
+      steps: 9
+      zeroVisible: true
+    - type: Appearance

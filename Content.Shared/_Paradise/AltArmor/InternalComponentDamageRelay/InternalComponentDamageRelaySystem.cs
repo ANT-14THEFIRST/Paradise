@@ -22,9 +22,7 @@ public sealed partial class InternalComponentDamageRelaySystem : AltArmorSystem<
 
     public void OnDamageChange(Entity<InternalComponentDamageRelayComponent> ent, ref DamageModifyEvent args)
     {
-        ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out var resultArmorDamage);
-
-        args.Damage = resultArmorDamage;
+        ModifyDamage(ent.Owner, args.OriginalDamage, out var resultDamage, out args.Damage);
 
         if (ent.Comp.Containers == string.Empty)
             return;
