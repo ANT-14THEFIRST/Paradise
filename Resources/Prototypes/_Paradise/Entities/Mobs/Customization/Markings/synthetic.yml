@@ -3,9 +3,9 @@
   bodyPart: HeadTop
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_perception_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_perception_secondary
 
 - type: marking
@@ -13,9 +13,9 @@
   bodyPart: HeadTop
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_cyclops_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_cyclops_secondary
 
 - type: marking
@@ -23,9 +23,9 @@
   bodyPart: HeadTop
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_linear_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_linear_secondary
 
 - type: marking
@@ -33,9 +33,9 @@
   bodyPart: HeadTop
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_omnidirectional_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_omnidirectional_secondary
 
 - type: marking
@@ -43,9 +43,9 @@
   bodyPart: HeadTop
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_simple_eyes_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_top_simple_eyes_secondary
 
 - type: marking
@@ -53,7 +53,7 @@
   bodyPart: HeadSide
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_side_plating
 
 - type: marking
@@ -61,7 +61,7 @@
   bodyPart: HeadSide
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_side_plating_light
 
 - type: marking
@@ -69,9 +69,9 @@
   bodyPart: HeadSide
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_side_plating_optics_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: head_side_plating_optics_secondary
 
 - type: marking
@@ -79,9 +79,9 @@
   bodyPart: LArm
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: l_arm_plating_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: l_arm_plating_secondary
 
 - type: marking
@@ -89,9 +89,9 @@
   bodyPart: RArm
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: r_arm_plating_primary
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: r_arm_plating_secondary
 
 - type: marking
@@ -99,7 +99,7 @@
   bodyPart: LHand
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: l_hand_plating
 
 - type: marking
@@ -107,7 +107,7 @@
   bodyPart: RHand
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: r_hand_plating
 
 - type: marking
@@ -115,7 +115,7 @@
   bodyPart: LLeg
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: l_leg_plating
 
 - type: marking
@@ -123,7 +123,7 @@
   bodyPart: RLeg
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: r_leg_plating
 
 - type: marking
@@ -131,7 +131,7 @@
   bodyPart: Chest
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: torso_plating
 
 - type: marking
@@ -139,7 +139,7 @@
   bodyPart: Chest
   groupWhitelist: [Synth, SynthHuman]
   sprites:
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: torso_plating
-    - sprite: _Paradise\Mobs\Customization\synth_parts.rsi
+    - sprite: _Paradise/Mobs/Customization/synth_parts.rsi
       state: lower_torso_plating

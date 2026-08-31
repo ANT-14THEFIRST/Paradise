@@ -5,25 +5,6 @@
   abstract: true
   components:
     - type: SiliconModule
-    - type: Item
-      storedRotation: -90
-      inhandVisuals:
-        left:
-          - state: base-icon-inhand-left
-            color: "#8FCBCB"
-          - state: base-module-inhand-left
-            color: "#A1A1A1"
-          - state: base-part-inhand-left
-          - state: base-stripes-inhand-left
-            color: "#7D7D7D"
-        right:
-          - state: base-icon-inhand-right
-            color: "#8FCBCB"
-          - state: base-module-inhand-right
-            color: "#A1A1A1"
-          - state: base-part-inhand-right
-          - state: base-stripes-inhand-right
-            color: "#7D7D7D"
     - type: Sprite
       sprite: Objects/Specific/Robotics/borgmodule.rsi
       state: engineering
@@ -83,8 +64,36 @@
       scale: 0.8, 0.8
 
 - type: entity
+  id: SynthModInstallationRight
+  parent: SynthModuleBase
+  name: synth installation (right)
+  components:
+    - type: Tag
+      tags: [ArmInstallationRight]
+    - type: Item
+      size: Normal
+      sprite: null
+    - type: SiliconModuleBlacklist
+      moduleBlacklist:
+        tags: [ArmInstallationRight]
+
+- type: entity
+  id: SynthModInstallationLeft
+  parent: SynthModuleBase
+  name: synth installation (left)
+  components:
+    - type: Tag
+      tags: [ArmInstallationLeft]
+    - type: Item
+      size: Normal
+      sprite: null
+    - type: SiliconModuleBlacklist
+      moduleBlacklist:
+        tags: [ArmInstallationLeft]
+
+- type: entity
   id: SynthModIntegratedSMG
-  parent: SynthModTest
+  parent: SynthModuleBase
   name: integrated SMG synth installation (right)
   components:
     - type: Item
@@ -116,3 +125,26 @@
     - type: Sprite
       sprite: Objects/Specific/Robotics/borgmodule.rsi
       state: engineering
+
+- type: entity
+  id: SynthModIntegratedBladeRight
+  parent: SynthModInstallationRight
+  name: integrated blade synth installation (right)
+  components:
+    - type: Sprite
+      sprite: _Paradise/Objects/Weapons/Melee/armblade_installation.rsi
+      state: icon
+    - type: SiliconModuleArmInstallation
+      item: SynthArmBlade
+
+- type: entity
+  id: SynthModIntegratedBladeLeft
+  parent: SynthModInstallationLeft
+  name: integrated blade synth installation (left)
+  components:
+    - type: Sprite
+      sprite: _Paradise/Objects/Weapons/Melee/armblade_installation.rsi
+      state: icon
+    - type: SiliconModuleArmInstallation
+      item: SynthArmBlade
+      holdingContainerHandId: left

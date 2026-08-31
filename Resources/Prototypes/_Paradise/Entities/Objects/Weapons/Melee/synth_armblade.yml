@@ -1,0 +1,28 @@
+- type: entity
+  name: integrated blade
+  parent: BaseItem
+  id: SynthArmBlade
+  description: A straight, retractable blade that is integrated into a synthetic's hand
+  components:
+    - type: Tool
+      qualities:
+        - Slicing
+    - type: Execution
+      doAfterDuration: 4.0
+    - type: Sprite
+      sprite: _Paradise/Objects/Weapons/Melee/armblade.rsi
+      state: icon
+    - type: MeleeWeapon
+      soundHit:
+        collection: AlienClaw
+      wideAnimationRotation: 90
+      attackRate: 1
+      damage:
+        types:
+          Slash: 30
+    - type: Item
+      size: Normal
+      sprite: _Paradise/Objects/Weapons/Melee/armblade.rsi
+    - type: Prying
+      speedModifier: 0.7
+      pryPowered: true

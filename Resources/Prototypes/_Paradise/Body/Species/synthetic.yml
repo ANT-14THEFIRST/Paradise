@@ -428,7 +428,7 @@
             - MobLayer
     - type: InternalComponentDamageRelay
       containers: SynthParts
-      tresholdDict:
+      userDamageReductionByType:
         Piercing: 10
         Blunt: 25
         Heat: 15
@@ -440,7 +440,7 @@
         Bloodloss: 1000
         Shock: 30
         Cold: 20
-      durabilityTresholdDict:
+      selfDamageReductionByType:
         Piercing: 5
         Blunt: 9
         Heat: 5
