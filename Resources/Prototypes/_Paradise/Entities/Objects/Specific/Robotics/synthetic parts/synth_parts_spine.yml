@@ -14,6 +14,9 @@
     - type: Sprite
       sprite: _Paradise/Objects/Specific/Robotics/Synthetic/parts.rsi
       state: frame_steel
+    - type: ComplexRepairable
+      material: SheetSteel
+      materialRepairThreshold: 10.0
 
 - type: entity
   id: SynthSpineCarbon
@@ -57,7 +60,11 @@
       maxDamageToRemainFunctional: 80
     - type: Damageable
       damageContainer: Synthetic
-      damageModifierSet: Synthetic
+    - type: ComplexRepairable
+      material: SheetPlasteel
+      materialRepairThreshold: 10.0
+      doAfterModifier: 1
+      damageValue: -10.0
     - type: Destructible
       thresholds:
         - trigger: !type:DamageTrigger

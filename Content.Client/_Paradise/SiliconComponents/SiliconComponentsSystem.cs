@@ -1,8 +1,9 @@
+using Content.Shared._Paradise.SiliconComponents;
 using Content.Shared.Alert;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.PowerCell.Components;
-using Content.Shared._Paradise.SiliconComponents;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Player;
@@ -40,6 +41,21 @@ public sealed partial class SiliconComponentsSystem : SharedSiliconComponentsSys
     {
         _alerts.ClearAlert(ent.Owner, ent.Comp.BatteryAlert);
         _alerts.ClearAlert(ent.Owner, ent.Comp.NoBatteryAlert);
+    }
+
+    protected override void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageDealtEvent args)
+    {
+        base.OnDamageChanged(ent, ref args);
+    }
+
+    protected override void OnPartInserted(Entity<SiliconPartComponent> ent, ref ComponentGotInsertedIntoUser args)
+    {
+        base.OnPartInserted(ent, ref args);
+    }
+
+    protected override void OnPartRemoved(Entity<SiliconPartComponent> ent, ref ComponentGotRemovedFromUser args)
+    {
+        base.OnPartRemoved(ent, ref args);
     }
 
     private void UpdateBatteryAlert(Entity<SiliconComponentsComponent, PowerCellSlotComponent?> ent)

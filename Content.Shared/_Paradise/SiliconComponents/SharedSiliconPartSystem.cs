@@ -9,13 +9,12 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
-using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._Paradise.SiliconComponents;
 
-public sealed partial class SiliconPartSystem : EntitySystem
+public abstract partial class SharedSiliconPartSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private BlindableSystem _blindable = default!;
@@ -23,8 +22,6 @@ public sealed partial class SiliconPartSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private INetManager _net = default!;
-    [Dependency] private IEntityManager _entManager = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedSiliconComponentsSystem _siliconComponents = default!;
     [Dependency] private AlertsSystem _alerts = default!;
@@ -86,7 +83,7 @@ public sealed partial class SiliconPartSystem : EntitySystem
         RefreshAlerts(args.Owner);
     }
 
-    private void UpdateDamageStatus(Entity<DamabeableSiliconPartComponent> ent)
+    protected virtual void UpdateDamageStatus(Entity<DamabeableSiliconPartComponent> ent)
     {
         if (!TryComp<SiliconPartComponent>(ent.Owner, out var partComp))
             return;

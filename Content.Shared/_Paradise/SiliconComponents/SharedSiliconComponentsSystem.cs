@@ -41,7 +41,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedWiresSystem _wires = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SiliconPartSystem _parts = default!;
+    [Dependency] private SharedSiliconPartSystem _parts = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
 
@@ -395,7 +395,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterEventArgs);
     }
 
-    private void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageDealtEvent args)
+    protected virtual void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageDealtEvent args)
     {
         _parts.RefreshAlerts(ent.AsNullable());
     }
@@ -480,7 +480,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SetOperational(partOwnerValid, TryGetOperational(partOwnerValid));
     }
 
-    private void OnPartInserted(Entity<SiliconPartComponent> ent, ref ComponentGotInsertedIntoUser args)
+    protected virtual void OnPartInserted(Entity<SiliconPartComponent> ent, ref ComponentGotInsertedIntoUser args)
     {
         if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
             return;
@@ -488,7 +488,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SetOperational(args.Owner, TryGetOperational(args.Owner));
     }
 
-    private void OnPartRemoved(Entity<SiliconPartComponent> ent, ref ComponentGotRemovedFromUser args)
+    protected virtual void OnPartRemoved(Entity<SiliconPartComponent> ent, ref ComponentGotRemovedFromUser args)
     {
         if (TerminatingOrDeleted(ent) || TerminatingOrDeleted(args.Owner))
             return;

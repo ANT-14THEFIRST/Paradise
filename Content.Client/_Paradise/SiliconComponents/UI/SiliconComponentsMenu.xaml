@@ -19,24 +19,59 @@
                         <TextureButton HorizontalExpand="True" Name="OpticsButton" HorizontalAlignment="Right" ToggleMode="False" SetSize="75 75" StyleClasses="OpenLeft">
                             <SpriteView Name="OpticsView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                         </TextureButton>
+                        <ProgressBar Name="IntegrityDisplayBarOptics"
+                                         HorizontalAlignment="Right"
+                                         HorizontalExpand="True"
+                                         SetSize="75 15"
+                                         MaxValue="1"
+                                         Value="0">
+                        </ProgressBar>
                         <Control MinHeight="60"/>
                         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" Margin="0 20 0 20" >
-                            <TextureButton HorizontalExpand="True" Name="ServoButton" ToggleMode="False" Margin="20 0 0 0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="ServoView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
-                            </TextureButton>
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" Margin="0 20 0 20" >
+                                <TextureButton HorizontalExpand="True" Name="ServoButton" ToggleMode="False" Margin="20 0 0 0" SetSize="75 75" StyleClasses="OpenLeft">
+                                    <SpriteView Name="ServoView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
+                                </TextureButton>
+                                <ProgressBar Name="IntegrityDisplayBarServo"
+                                         HorizontalAlignment="Right"
+                                         HorizontalExpand="True"
+                                         SetSize="75 15"
+                                         MaxValue="1"
+                                         Value="0">
+                                </ProgressBar>
+                            </BoxContainer>
                             <Control MinWidth="75"/>
-                            <TextureButton HorizontalExpand="True" Name="BrainButton" ToggleMode="False" Margin="0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="BrainView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
-                            </TextureButton>
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" Margin="0 20 0 20" >
+                                <TextureButton HorizontalExpand="True" Name="BrainButton" ToggleMode="False" Margin="0" SetSize="75 75" StyleClasses="OpenLeft">
+                                    <SpriteView Name="BrainView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
+                                </TextureButton>
+                                <Control MinHeight="15"/>
+                            </BoxContainer>
                             <Control MinWidth="75"/>
-                            <TextureButton HorizontalExpand="True" Name="SpineButton" ToggleMode="False" Margin="0 0 20 0" SetSize="75 75" StyleClasses="OpenLeft">
-                                <SpriteView Name="SpineView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
-                            </TextureButton>
+                            <BoxContainer Orientation="Vertical" HorizontalAlignment="Right" VerticalExpand="True" HorizontalExpand="True" Margin="20 20 0 20" >
+                                <TextureButton HorizontalExpand="True" Name="SpineButton" ToggleMode="False" Margin="0 0 0 0" SetSize="75 75" StyleClasses="OpenLeft">
+                                    <SpriteView Name="SpineView" HorizontalAlignment="Right" VerticalAlignment="Center" Scale="5 5"/>
+                                </TextureButton>
+                                <ProgressBar Name="IntegrityDisplayBarSpine"
+                                         HorizontalAlignment="Center"
+                                         HorizontalExpand="True"
+                                         SetSize="75 15"
+                                         MaxValue="1"
+                                         Value="0">
+                                </ProgressBar>
+                            </BoxContainer>
                         </BoxContainer>
                         <Control MinHeight="10"/>
                         <TextureButton HorizontalExpand="True" Name="DriveButton" HorizontalAlignment="Right" ToggleMode="False" Margin="0" SetSize="75 75" StyleClasses="OpenLeft">
                             <SpriteView Name="DriveView" HorizontalAlignment="Center" VerticalAlignment="Center" Scale="5 5"/>
                         </TextureButton>
+                        <ProgressBar Name="IntegrityDisplayBarDrive"
+                                         HorizontalAlignment="Right"
+                                         HorizontalExpand="True"
+                                         SetSize="75 15"
+                                         MaxValue="1"
+                                         Value="0">
+                        </ProgressBar>
                     </BoxContainer>
                 </SpriteView>
             </PanelContainer>

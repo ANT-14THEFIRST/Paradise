@@ -25,12 +25,6 @@ namespace Content.Shared.Eye.Blinding.Systems
             Subs.SubscribeWithRelay<EyeProtectionComponent, GetEyeProtectionEvent>(OnGetProtection, held: false); //PARADISE EDIT - Synthetic update
         }
 
-        private void OnGetRelayedProtection(EntityUid uid, EyeProtectionComponent component,
-            InventoryRelayedEvent<GetEyeProtectionEvent> args)
-        {
-            OnGetProtection(uid, component, args.Args);
-        }
-
         private void OnGetProtection(EntityUid uid, EyeProtectionComponent component, GetEyeProtectionEvent args)
         {
             if (TryComp<MaskComponent>(uid, out var mask) && mask.IsToggled)

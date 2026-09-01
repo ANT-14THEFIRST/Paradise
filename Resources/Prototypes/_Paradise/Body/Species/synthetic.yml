@@ -295,8 +295,8 @@
     - type: ComplexInteraction
     - type: ComplexRepairable
       material: SheetSteel
-      materialRepairTreshold: 10.0
-      doAfterModifier: 1.2
+      materialRepairThreshold: 10.0
+      damageValue: -10.0
     - type: IntrinsicRadioReceiver
     - type: IntrinsicRadioTransmitter
       channels:
@@ -307,11 +307,11 @@
         - Binary
         - Common
     - type: ZombieImmune
-    - type: Repairable
-      damageValue: -10 # 10 seconds to repair from crit
-      doAfterDelay: 1
-      fuelCost: 0.5
-      allowSelfRepair: false
+    #- type: Repairable
+    #  damageValue: -10 # 10 seconds to repair from crit
+    #  doAfterDelay: 1
+    #  fuelCost: 0.5
+    #  allowSelfRepair: false
     - type: WiresPanel
     - type: ActivatableUIRequiresPanel
     - type: ContainerContainer
@@ -362,7 +362,6 @@
     - type: LockedWiresPanel
     - type: Damageable
       damageContainer: Synthetic
-      damageModifierSet: Synthetic
     - type: Blindable
     - type: ExplosionResistance
       damageCoefficient: 0.7

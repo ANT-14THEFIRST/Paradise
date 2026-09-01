@@ -21,6 +21,8 @@ public sealed class SiliconBoundUserInterface : BoundUserInterface
         _menu = this.CreateWindow<SiliconComponentsMenu>();
         _menu.SetEntity(Owner);
 
+        _menu.UpdateIntegrityBars();
+
         _menu.BrainButtonPressed += () =>
         {
             SendPredictedMessage(new SiliconEjectPartBuiMessage(PartType.Brain));
@@ -55,6 +57,16 @@ public sealed class SiliconBoundUserInterface : BoundUserInterface
         {
             SendPredictedMessage(new SiliconRemoveModuleBuiMessage(EntMan.GetNetEntity(module)));
         };
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        if (state is not SiliconBoundUiState msg)
+            return;
+
+        _menu?.UpdateIntegrityBars();
     }
 
     public override void Update()

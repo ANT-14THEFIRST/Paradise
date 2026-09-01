@@ -1,3 +1,4 @@
+using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Paradise.SiliconComponents;
@@ -27,4 +28,9 @@ public sealed class SiliconEjectBatteryBuiMessage : BoundUserInterfaceMessage;
 public sealed class SiliconRemoveModuleBuiMessage(NetEntity module) : BoundUserInterfaceMessage
 {
     public NetEntity Module = module;
+}
+
+[Serializable, NetSerializable]
+public sealed class SiliconBoundUiState : BoundUserInterfaceState
+{
 }
