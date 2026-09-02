@@ -40,20 +40,16 @@ public sealed partial class GunTargetingOverlay : Overlay
     {
         var worldHandle = args.WorldHandle;
 
-        var player = _player.LocalEntity;
-
-        if (player == null ||
-            !_entManager.TryGetComponent<TransformComponent>(player, out var xform))
-        {
+        if (_player.LocalEntity is not {Valid: true} playerValid ||
+            !_entManager.TryGetComponent<TransformComponent>(playerValid, out var xform))
             return;
-        }
 
-        var mapPos = _transform.GetMapCoordinates(player.Value, xform: xform);
+        var mapPos = _transform.GetMapCoordinates(playerValid, xform: xform);
 
         if (mapPos.MapId == MapId.Nullspace)
             return;
 
-        if (!_guns.TryGetGun(player.Value, out var gun))
+        if (!_guns.TryGetGun(playerValid, out var gun))
             return;
 
         var mouseScreenPos = _input.MouseScreenPosition;
