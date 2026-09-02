@@ -144,12 +144,12 @@ public abstract partial class SharedSiliconPartSystem : EntitySystem
 
     private void OnMovementModifierInserted(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotInsertedIntoUser args)
     {
-        _movement.RefreshMovementSpeedModifiers(ent.Owner);
+        _movement.RefreshMovementSpeedModifiers(args.Owner);
     }
 
     private void OnMovementModifierRemoved(Entity<MovementSpeedModifyingPartComponent> ent, ref ComponentGotRemovedFromUser args)
     {
-        _movement.RefreshMovementSpeedModifiers(ent.Owner);
+        _movement.RefreshMovementSpeedModifiers(args.Owner);
     }
 
     private void OnMovementModifierOnline(Entity<MovementSpeedModifyingPartComponent> ent, ref SiliconPartStatusOnline args)

@@ -144,6 +144,13 @@
       deathPenalty: 0.01 # However they really ought to be living and intact, otherwise they're worth 100x less.
     - type: RandomPrice
       maxRandomPrice: 20000
+    # PARADISE EDIT START - Physical
+    - type: PhysicalParameters
+    - type: Item
+      size: Ginormous
+    - type: ItemExtension
+      minimalStrengthToPickUp: 3.5
+    # PARADISE EDIT END
     - type: Tag
       tags:
         - CanPilot
