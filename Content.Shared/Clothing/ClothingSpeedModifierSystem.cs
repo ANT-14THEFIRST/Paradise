@@ -21,7 +21,7 @@ public sealed partial class ClothingSpeedModifierSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private StandingStateSystem _standing = default!;
-    [Dependency] private PhysicalParametersSystem _parameters = default!;
+    [Dependency] private PhysicalParametersSystem _parameters = default!; // PARADISE EDIT - Physical parameters
 
     public override void Initialize()
     {
