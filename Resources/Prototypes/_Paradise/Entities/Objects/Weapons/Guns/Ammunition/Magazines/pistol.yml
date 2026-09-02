@@ -1,0 +1,52 @@
+- type: entity
+  abstract: true
+  parent: [BaseItem, BaseSecurityContraband]
+  id: BaseMagazinePistolSubMachineGunTopMounted25
+  name: top-mounted magazine (9x20 auto top-mounted)
+  description: 25-round top feeding magazine for SMGs. Intended to hold general-purpose kinetic ammunition.
+  components:
+    - type: Item
+      storedRotation: 90
+    - type: Tag
+      tags:
+        - MagazinePistolSubMachineGunTopMountedLowCap
+    - type: BallisticAmmoProvider
+      mayTransfer: true
+      whitelist:
+        tags:
+          - CartridgePistol
+      capacity: 25
+    - type: Sprite
+      sprite: _Paradise/Objects/Weapons/Guns/Ammunition/Magazines/smg_top_mounted_25.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: MagazineVisuals
+      magState: mag
+      steps: 9
+      zeroVisible: false
+    - type: Appearance
+    - type: ContainerContainer
+      containers:
+        ballistic-ammo: !type:Container
+
+- type: entity
+  parent: BaseMagazinePistolSubMachineGunTopMounted25
+  id: MagazinePistolSubMachineGunTopMounted25Empty
+  name: top-mounted magazine (9x20 auto top-mounted)
+  description: 25-round top feeding magazine for SMGs. Intended to hold general-purpose kinetic ammunition.
+  suffix: empty
+  components:
+    - type: BallisticAmmoProvider
+      proto: null
+
+- type: entity
+  parent: BaseMagazinePistolSubMachineGunTopMounted25
+  id: MagazinePistolSubMachineGunTopMounted25
+  name: top-mounted magazine (9x20 auto top-mounted)
+  description: 25-round top feeding magazine for SMGs. Intended to hold general-purpose kinetic ammunition.
+  components:
+    - type: BallisticAmmoProvider
+      proto: CartridgePistol

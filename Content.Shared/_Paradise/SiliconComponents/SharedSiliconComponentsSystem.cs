@@ -9,7 +9,9 @@ using Content.Shared.Gravity;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Lock;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Overlays;
 using Content.Shared.Popups;
 using Content.Shared.PowerCell;
@@ -84,6 +86,8 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         SubscribeLocalEvent<SiliconComponentsComponent, SiliconRemoveModuleBuiMessage>(OnRemoveModuleBuiMessage);
 
         SubscribeLocalEvent<SiliconComponentsComponent, DamageDealtEvent>(OnDamageChanged);
+
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
 
         SubscribeLocalEvent<SiliconComponentsComponent, FlashAttemptEvent>(RefRelayEventToPart);
         SubscribeLocalEvent<SiliconComponentsComponent, GetEyeProtectionEvent>(RefRelayEventToPart);
@@ -399,6 +403,37 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
     protected virtual void OnDamageChanged(Entity<SiliconComponentsComponent> ent, ref DamageDealtEvent args)
     {
         _parts.RefreshAlerts(ent.AsNullable());
+    }
+
+    private void OnRefreshMovementSpeed(Entity<SiliconComponentsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
+        foreach (var part in ent.Comp.Parts.Values)
+        {
+            if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp) ||
+                !TryComp<SiliconPartComponent>(part.ContainedEntity, out var partComp) ||
+                !partComp.Active &&
+                speedModComp.RequiresActive)
+                continue;
+
+            args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
+        }
+
+        foreach (var module in ent.Comp.ModuleContainer.ContainedEntities)
+        {
+            if (!TryComp<MovementSpeedModifyingModuleComponent>(module, out var speedModComp) ||
+                !TryComp<SiliconModuleComponent>(module, out var moduleComp))
+                continue;
+
+            if (speedModComp.RequiresToggle &&
+                (!TryComp<ItemToggleComponent>(module, out var toggleComp) ||
+                speedModComp.ReverseToggle == toggleComp.Activated))
+                continue;
+
+            args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
+        }
     }
 
     private void OnPartInstall(Entity<SiliconComponentsComponent> ent, ref InstallSiliconPartEvent args)

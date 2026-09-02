@@ -1,16 +1,6 @@
 using Content.Shared.Actions;
-using Content.Shared.Clothing;
-using Content.Shared.Clothing.Components;
-using Content.Shared.FixedPoint;
-using Content.Shared.Interaction.Components;
 using Content.Shared.Item.ItemToggle;
-using Content.Shared.Popups;
 using Content.Shared.Toggleable;
-using Content.Shared.Whitelist;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Containers;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._Paradise.SiliconComponents;
 

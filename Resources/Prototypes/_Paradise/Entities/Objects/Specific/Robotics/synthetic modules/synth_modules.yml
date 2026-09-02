@@ -163,7 +163,13 @@
       state: engineering
     - type: SiliconModuleToggleable
       action: ActionToggleMagboots
-    - type: ComponentToggler
+    - type: MovementSpeedModifyingModule
+      requiresToggle: True
+      speedMod:
+        walkSpeedModifier: 0.85
+        sprintSpeedModifier: 0.85
+    - type: ComponentAddingSiliconModule
+      requiresToggle: true
       components:
         - type: NoSlip
     - type: Magboots

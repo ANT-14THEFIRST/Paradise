@@ -1,6 +1,7 @@
 using Content.Shared._Paradise.AltArmor;
 using Content.Shared._Paradise.ArmorBlock;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Inventory;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -18,7 +19,7 @@ public sealed partial class InternalComponentDamageRelaySystem : AltArmorSystem<
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<InternalComponentDamageRelayComponent, DamageModifyEvent>(OnDamageChange, after: [typeof(ArmorBlockSystem)]);
+        SubscribeLocalEvent<InternalComponentDamageRelayComponent, DamageModifyEvent>(OnDamageChange, after: [typeof(ArmorBlockSystem), typeof(InventorySystem)]);
     }
 
     public void OnDamageChange(Entity<InternalComponentDamageRelayComponent> ent, ref DamageModifyEvent args)

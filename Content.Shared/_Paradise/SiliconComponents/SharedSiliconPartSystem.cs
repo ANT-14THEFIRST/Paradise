@@ -37,8 +37,6 @@ public abstract partial class SharedSiliconPartSystem : EntitySystem
 
         SubscribeLocalEvent<SiliconComponentsComponent, CanSeeAttemptEvent>(OnCanSeeCheck);
 
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovementSpeed);
-
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotInsertedIntoUser>(OnOpticsInserted);
         SubscribeLocalEvent<ActiveOpticsComponent, ComponentGotRemovedFromUser>(OnOpticsRemoved);
 
@@ -141,21 +139,6 @@ public abstract partial class SharedSiliconPartSystem : EntitySystem
         {
             args.Cancel();
             return;
-        }
-    }
-
-    private void OnRefreshMovementSpeed(Entity<SiliconComponentsComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
-        foreach (var part in ent.Comp.Parts.Values)
-        {
-            if (!TryComp<MovementSpeedModifyingPartComponent>(part.ContainedEntity, out var speedModComp) ||
-                !TryComp<SiliconPartComponent>(part.ContainedEntity, out var partComp) || !partComp.Active && speedModComp.RequiresActive)
-                continue;
-
-            args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
         }
     }
 
