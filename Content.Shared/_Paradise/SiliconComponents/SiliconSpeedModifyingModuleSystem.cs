@@ -1,15 +1,10 @@
-using Content.Shared.Actions;
-using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Toggleable;
 
 namespace Content.Shared._Paradise.SiliconComponents;
 
 public sealed partial class SiliconSpeedModifyingModuleSystem : EntitySystem
 {
-    [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
 
     public override void Initialize()
