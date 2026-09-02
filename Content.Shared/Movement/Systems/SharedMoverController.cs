@@ -1,5 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
+using Content.Shared._Paradise.Movement.Components;
 using Content.Shared.ActionBlocker;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
@@ -24,6 +23,8 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 
 namespace Content.Shared.Movement.Systems;
@@ -558,7 +559,7 @@ public abstract partial class SharedMoverController : VirtualController
             return sound != null;
         }
 
-        return TryGetFootstepSound(uid, xform, shoes != null, out sound, tileDef: tileDef);
+        return TryGetFootstepSound(uid, xform, shoes != null || HasComp<IgnoreBootAbsenceComponent>(uid), out sound, tileDef: tileDef); //PARADISE EDIT START - Add ignore boot absence
     }
 
     private bool TryGetFootstepSound(

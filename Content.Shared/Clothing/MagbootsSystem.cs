@@ -25,8 +25,7 @@ public sealed partial class SharedMagbootsSystem : EntitySystem
         SubscribeLocalEvent<MagbootsComponent, ItemToggledEvent>(OnToggled);
         SubscribeLocalEvent<MagbootsComponent, ClothingGotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<MagbootsComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
-        SubscribeLocalEvent<MagbootsComponent, IsWeightlessEvent>(OnIsWeightless);
-        SubscribeLocalEvent<MagbootsComponent, InventoryRelayedEvent<IsWeightlessEvent>>(OnIsWeightless);
+        Subs.SubscribeWithRelay<MagbootsComponent, IsWeightlessEvent>(OnIsWeightless, held: false); //PARADISE EDIT START - add relay
     }
 
     private void OnToggled(Entity<MagbootsComponent> ent, ref ItemToggledEvent args)
@@ -70,10 +69,5 @@ public sealed partial class SharedMagbootsSystem : EntitySystem
 
         args.IsWeightless = false;
         args.Handled = true;
-    }
-
-    private void OnIsWeightless(Entity<MagbootsComponent> ent, ref InventoryRelayedEvent<IsWeightlessEvent> args)
-    {
-        OnIsWeightless(ent, ref args.Args);
     }
 }

@@ -118,8 +118,7 @@ public sealed partial class SiliconModuleSystem : EntitySystem
 
     public bool CanInsertModule(Entity<SiliconComponentsComponent> user, Entity<SiliconModuleComponent> module)
     {
-        if (!TryComp<SiliconModuleBlacklistComponent>(module, out var whitelistComp))
-            return false;
+        TryComp<SiliconModuleBlacklistComponent>(module, out var whitelistComp);
 
         if (user.Comp.ModuleContainer == null)
             return false;

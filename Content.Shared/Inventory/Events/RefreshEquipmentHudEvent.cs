@@ -11,4 +11,6 @@ public record struct RefreshEquipmentHudEvent<T>(SlotFlags TargetSlots) : IInven
     public List<T> Components = new();
 
     PartType ISiliconPartRelayEvent.Parts => PartType.Optics; //PARADISE EDIT - Silicon update
+
+    bool ISiliconPartRelayEvent.RelayToModules => true;//PARADISE EDIT - Silicon update
 }

@@ -1,4 +1,3 @@
-using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Stacks;
 using Content.Shared.Tools;

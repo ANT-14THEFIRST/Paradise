@@ -5,6 +5,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Flash;
+using Content.Shared.Gravity;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
@@ -84,19 +85,20 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
         SubscribeLocalEvent<SiliconComponentsComponent, DamageDealtEvent>(OnDamageChanged);
 
-        SubscribeLocalEvent<SiliconComponentsComponent, FlashAttemptEvent>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, GetEyeProtectionEvent>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowJobIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHungerIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowThirstIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowMindShieldIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowSyndicateIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowCriminalRecordIconsComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<BlackAndWhiteOverlayComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<NoirOverlayComponent>>(RefRelayPartEvent);
-        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ThermalSightComponent>>(RefRelayPartEvent);
+        SubscribeLocalEvent<SiliconComponentsComponent, FlashAttemptEvent>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, GetEyeProtectionEvent>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, IsWeightlessEvent>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowJobIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHealthBarsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHealthIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowHungerIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowThirstIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowMindShieldIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowSyndicateIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ShowCriminalRecordIconsComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<BlackAndWhiteOverlayComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<NoirOverlayComponent>>(RefRelayEventToPart);
+        SubscribeLocalEvent<SiliconComponentsComponent, RefreshEquipmentHudEvent<ThermalSightComponent>>(RefRelayEventToPart);
 
         SubscribeLocalEvent<SiliconComponentsComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
 
@@ -105,8 +107,7 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
 
     private void OnComponentStartup(Entity<SiliconComponentsComponent> ent, ref ComponentStartup args)
     {
-        if (!TryComp<ContainerManagerComponent>(ent.Owner, out var containerManager))
-            return;
+        EnsureComp<ContainerManagerComponent>(ent.Owner, out var containerManager);
 
         if (TryComp<BlindableComponent>(ent.Owner, out var ownerBlindableComp))
             _blindable.UpdateIsBlind(ent.Owner);
@@ -569,56 +570,79 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
         return true;
     }
 
-    protected void RefRelayPartEvent<T>(Entity<SiliconComponentsComponent> ent, ref T args) where T : ISiliconPartRelayEvent
+    protected void RefRelayEventToPart<T>(Entity<SiliconComponentsComponent> ent, ref T args) where T : ISiliconPartRelayEvent
     {
-        RelayRefEvent(ent, ref args);
+        RelayPartRefEvent(ent, ref args);
     }
 
-    protected void RelayPartEvent<T>(Entity<SiliconComponentsComponent> ent, T args) where T : ISiliconPartRelayEvent
+    protected void RelayEventToPart<T>(Entity<SiliconComponentsComponent> ent, T args) where T : ISiliconPartRelayEvent
     {
-        RelayEvent(ent, args);
+        RelayPartEvent(ent, args);
     }
 
-    public void RelayRefEvent<T>(Entity<SiliconComponentsComponent> ent, ref T args) where T : ISiliconPartRelayEvent
+    public void RelayPartRefEvent<T>(Entity<SiliconComponentsComponent> ent, ref T args) where T : ISiliconPartRelayEvent
     {
-        if (args.Parts == PartType.NONE)
-            return;
-
         var ev = new PartRelayedEvent<T>(args, ent.Owner);
 
-        foreach (var partType in ent.Comp.Parts.Keys)
-        {
-            if (TryGetPart(ent.AsNullable(), partType, out var partEnt) &&
-                partEnt is { Valid: true } partEntValid)
-                RaiseLocalEvent(partEntValid, ev);
-        }
-
-        args = ev.Args;
-    }
-
-    public void RelayEvent<T>(Entity<SiliconComponentsComponent> ent, T args) where T : ISiliconPartRelayEvent
-    {
-        if (args.Parts == PartType.NONE)
-            return;
-
-        var ev = new PartRelayedEvent<T>(args, ent.Owner);
-
-        if (args.Parts != PartType.ALL)
+        if (args.Parts != PartType.ALL &&
+            args.Parts != PartType.NONE)
         {
             if (TryGetPart(ent.AsNullable(), args.Parts, out var partEnt) &&
                 partEnt is { Valid: true } partEntValid)
                 RaiseLocalEvent(partEntValid, ev);
 
             args = ev.Args;
-
-            return;
         }
 
-        foreach (var partType in ent.Comp.Parts.Keys)
+        if (args.Parts == PartType.ALL)
         {
-            if (TryGetPart(ent.AsNullable(), partType, out var partEnt) &&
+            foreach (var partType in ent.Comp.Parts.Keys)
+            {
+                if (TryGetPart(ent.AsNullable(), partType, out var partEnt) &&
+                    partEnt is { Valid: true } partEntValid)
+                    RaiseLocalEvent(partEntValid, ev);
+            }
+        }
+
+        if (args.RelayToModules &&
+            ent.Comp.ModuleContainer != null)
+        {
+            foreach (var module in ent.Comp.ModuleContainer.ContainedEntities)
+                RaiseLocalEvent(module, ev);
+        }
+
+        args = ev.Args;
+    }
+
+    public void RelayPartEvent<T>(Entity<SiliconComponentsComponent> ent, T args) where T : ISiliconPartRelayEvent
+    {
+        var ev = new PartRelayedEvent<T>(args, ent.Owner);
+
+        if (args.Parts != PartType.ALL &&
+            args.Parts != PartType.NONE)
+        {
+            if (TryGetPart(ent.AsNullable(), args.Parts, out var partEnt) &&
                 partEnt is { Valid: true } partEntValid)
                 RaiseLocalEvent(partEntValid, ev);
+
+            args = ev.Args;
+        }
+
+        if (args.Parts == PartType.ALL)
+        {
+            foreach (var partType in ent.Comp.Parts.Keys)
+            {
+                if (TryGetPart(ent.AsNullable(), partType, out var partEnt) &&
+                    partEnt is { Valid: true } partEntValid)
+                    RaiseLocalEvent(partEntValid, ev);
+            }
+        }
+
+        if (args.RelayToModules &&
+            ent.Comp.ModuleContainer != null)
+        {
+            foreach (var module in ent.Comp.ModuleContainer.ContainedEntities)
+                RaiseLocalEvent(module, ev);
         }
 
         args = ev.Args;
@@ -783,4 +807,6 @@ public sealed class PartRelayedEvent<TEvent> : EntityEventArgs
 public interface ISiliconPartRelayEvent
 {
     public PartType Parts { get; }
+
+    public bool RelayToModules { get; }
 }

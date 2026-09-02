@@ -13,6 +13,8 @@ public record struct FlashAttemptEvent(EntityUid Target, EntityUid? User, Entity
     SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.HEAD | SlotFlags.EYES | SlotFlags.MASK;
 
     PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //PARADISE EDIT - Silicon update
+
+    bool ISiliconPartRelayEvent.RelayToModules => false;//PARADISE EDIT - Silicon update
 }
 
 /// <summary>

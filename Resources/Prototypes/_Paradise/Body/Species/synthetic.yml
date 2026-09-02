@@ -68,6 +68,17 @@
         FootRight: OrganRoboticFootRight
     - type: HumanoidProfile
       species: Human
+    - type: Hands
+      leftHandDisplacement:
+        sizeMaps:
+          32:
+            sprite: _Paradise/Mobs/Species/Synthetic/displacement.rsi
+            state: hand_left
+      rightHandDisplacement:
+        sizeMaps:
+          32:
+            sprite: _Paradise/Mobs/Species/Synthetic/displacement.rsi
+            state: hand_right
 
 - type: entity
   abstract: true
@@ -271,6 +282,7 @@
         Critical: BorgCrit
       showOverlays: false
       allowRevives: true
+    - type: IgnoreBootAbsence
     - type: HealthExaminable
       examinableTypes:
         - Blunt

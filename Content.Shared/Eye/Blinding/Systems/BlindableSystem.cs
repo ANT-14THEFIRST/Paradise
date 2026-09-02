@@ -153,4 +153,6 @@ public sealed class GetEyeProtectionEvent : EntityEventArgs, IInventoryRelayEven
     public SlotFlags TargetSlots => SlotFlags.EYES | SlotFlags.MASK | SlotFlags.HEAD;
 
     PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //PARADISE EDIT - Silicon update
+
+    bool ISiliconPartRelayEvent.RelayToModules => false;//PARADISE EDIT - Silicon update
 }

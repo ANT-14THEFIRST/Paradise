@@ -1,3 +1,4 @@
+using Content.Shared._Paradise.SiliconComponents;
 using Content.Shared.Alert;
 using Content.Shared.Inventory;
 using Content.Shared.Throwing;
@@ -255,9 +256,13 @@ public abstract partial class SharedGravitySystem : EntitySystem
 /// <param name="IsWeightless">Whether we should be weightless</param>
 /// <param name="Handled">Whether something is trying to override our weightlessness</param>
 [ByRefEvent]
-public record struct IsWeightlessEvent(bool IsWeightless = false, bool Handled = false) : IInventoryRelayEvent
+public record struct IsWeightlessEvent(bool IsWeightless = false, bool Handled = false) : IInventoryRelayEvent, ISiliconPartRelayEvent //PARADISE EDIT - Silicon update
 {
     SlotFlags IInventoryRelayEvent.TargetSlots => ~SlotFlags.POCKET;
+
+    PartType ISiliconPartRelayEvent.Parts => PartType.ALL; //PARADISE EDIT - Silicon update
+
+    bool ISiliconPartRelayEvent.RelayToModules => true;//PARADISE EDIT - Silicon update
 }
 
 /// <summary>
