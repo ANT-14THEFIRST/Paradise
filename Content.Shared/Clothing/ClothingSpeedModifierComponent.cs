@@ -16,9 +16,6 @@ public sealed partial class ClothingSpeedModifierComponent : Component
     [DataField]
     public float SprintModifier = 1.0f;
 
-    [DataField]
-    public bool AffectedByParameters = false;
-
     /// <summary>
     /// Defines if the speed modifier requires <see cref="ItemToggleComponent"/> activation to apply.
     /// This will have no effect without an <see cref="ItemToggleComponent"/> on the entity.
@@ -32,6 +29,11 @@ public sealed partial class ClothingSpeedModifierComponent : Component
     /// </summary>
     [DataField]
     public bool? Standing;
+
+    // PARADISE EDIT START - Physical parameters
+    [DataField]
+    public bool AffectedByParameters = false;
+    // PARADISE EDIT END
 }
 
 [Serializable, NetSerializable]
