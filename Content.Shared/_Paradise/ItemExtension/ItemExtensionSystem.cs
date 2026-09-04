@@ -178,11 +178,15 @@ public sealed partial class ItemExtensionSystem : EntitySystem
 
         var handsDict = handsComp.Hands;
 
-        if ((!_container.TryGetContainingContainer(used, out var container) ||
-                !_hands.TryGetHand(user, container.ID, out var usedHand)) &&
-                handsComp.ActiveHandId != null)
+        if (_container.TryGetContainingContainer(used, out var container) &&
+                _hands.TryGetHand(user, container.ID, out var usedHand))
         {
-            handsUsed.Add(handsComp.ActiveHandId, handsDict[handsComp.ActiveHandId]);
+            handsUsed.Add(container.ID, (Hand)usedHand);
+        }
+        else
+        {
+            if (handsComp.ActiveHandId != null)
+                handsUsed.Add(handsComp.ActiveHandId, handsDict[handsComp.ActiveHandId]);
 
             return handsUsed;
         }

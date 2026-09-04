@@ -421,6 +421,9 @@ public abstract partial class SharedSiliconComponentsSystem : EntitySystem
             args.ModifySpeed(speedModComp.SpeedMod.SprintSpeedModifier, speedModComp.SpeedMod.WalkSpeedModifier);
         }
 
+        if (ent.Comp.ModuleContainer == null)
+            return;
+
         foreach (var module in ent.Comp.ModuleContainer.ContainedEntities)
         {
             if (!TryComp<MovementSpeedModifyingModuleComponent>(module, out var speedModComp) ||

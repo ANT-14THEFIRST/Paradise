@@ -450,6 +450,11 @@
             - MobMask
           layer:
             - MobLayer
+    - type: PhysicalParameters
+    - type: Item
+      size: Ginormous
+    - type: ItemExtension
+      minimalStrengthToPickUp: 3.7
     - type: InternalComponentDamageRelay
       containers: SynthParts
       userDamageReductionByType:

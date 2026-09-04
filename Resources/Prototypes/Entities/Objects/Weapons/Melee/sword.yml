@@ -20,6 +20,12 @@
     - type: Tool
       qualities:
         - Slicing
+    #PARADISE EDIT START - physical parameters
+    - type: ItemExtensionMeleeWeapon
+    - type: ItemExtension
+      minimalStrengthToPickUp: 0.5
+      strengthRequirementToBeUsed: 1
+    #PARADISE EDIT END
 
 #Shortswords
 - type: entity
