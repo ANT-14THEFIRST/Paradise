@@ -237,7 +237,7 @@
               - CartridgeAntiMateriel
     - type: ChamberMagazineAmmoProvider
       soundRack:
-      path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
+        path: /Audio/Weapons/Guns/Cock/batrifle_cock.ogg
     - type: ContainerContainer
       containers:
         gun_magazine: !type:ContainerSlot
