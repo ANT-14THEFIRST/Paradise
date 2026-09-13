@@ -289,6 +289,8 @@
   components:
     - type: Sprite
       sprite: Structures/Specific/Anomalies/ice_anom.rsi
+      layers:
+        - state: bullet
     - type: Projectile
       damage:
         types:
