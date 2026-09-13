@@ -7,7 +7,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -25,7 +25,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -43,7 +43,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -61,7 +61,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -79,7 +79,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -97,7 +97,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -115,7 +115,7 @@
   cost:
     Telecrystal: 1
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -133,7 +133,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -151,7 +151,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -169,7 +169,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -187,7 +187,7 @@
   cost:
     Telecrystal: 1
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -205,7 +205,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -223,7 +223,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -241,7 +241,7 @@
   cost:
     Telecrystal: 3
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1 #Not nearly as valuable without the estoc
@@ -259,7 +259,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -277,7 +277,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1
@@ -295,13 +295,13 @@
   cost:
     Telecrystal: 4
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - DebugUplink
+    - !type:StoreWhitelistCondition
+      whitelist:
+        tags:
+          - NukeOpsUplink
+          - DebugUplink
 
 - type: listing
   id: UplinkMagazineShotgunHP
@@ -312,7 +312,7 @@
   cost:
     Telecrystal: 2
   categories:
-  - UplinkAmmo
+    - UplinkAmmo
   dynamicsPrices:
     LightDynamic:
       Telecrystal: 1

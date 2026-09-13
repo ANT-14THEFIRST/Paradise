@@ -8,21 +8,21 @@
   tier: 1
   cost: 9000
   recipeUnlocks:
-  - MagazineBoxAntiMaterielHP
-  - MagazineBoxLightRifleHP
-  - MagazineBoxMagnumHP
-  - MagazineBoxPistolHP
-  - MagazineBoxRifleHP
-  - MagazineLightRifleHP
-  - MagazinePistolHP
-  - MagazinePistolSubMachineGunHP
-  - MagazineRifleHP
-  - SpeedLoaderMagnumHP
-  - BoxShotgunHP
-  - MagazineShotgunHP
-  - MagazineFullRifleHP
-  - MagazineAntiMaterialHP
-  - MagazineBoxFullRifleHP
+    - MagazineBoxAntiMaterielHP
+    - MagazineBoxLightRifleHP
+    - MagazineBoxMagnumHP
+    - MagazineBoxPistolHP
+    - MagazineBoxRifleHP
+    - MagazineLightRifleHP
+    - MagazinePistolHP
+    - MagazinePistolSubMachineGunHP
+    - MagazineRifleHP
+    - SpeedLoaderMagnumHP
+    - BoxShotgunHP
+    - MagazineShotgunHP
+    - MagazineFullRifleHP
+    - MagazineAntiMaterialHP
+    - MagazineBoxFullRifleHP
 
 - type: technology
   id: ExplosiveAmmunition
@@ -34,7 +34,7 @@
   tier: 3
   cost: 12000
   recipeUnlocks:
-  - BoxShotgunHE
-  - MagazineBoxAntiMaterielHE
-  - MagazineAntiMaterialExplosive
-  - MagazineShotgunExplosive
+    - BoxShotgunHE
+    - MagazineBoxAntiMaterielHE
+    - MagazineAntiMaterialExplosive
+    - MagazineShotgunExplosive
