@@ -113,7 +113,7 @@ public abstract partial class SharedGunAimingSystem : EntitySystem
         ent.Comp.IsAimed = false;
         _gun.RefreshModifiers(ent.Owner);
 
-        if(_gun.TryGetGun(ent.Owner, out var gun) && gun.Owner is { Valid: true } userValid)
+        if (args.Owner is { Valid: true } userValid)
             _movementSpeedModifier.RefreshMovementSpeedModifiers(userValid);
 
         Dirty(ent);

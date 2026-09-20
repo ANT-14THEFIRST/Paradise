@@ -45,7 +45,7 @@ public abstract partial class SharedHandsSystem
 
     private HeldRelayedEvent<T> CoreRelayEvent<T>(Entity<HandsComponent> entity, ref T args)
     {
-        var ev = new HeldRelayedEvent<T>(args);
+        var ev = new HeldRelayedEvent<T>(args, entity.Owner); //PARADISE EDIT - tweak held relay
 
         foreach (var held in EnumerateHeld(entity.AsNullable()))
         {
