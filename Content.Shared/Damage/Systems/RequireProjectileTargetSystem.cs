@@ -39,7 +39,7 @@ public sealed partial class RequireProjectileTargetSystem : EntitySystem
         {
             bool isAimed = HasComp<AimedProjectileComponent>(other);
 
-            if (isAimed && //The shooter and the target are both down and the target is alive => we'll hit, otherwise we won't
+            if (_standing.IsDown(shooterValidated) && //The shooter and the target are both down and the target is alive => we'll hit, otherwise we won't
                 _standing.IsDown(ent.Owner) &&
                 _state.IsAlive(ent.Owner))
                 return;

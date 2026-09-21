@@ -97,6 +97,15 @@ public sealed partial class GunSystem : SharedGunSystem
                 continue;
             }
 
+            //PARADISE EDIT START - MANUAL AIMING
+            bool isAimed = false;
+
+            if (TryComp<GunAimableComponent>(gun.Owner, out var aimableComp) &&
+                aimableComp.IsAimed ||
+                user is { Valid: true } userValid && _standing.IsDown(userValid))
+                isAimed = true;
+            //PARADISE EDIT END
+
             // TODO: Clean this up in a gun refactor at some point - too much copy pasting
             switch (shootable)
             {
@@ -108,9 +117,7 @@ public sealed partial class GunSystem : SharedGunSystem
                         CreateAndFireProjectiles(uid, cartridge);
 
                         //PARADISE EDIT START - MANUAL AIMING
-                        if (TryComp<GunAimableComponent>(gun.Owner, out var aimableComp) &&
-                            aimableComp.IsAimed ||
-                            user is { Valid: true } userValid && _standing.IsDown(userValid))
+                        if (isAimed)
                             EnsureComp<AimedProjectileComponent>(uid);
                         //PARADISE EDIT END
 
@@ -140,6 +147,10 @@ public sealed partial class GunSystem : SharedGunSystem
                 case AmmoComponent newAmmo:
                     if (ent == null)
                         break;
+                    //PARADISE EDIT START - MANUAL AIMING
+                    if (isAimed)
+                        EnsureComp<AimedProjectileComponent>(ent.Value);
+                    //PARADISE EDIT END
                     CreateAndFireProjectiles(ent.Value, newAmmo);
 
                     break;
