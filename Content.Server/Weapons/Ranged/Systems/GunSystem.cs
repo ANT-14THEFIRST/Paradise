@@ -114,9 +114,9 @@ public sealed partial class GunSystem : SharedGunSystem
                     if (!cartridge.Spent)
                     {
                         var uid = Spawn(cartridge.Prototype, fromEnt);
-                        CreateAndFireProjectiles(uid, cartridge);
-
                         //PARADISE EDIT START - MANUAL AIMING
+                        CreateAndFireProjectiles(uid, cartridge, isAimed);
+
                         if (isAimed)
                             EnsureComp<AimedProjectileComponent>(uid);
                         //PARADISE EDIT END
@@ -150,8 +150,9 @@ public sealed partial class GunSystem : SharedGunSystem
                     //PARADISE EDIT START - MANUAL AIMING
                     if (isAimed)
                         EnsureComp<AimedProjectileComponent>(ent.Value);
+
+                    CreateAndFireProjectiles(ent.Value, newAmmo, isAimed);
                     //PARADISE EDIT END
-                    CreateAndFireProjectiles(ent.Value, newAmmo);
 
                     break;
                 case HitscanAmmoComponent:
@@ -182,7 +183,7 @@ public sealed partial class GunSystem : SharedGunSystem
             FiredProjectiles = shotProjectiles,
         });
 
-        void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp)
+        void CreateAndFireProjectiles(EntityUid ammoEnt, AmmoComponent ammoComp, bool isAimed) //PARADISE EDIT - Weapon Overhaul
         {
             if (TryComp<ProjectileSpreadComponent>(ammoEnt, out var ammoSpreadComp))
             {
@@ -200,6 +201,8 @@ public sealed partial class GunSystem : SharedGunSystem
                 for (var i = 1; i < ammoSpreadComp.Count; i++)
                 {
                     var newuid = Spawn(ammoSpreadComp.Proto, fromEnt);
+                    if (isAimed)//PARADISE EDIT - Weapon Overhaul
+                        EnsureComp<AimedProjectileComponent>(newuid); //PARADISE EDIT - Weapon Overhaul
                     ShootOrThrow(newuid, angles[i].ToVec(), gunVelocity, gun, user);
                     shotProjectiles.Add(newuid);
                 }
